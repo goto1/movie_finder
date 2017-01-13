@@ -1,0 +1,30 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+client/logs
+client/*.log
+client/npm-debug.log*
+
+server/logs
+server/*.log
+server/npm-debug.log*
+
+# Dependency directories
+node_modules
+
+client/node_modules
+server/node_modules
+
+# Optional npm cache directory
+.npm
+
+client/.npm
+server/.npm
+
+# Optional eslint cache
+.eslintcache
+
+client/.eslintcache
+server/.eslintcache
