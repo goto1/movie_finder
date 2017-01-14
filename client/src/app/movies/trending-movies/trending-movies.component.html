@@ -1,0 +1,26 @@
+<div class="trending">
+  <div class="title">
+    <i class="fa fa-film" aria-hidden="true"></i>
+    Currently Trending...
+  </div>
+
+  <div class="scroll-left scroll">
+    <i class="fa fa-angle-left" aria-hidden="true"></i>
+  </div>
+  <div class="scroll-right scroll">
+    <i class="fa fa-angle-right" aria-hidden="true"></i>
+  </div>
+
+  <div class="trending-movies" *ngIf="trendingMovies">
+    <div class="movie-wrapper" *ngFor="let movie of trendingMovies">
+      <div class="movie-details">
+        <div class="movie-poster">
+          <img src="{{movie.img}}" alt="movie poster">
+        </div>
+        <div class="movie-title">{{movie.title}}</div>
+      </div>
+    </div>
+  </div>
+  
+
+</div>

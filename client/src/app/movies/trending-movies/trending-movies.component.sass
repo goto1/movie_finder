@@ -1,0 +1,74 @@
+$primary-color: #FBFFFD
+$secondary-color: #7D7F7F
+$font-color-dark-green: #577F6D
+$font-color-off-white: #FFFBFB
+
+.trending
+  margin-top: 25px
+  border: 2px solid $secondary-color
+  border-radius: 5px 15px 5px 15px
+  height: 300px
+  padding-left: 25px
+  padding-right: 30px
+  position: relative
+
+  .title
+    position: absolute
+    top: 5px
+    left: 10px
+    text-transform: uppercase
+    letter-spacing: .15em
+    font-size: .85em
+    font-weight: 600
+    color: $font-color-dark-green
+
+  .scroll
+    position: absolute
+    top: 40%
+    font-size: 3.25em
+    transition: 0.5s
+    &:hover
+      color: #77CBA5
+      cursor: pointer
+
+  .scroll-left
+    left: 5px
+  .scroll-right
+    right: 4.5px
+
+  .trending-movies
+    display: flex
+    height: 100%
+    overflow: scroll
+
+    .movie-wrapper
+      flex-basis: 140px
+      flex-shrink: 0
+      align-self: center
+
+      height: 240px
+      padding-left: 10px
+      padding-right: 10px
+
+      .movie-details
+        width: 95%
+        height: 100%
+        background-color: $font-color-dark-green
+        border-bottom: 1px solid $secondary-color
+        transition: 0.5s
+
+        &:hover
+          cursor: pointer
+          box-shadow: 0px 0px 2px 4px #FE5E4A
+        
+        .movie-poster
+          img
+            width: 100%
+        .movie-title
+          text-transform: uppercase
+          color: $font-color-off-white
+          padding: 0px 5px 0px 5px
+          font-weight: 600
+          font-size: .85em
+          letter-spacing: .05em
+          text-align: center
