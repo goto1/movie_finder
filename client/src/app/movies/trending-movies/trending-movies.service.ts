@@ -9,12 +9,12 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class TrendingMoviesService {
-  private trendingMoviesUrl = 'https://api.themoviedb.org/3/discover/movie?api_key=03eb2b84d82f7dbdb50c3106fb6c2de3&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1';
+  private moviesUrl = 'https://api.themoviedb.org/3/discover/movie?api_key=03eb2b84d82f7dbdb50c3106fb6c2de3&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1';
 
   constructor(private http: Http) { }
 
-  getTrendingMovies(): Observable<Movie[]> {
-    return this.http.get(this.trendingMoviesUrl)
+  public getMovies(): Observable<Movie[]> {
+    return this.http.get(this.moviesUrl)
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -38,5 +38,6 @@ export class TrendingMoviesService {
     
     return Observable.throw(errorMessage);
   }
+
 }
 

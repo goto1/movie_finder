@@ -1,26 +1,37 @@
 <div class="trending">
-
   <div class="title">
     <i class="fa fa-film" aria-hidden="true"></i>
     Currently Trending...
   </div>
 
-  <div class="scroll-left scroll">
-    <i (click)="scrollTrendingMoviesLeft()" class="fa fa-angle-left" aria-hidden="true"></i>
-  </div>
-  <div class="scroll-right scroll">
-    <i (click)="scrollTrendingMoviesRight()" class="fa fa-angle-right" aria-hidden="true"></i>
-  </div>
+  <div class="movies" *ngIf="moviesShown">
+    <div class="scroll-left scroll" (click)="previousPage()">
+      <a><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+    </div>
+    <div class="scroll-right scroll" (click)="nextPage()">
+      <a><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+    </div>
 
-  <div class="trending-movies" *ngIf="trendingMovies">
-    <div class="movie-wrapper" *ngFor="let movie of trendingMovies">
-      <div class="movie-details">
-        <div class="movie-poster">
-          <img src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}" alt="movie poster">
+    <div class="trending-movies">
+      <div class="movie-wrapper" *ngFor="let movie of moviesShown">
+        <div class="movie-details">
+          <div class="movie-poster">
+            <img src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}" alt="movie poster">
+          </div>
+          <div class="movie-title">
+            <div class="movie-title-wrapper">{{movie.title | movieTitle}}</div>
+          </div>
         </div>
-        <div class="movie-title">{{movie.title | movieTitle}}</div>
       </div>
     </div>
+  </div>
+
+  <div class="error" *ngIf="!moviesShown">
+    <h2 class="error-item">
+      Oops! Something went terribly wrong. <br />Please refresh the page
+      or try again later.
+    </h2>
+    <div class="sad-face error-item"><i class="fa fa-frown-o" aria-hidden="true"></i></div>
   </div>
   
 </div>
