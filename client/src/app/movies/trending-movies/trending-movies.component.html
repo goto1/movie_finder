@@ -5,17 +5,17 @@
   </div>
 
   <div class="scroll-left scroll">
-    <i class="fa fa-angle-left" aria-hidden="true"></i>
+    <i (click)="scrollTrendingMoviesLeft()" class="fa fa-angle-left" aria-hidden="true"></i>
   </div>
   <div class="scroll-right scroll">
-    <i class="fa fa-angle-right" aria-hidden="true"></i>
+    <i (click)="scrollTrendingMoviesRight()" class="fa fa-angle-right" aria-hidden="true"></i>
   </div>
 
   <div class="trending-movies" *ngIf="trendingMovies">
     <div class="movie-wrapper" *ngFor="let movie of trendingMovies">
       <div class="movie-details">
         <div class="movie-poster">
-          <img src="{{movie.img}}" alt="movie poster">
+          <img src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}" alt="movie poster">
         </div>
         <div class="movie-title">{{movie.title}}</div>
       </div>
