@@ -29,7 +29,6 @@ export class TrendingMoviesComponent implements OnInit {
     if (this.page < this.allMovies.length - 1) {
       this.page++;
     }
-    console.log(this.page, this.allMovies.length);
     this.getMoviesFromPage(this.page);
   }
 

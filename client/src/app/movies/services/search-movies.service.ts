@@ -15,7 +15,6 @@ export class SearchMoviesService extends MovieDBService {
   public searchMovie(title: string): Observable<Movie[]> {
     title = title.replace(/\s/g, '%20');
     this.apiUrl += '&query=' + title;
-    console.log(this.apiUrl);
     return this.http.get(this.apiUrl)
       .map(this.extractData)
       .catch(this.handleError);
