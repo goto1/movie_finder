@@ -1,30 +1,9 @@
-import { Component, OnInit }  from '@angular/core';
-
-import { Movie } from './models/movie'
-import { SearchMoviesService } from './services/search-movies.service';
+import { Component }  from '@angular/core';
 
 @Component({
-  templateUrl: './movies.component.html',
-  styleUrls: [ './movies.component.sass' ]
+  template: `
+    <trending-movies></trending-movies>
+    <movies-search></movies-search>
+  `
 })
-export class MoviesComponent implements OnInit { 
-  public movies: Movie[];
-  public searchQuery: string;
-
-  constructor(private searchMoviesService: SearchMoviesService) { }
-
-  ngOnInit(): void {
-    this.searchQuery = 'The Hangover';
-    this.searchMovie(this.searchQuery);
-  }
-
-  public searchMovie(title: string): void {
-    if (title) {
-      this.searchQuery = title;
-      this.searchMoviesService.searchMovie(title).subscribe(
-        movies => this.movies = movies,
-        error => console.error(<any>error)
-      );
-    }
-  }
-}
+export class MoviesComponent { }
