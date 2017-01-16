@@ -4,11 +4,11 @@ import { Movie }                  from '../models/movie';
 import { TrendingMoviesService }  from '../services/trending-movies.service';
 
 @Component({
-  selector: 'trending-movies',
-  templateUrl: './trending-movies.component.html',
-  styleUrls: [ './trending-movies.component.sass' ]
+  selector: 'movies-trending',
+  templateUrl: './movies-trending.component.html',
+  styleUrls: [ './movies-trending.component.sass' ]
 })
-export class TrendingMoviesComponent implements OnInit {
+export class MoviesTrendingComponent implements OnInit {
   public allMovies;
   public showMovies: Movie[];
   private page: number = 0;

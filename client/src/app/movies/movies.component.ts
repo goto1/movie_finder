@@ -2,7 +2,7 @@ import { Component }  from '@angular/core';
 
 @Component({
   template: `
-    <trending-movies></trending-movies>
+    <movies-trending></movies-trending>
     <movies-search></movies-search>
   `
 })
