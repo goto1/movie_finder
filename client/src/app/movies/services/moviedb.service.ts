@@ -1,28 +1,19 @@
-import { Injectable }       from '@angular/core';
-import { Http, Response }   from '@angular/http';
-import { Observable }       from 'rxjs/Observable';
+import { Response }   from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 
-import { Movie }            from '../models/movie';
+import { Movie }      from '../models/movie';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-@Injectable()
-export class MovieDBService {
-  constructor(private http: Http) { }
+export abstract class MovieDBService {
 
-  public getData(url: string): Observable<Movie[]> {
-    return this.http.get(url)
-      .map(this.extractData)
-      .catch(this.handleError);
-  }
-
-  private extractData(res: Response) {
+  protected extractData(res: Response) {
     const body = res.json();
     return body.results || {};
   }
 
-  private handleError(error: Response | any) {
+  protected handleError(error: Response | any) {
     let errorMessage: string;
 
     if (error instanceof Response) {
