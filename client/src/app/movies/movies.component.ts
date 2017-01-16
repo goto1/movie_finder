@@ -1,7 +1,7 @@
 import { Component, OnInit }  from '@angular/core';
 
-import { MoviesService }      from './movies.service';
-import { Movie }              from './trending-movies/movie';
+import { Movie } from './models/movie'
+import { SearchMoviesService } from './services/search-movies.service';
 
 @Component({
   templateUrl: './movies.component.html',
@@ -9,10 +9,9 @@ import { Movie }              from './trending-movies/movie';
 })
 export class MoviesComponent implements OnInit { 
   public movies: Movie[];
-  public errorMessage: string;
   public searchQuery: string;
 
-  constructor(private moviesService: MoviesService) { }
+  constructor(private searchMoviesService: SearchMoviesService) { }
 
   ngOnInit(): void {
     this.searchQuery = 'The Hangover';
@@ -22,9 +21,9 @@ export class MoviesComponent implements OnInit {
   public searchMovie(title: string): void {
     if (title) {
       this.searchQuery = title;
-      this.moviesService.searchForMovie(title).subscribe(
+      this.searchMoviesService.searchMovie(title).subscribe(
         movies => this.movies = movies,
-        error => this.errorMessage = <any>error
+        error => console.error(<any>error)
       );
     }
   }
