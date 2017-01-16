@@ -1,0 +1,49 @@
+<trending-movies></trending-movies>
+
+<div class="movie-search">
+  <div class="search-input">
+    <input type="text" placeholder="The Hangover..." class="input-item" 
+      #title />
+    <i class="fa fa-search input-item" aria-hidden="true"
+      (click)="searchMovie(title.value)"></i>
+  </div>
+</div>
+<div class="search-results" *ngIf="movies">
+  <h2 class="header">Showing results for <span>{{searchQuery}}</span>...</h2>
+
+  <div class="movies">
+    <div class="movie-details" *ngFor="let movie of movies">
+      <div class="poster">
+        <div *ngIf="movie.poster_path">
+          <img src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}" alt="movie poster" />
+        </div>
+        <div *ngIf="!movie.poster_path" class="no-poster">
+          <i class="fa fa-film" aria-hidden="true"></i>
+        </div>
+      </div>
+      <div class="movie-info">
+        <div class="title">{{movie.title | movieTitleSearch}}</div>
+        <div class="release-date">
+          Release Date: 
+          <span *ngIf="movie.release_date">{{movie.release_date}}</span>
+          <span *ngIf="!movie.release_date">N/A</span>
+        </div>
+        <div class="vote-average"><span>{{movie.vote_average}} <i class="fa fa-star-o" aria-hidden="true"></i></span></div>
+      </div>
+      <div class="footer">
+        <div class="like footer-item">
+          <i class="fa fa-heart" aria-hidden="true"></i>
+        </div>
+        <div class="bookmark footer-item">
+          <i class="fa fa-bookmark" aria-hidden="true"></i>
+        </div>        
+      </div>
+    </div>
+  </div>
+</div>
+<div class="search-results-fail" *ngIf="!movies">
+  <h2>Looks like something went wrong. <br />Please try again.</h2>
+  <div class="error">
+    <i class="fa fa-meh-o" aria-hidden="true"></i>
+  </div>
+</div>
