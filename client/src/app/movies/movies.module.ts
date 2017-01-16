@@ -1,6 +1,6 @@
 import { NgModule }                 from '@angular/core';
 import { CommonModule }             from '@angular/common';
-import { HttpModule, JsonpModule }  from '@angular/http';
+import { HttpModule }               from '@angular/http';
 import { FormsModule }              from '@angular/forms';
 
 import { MoviesRoutingModule }      from './movies-routing.module';
@@ -12,14 +12,12 @@ import { MoviesSearchComponent }    from './movies-search/movies-search.componen
 import { TrendingMoviesService }    from './services/trending-movies.service';
 import { SearchMoviesService }      from './services/search-movies.service';
 
-import { MovieTitleSearchPipe }     from './pipes/movie-title-search.pipe';
-import { MovieTitleTrendingPipe }   from './pipes/movie-title-trending.pipe';
+import { MovieTitleShortPipe }      from './pipes/movie-title-short.pipe';
 
 @NgModule({
   imports: [
     CommonModule,
     HttpModule,
-    JsonpModule,
     FormsModule,
     MoviesRoutingModule
   ],
@@ -28,8 +26,7 @@ import { MovieTitleTrendingPipe }   from './pipes/movie-title-trending.pipe';
     MoviesTrendingComponent,
     MoviesSearchComponent,
 
-    MovieTitleTrendingPipe,
-    MovieTitleSearchPipe
+    MovieTitleShortPipe
   ],
   providers: [
     TrendingMoviesService,

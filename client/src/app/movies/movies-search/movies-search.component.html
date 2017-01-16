@@ -20,7 +20,7 @@
         </div>
       </div>
       <div class="movie-info">
-        <div class="title">{{movie.title | movieTitleSearch}}</div>
+        <div class="title">{{movie.title | movieTitleShort: 19}}</div>
         <div class="release-date">
           Release Date: 
           <span *ngIf="movie.release_date">{{movie.release_date}}</span>
