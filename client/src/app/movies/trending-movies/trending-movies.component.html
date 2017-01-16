@@ -4,8 +4,8 @@
     Currently Trending...
   </div>
 
-  <div class="movies" *ngIf="moviesShown">
-    <div class="scroll-left scroll" (click)="previousPage()">
+  <div class="movies" *ngIf="showMovies">
+    <div class="scroll-left scroll" (click)="prevPage()">
       <a><i class="fa fa-angle-left" aria-hidden="true"></i></a>
     </div>
     <div class="scroll-right scroll" (click)="nextPage()">
@@ -13,7 +13,7 @@
     </div>
 
     <div class="trending-movies">
-      <div class="movie-wrapper" *ngFor="let movie of moviesShown">
+      <div class="movie-wrapper" *ngFor="let movie of showMovies">
         <div class="movie-details">
           <div class="movie-poster">
             <img src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}" alt="movie poster">
@@ -26,7 +26,7 @@
     </div>
   </div>
 
-  <div class="error" *ngIf="!moviesShown">
+  <div class="error" *ngIf="!showMovies">
     <h2 class="error-item">
       Oops! Something went terribly wrong. <br />Please refresh the page
       or try again later.

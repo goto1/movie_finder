@@ -1,7 +1,7 @@
 import { Component, OnInit }      from '@angular/core';
 
-import { Movie }                  from './movie';
-import { TrendingMoviesService }  from './trending-movies.service';
+import { Movie }                  from '../models/movie';
+import { TrendingMoviesService }  from '../services/trending-movies.service';
 
 @Component({
   selector: 'trending-movies',
@@ -9,60 +9,38 @@ import { TrendingMoviesService }  from './trending-movies.service';
   styleUrls: [ './trending-movies.component.sass' ]
 })
 export class TrendingMoviesComponent implements OnInit {
-  public errorMessage: string;
-  public moviesShown: Movie[];
-
-  private allMovies: Movie[];
-  private moviesExtracted: any[] = [];
-  private pageNumber: number = 0;
+  public allMovies;
+  public showMovies: Movie[];
+  private page: number = 0;
   
   constructor(private trendingMoviesService: TrendingMoviesService) { }
 
   ngOnInit(): void {
-    this.getMovies();
-  }
-
-  private getMovies(): void {
     this.trendingMoviesService.getMovies().subscribe(
       movies => {
         this.allMovies = movies;
-        this.sortMoviesByPages();
-        this.getMoviesFromPage(this.pageNumber);
+        this.showMovies = this.allMovies[this.page];
       },
-      error => this.errorMessage = <any>error
+      error => console.error(error)
     );
   }
 
-  private sortMoviesByPages(): void {
-    let tempArr: Movie[] = [];
-    let counter: number = 1;
-    
-    for (let i = 0; i < this.allMovies.length; i++) {
-      tempArr.push(this.allMovies[i]);
-      if (counter % 5 === 0) {
-        this.moviesExtracted.push(tempArr);
-        tempArr = [];
-      }
-      counter++;
+  public nextPage(): void {
+    if (this.page < this.allMovies.length - 1) {
+      this.page++;
     }
+    console.log(this.page, this.allMovies.length);
+    this.getMoviesFromPage(this.page);
+  }
+
+  public prevPage(): void {
+    if (this.page > 0) {
+      this.page--;
+    }
+    this.getMoviesFromPage(this.page);
   }
 
   private getMoviesFromPage(number: number): void {
-    this.moviesShown = this.moviesExtracted[number];
+    this.showMovies = this.allMovies[number];
   }
-
-  public nextPage(): void {
-    if (this.pageNumber < this.moviesExtracted.length - 1) {
-      this.pageNumber++;
-    }
-    this.getMoviesFromPage(this.pageNumber);
-  }
-
-  public previousPage(): void {
-    if (this.pageNumber > 0) {
-      this.pageNumber--;
-    }
-    this.getMoviesFromPage(this.pageNumber);
-  }
-
 }
