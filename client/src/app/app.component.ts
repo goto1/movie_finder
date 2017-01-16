@@ -14,8 +14,9 @@ import { Component } from '@angular/core';
         </button>
       </nav>
     </header>
+    <router-outlet></router-outlet>
   `,
-  styleUrls: ['./app.component.sass']
+  styleUrls: [ './app.component.sass' ]
 })
 export class AppComponent {
   public userLoggedIn: boolean = false;
