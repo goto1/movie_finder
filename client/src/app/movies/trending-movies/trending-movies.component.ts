@@ -1,8 +1,7 @@
-import { Component, OnInit }  from '@angular/core';
+import { Component, OnInit }      from '@angular/core';
 
-import { Movie }              from './movie';
-
-import { TrendingMoviesService } from './trending-movies.service';
+import { Movie }                  from './movie';
+import { TrendingMoviesService }  from './trending-movies.service';
 
 @Component({
   selector: 'trending-movies',
@@ -62,7 +61,6 @@ export class TrendingMoviesComponent implements OnInit {
   public previousPage(): void {
     if (this.pageNumber > 0) {
       this.pageNumber--;
-      console.log(this.pageNumber);
     }
     this.getMoviesFromPage(this.pageNumber);
   }
