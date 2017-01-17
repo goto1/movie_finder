@@ -15,6 +15,7 @@ import { SearchMoviesService }      from './services/search-movies.service';
 import { MovieDetailsService }      from './services/movie-details.service';
 
 import { MovieTitleShortPipe }      from './pipes/movie-title-short.pipe';
+import { SafeTrailerUrlPipe }       from './pipes/safe-trailer-url.pipe';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { MovieTitleShortPipe }      from './pipes/movie-title-short.pipe';
     MoviesSearchComponent,
     MovieDetailsComponent,
 
-    MovieTitleShortPipe
+    MovieTitleShortPipe,
+    SafeTrailerUrlPipe
   ],
   providers: [
     TrendingMoviesService,

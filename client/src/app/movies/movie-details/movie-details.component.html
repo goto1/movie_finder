@@ -1,1 +1,62 @@
-<h1>Movie Details Component</h1>
+<div class="row row1">
+  <div class="movie-overview">
+
+    <div class="col col1">
+
+      <div class="title-rating-wrapper">
+        <div class="title trw-item">
+          {{movie?.title}}
+        </div>
+        <div class="rating trw-item">
+          <span>{{movie?.vote_average}}</span>
+        </div>
+      </div>
+      <div class="vote-count-release-date-wrapper">
+        <div class="release-date vcrdw">
+          Release Date: <span>{{movie?.release_date}}</span>
+        </div>
+        <div class="vote-count vcrdw">
+          Vote Count: <span>{{movie?.vote_count}}</span>
+        </div>
+      </div>
+      <div class="genres">
+        <span class="genre-name" *ngFor="let genre of movie?.genres">
+          {{genre.name}}
+        </span>
+      </div>
+      <div class="overview">
+        <h2>Overview</h2>
+        <div class="overview-text">{{movie?.overview}}</div>
+      </div>
+    </div>
+
+    <div class="col col2">
+      <div class="poster-holder" *ngIf="movie?.poster_path">
+        <img src="https://image.tmdb.org/t/p/w500{{movie?.poster_path}}" 
+          alt="image poster" />
+      </div>
+      <div class="poster-holder not-available" *ngIf="!movie?.poster_path">
+        <div class="poster-not-available">
+          <i class="fa fa-film" aria-hidden="true"></i>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="row row2" *ngIf="similarMovies">
+  <h2>Similar Movies</h2>
+  <div class="similar-movies">
+    <div class="movie-template" *ngFor="let sim_movie of similarMovies">
+      <div class="movie-poster">
+        <img src="https://image.tmdb.org/t/p/w500{{sim_movie.poster_path}}" alt="movie poster" />
+        <div class="rating">{{sim_movie.vote_average}}</div>
+      </div>
+      <div class="movie-title">
+        {{sim_movie.title | movieTitleShort: 15 }}
+      </div>
+    </div>
+  </div>
+
+</div>
