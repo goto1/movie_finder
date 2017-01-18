@@ -1,11 +1,9 @@
-import { Component, OnInit }              from '@angular/core';
+import { Component, OnInit }      from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
-import { MovieDetailsService } from '../services/movie-details.service';
+import { MovieDetailsService }    from '../services/movie-details.service';
 
-import { DetailedMovie }  from '../models/detailed-movie';
-import { Movie }          from '../models/movie';
-import { Genre }          from '../models/genre';
+import { DetailedMovie }          from '../models/detailed-movie';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
@@ -29,30 +27,10 @@ export class MovieDetailsComponent implements OnInit {
   private getMovieDetails(id: number): void {
     this.movieDetailsService.getDetails(id)
       .subscribe(
-        movie => { 
-          this.movie = movie;
-          this.extractTrailerUrl(this.movie);
-          this.extractPosterPath(this.movie);
-        },
+        // movie => { this.movie = movie; console.log(this.movie); },
+        movie => this.movie = movie,
         error => console.error(error)
       );
-  }
-
-
-  private extractTrailerUrl(movie): void {
-    let trailerUrl: string = '';
-    if (movie.videos.results[0]) {
-      trailerUrl = `https://www.youtube.com/embed/${movie.videos.results[0].key}`;
-    }
-    this.movie.trailer = trailerUrl;
-  }
-
-  private extractPosterPath(movie): void {
-    let posterUrl: string = '';
-    if (movie.poster_path) {
-      posterUrl = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
-    }
-    this.movie.poster_path = posterUrl;
   }
 
 }
