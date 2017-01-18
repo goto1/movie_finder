@@ -6,10 +6,6 @@ import { MovieDBService } from './moviedb.service';
 import { DetailedMovie }  from '../models/detailed-movie';
 import { API }            from './moviedb-api-info';
 
-//import { DetailedMovie }  from '../models/detailed-movie';
-import { Movie }          from '../models/movie';
-import { Genre }          from '../models/genre';
-
 @Injectable()
 export class MovieDetailsService extends MovieDBService {
   private data;
@@ -24,10 +20,11 @@ export class MovieDetailsService extends MovieDBService {
       .map(this.extractData)
       .map(this.extractSimilarMovies)
       .map(this.extractTrailerUrl)
+      .map(this.extractPosterUrl)
       .catch(this.handleError);
   }
 
-  protected extractData(res: Response) {
+  protected extractData(res: Response): Object {
     return res.json() || {};
   }
 
@@ -46,9 +43,15 @@ export class MovieDetailsService extends MovieDBService {
 
   private extractTrailerUrl(movie): DetailedMovie {
     if (movie.videos.results[0]) {
-      movie.videos = `https://youtube.com/embed/${movie.videos.results[0].key}`;
+      movie.trailer = `https://youtube.com/embed/${movie.videos.results[0].key}`;
     }
     return movie;
   }
 
+  private extractPosterUrl(movie): DetailedMovie {
+    if (movie.poster_path) {
+      movie.poster_path = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+    }
+    return movie;
+  }
 }
