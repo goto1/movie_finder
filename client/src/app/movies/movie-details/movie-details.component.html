@@ -19,8 +19,8 @@
           Vote Count: <span>{{movie?.vote_count}}</span>
         </div>
       </div>
-      <div class="genres">
-        <span class="genre-name" *ngFor="let genre of movie?.genres">
+      <div class="genres" *ngIf="movie?.genres">
+        <span class="genre-name" *ngFor="let genre of movie.genres">
           {{genre.name}}
         </span>
       </div>
@@ -32,7 +32,7 @@
 
     <div class="col col2">
       <div class="poster-holder" *ngIf="movie?.poster_path">
-        <img src="https://image.tmdb.org/t/p/w500{{movie?.poster_path}}" 
+        <img src="{{movie.poster_path}}" 
           alt="image poster" />
       </div>
       <div class="poster-holder not-available" *ngIf="!movie?.poster_path">
@@ -45,16 +45,16 @@
   </div>
 </div>
 
-<div class="row row2" *ngIf="similarMovies">
+<div class="row row2" *ngIf="movie?.similar">
   <h2>Similar Movies</h2>
   <div class="similar-movies">
-    <div class="movie-template" *ngFor="let sim_movie of similarMovies">
+    <div class="movie-template" *ngFor="let smovie of movie.similar">
       <div class="movie-poster">
-        <img src="https://image.tmdb.org/t/p/w500{{sim_movie.poster_path}}" alt="movie poster" />
-        <div class="rating">{{sim_movie.vote_average}}</div>
+        <img src="https://image.tmdb.org/t/p/w500{{smovie.poster_path}}" alt="movie poster" />
+        <div class="rating">{{smovie.vote_average}}</div>
       </div>
       <div class="movie-title">
-        {{sim_movie.title | movieTitleShort: 15 }}
+        {{smovie.title | movieTitleShort: 15 }}
       </div>
     </div>
   </div>
