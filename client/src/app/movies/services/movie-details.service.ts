@@ -17,13 +17,18 @@ export class MovieDetailsService extends MovieDBService {
   constructor(private http: Http) { super(); }
 
   public getDetails(id: number | string): Observable<DetailedMovie> {
-    //this.testing();
     const apiUrl = API.url + '/movie/' + id + '?' + 
       API.key + '&language=en-US' + '&append_to_response=videos,similar';
+    
     return this.http.get(apiUrl)
       .map(this.extractData)
       .map(this.extractSimilarMovies)
+      .map(this.extractTrailerUrl)
       .catch(this.handleError);
+  }
+
+  protected extractData(res: Response) {
+    return res.json() || {};
   }
 
   private extractSimilarMovies(movie): DetailedMovie {
@@ -36,22 +41,14 @@ export class MovieDetailsService extends MovieDBService {
         movie.similar = movie.similar.results;
       }
     }
-    console.log(movie);
-
-    // if (movie.similar.results) {
-    //   if (movie.similar.results.length > numberOfMovies) {
-    //     movie.similar.results.slice(0, numberOfMovies);
-    //   } else {
-    //     movie.similar.results;
-    //   }
-    // }
-
     return movie;
   }
 
-  protected extractData(res: Response) {
-    return res.json();
+  private extractTrailerUrl(movie): DetailedMovie {
+    if (movie.videos.results[0]) {
+      movie.videos = `https://youtube.com/embed/${movie.videos.results[0].key}`;
+    }
+    return movie;
   }
-
 
 }
