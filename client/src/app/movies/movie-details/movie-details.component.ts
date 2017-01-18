@@ -31,7 +31,6 @@ export class MovieDetailsComponent implements OnInit {
       .subscribe(
         movie => { 
           this.movie = movie;
-          this.extractSimilarMovies(this.movie);
           this.extractTrailerUrl(this.movie);
           this.extractPosterPath(this.movie);
         },
@@ -39,19 +38,6 @@ export class MovieDetailsComponent implements OnInit {
       );
   }
 
-  private extractSimilarMovies(movie): void {
-    let similarMovies: Movie[] = [];
-    const numberOfMovies: number = 6;
-
-    if (movie.similar.results) {
-      if (movie.similar.results.length > numberOfMovies) {
-        similarMovies = movie.similar.results.slice(0, numberOfMovies);
-      } else {
-        similarMovies = movie.similar.results;
-      }
-    }
-    this.movie.similar = similarMovies;
-  }
 
   private extractTrailerUrl(movie): void {
     let trailerUrl: string = '';

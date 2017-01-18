@@ -21,7 +21,7 @@
       </div>
       <div class="genres" *ngIf="movie?.genres">
         <span class="genre-name" *ngFor="let genre of movie.genres">
-          {{genre.name}}
+          {{genre.name | movieTitleShort: 10}}
         </span>
       </div>
       <div class="overview">
