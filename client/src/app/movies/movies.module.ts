@@ -6,11 +6,11 @@ import { FormsModule }              from '@angular/forms';
 import { MoviesRoutingModule }      from './movies-routing.module';
 
 import { MoviesComponent }          from './movies.component';
-import { MoviesTrendingComponent }  from './movies-trending/movies-trending.component';
+import { MoviesDiscoverComponent }  from './movies-discover/movies-discover.component';
 import { MoviesSearchComponent }    from './movies-search/movies-search.component';
 import { MovieDetailsComponent }    from './movie-details/movie-details.component';
 
-import { TrendingMoviesService }    from './services/trending-movies.service';
+import { DiscoverMoviesService }    from './services/discover-movies.service';
 import { SearchMoviesService }      from './services/search-movies.service';
 import { MovieDetailsService }      from './services/movie-details.service';
 
@@ -26,7 +26,7 @@ import { SafeUrlPipe }              from './pipes/safe-url.pipe';
   ],
   declarations: [
     MoviesComponent,
-    MoviesTrendingComponent,
+    MoviesDiscoverComponent,
     MoviesSearchComponent,
     MovieDetailsComponent,
 
@@ -34,7 +34,7 @@ import { SafeUrlPipe }              from './pipes/safe-url.pipe';
     SafeUrlPipe
   ],
   providers: [
-    TrendingMoviesService,
+    DiscoverMoviesService,
     SearchMoviesService,
     MovieDetailsService
   ]

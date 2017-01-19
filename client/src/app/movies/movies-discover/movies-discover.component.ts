@@ -1,22 +1,21 @@
 import { Component, OnInit }      from '@angular/core';
 
 import { Movie }                  from '../models/movie';
-import { TrendingMoviesService }  from '../services/trending-movies.service';
+import { DiscoverMoviesService }  from '../services/discover-movies.service';
 
 @Component({
-  selector: 'movies-trending',
-  templateUrl: './movies-trending.component.html',
-  styleUrls: [ './movies-trending.component.sass' ]
+  templateUrl: './movies-discover.component.html',
+  styleUrls: [ './movies-discover.component.sass' ]
 })
-export class MoviesTrendingComponent implements OnInit {
+export class MoviesDiscoverComponent implements OnInit {
   public allMovies;
   public showMovies: Movie[];
   private page: number = 0;
   
-  constructor(private trendingMoviesService: TrendingMoviesService) { }
+  constructor(private discoverMoviesService: DiscoverMoviesService) { }
 
   ngOnInit(): void {
-    this.trendingMoviesService.getMovies().subscribe(
+    this.discoverMoviesService.getMovies().subscribe(
       movies => {
         this.allMovies = movies;
         this.showMovies = this.allMovies[this.page];

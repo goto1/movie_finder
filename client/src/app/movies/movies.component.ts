@@ -4,14 +4,10 @@ import { Component }  from '@angular/core';
   template: `
     <nav>
       <a routerLink="/movies" routerLinkActive="active">
-        <div class="nav-item">
-          Discover <i class="fa fa-film" aria-hidden="true"></i>
-        </div>
+        Discover <i class="fa fa-film" aria-hidden="true"></i>
       </a>
       <a routerLink="/search" routerLinkActive="active">
-        <div class="nav-item">
-          Search <i class="fa fa-search" aria-hidden="true"></i>
-        </div>
+        Search <i class="fa fa-search" aria-hidden="true"></i>
       </a>
     </nav>
     <router-outlet></router-outlet>

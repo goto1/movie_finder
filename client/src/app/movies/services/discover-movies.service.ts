@@ -7,7 +7,7 @@ import { Movie }          from '../models/movie';
 import { API }            from './moviedb-api-info';
 
 @Injectable()
-export class TrendingMoviesService extends MovieDBService {
+export class DiscoverMoviesService extends MovieDBService {
   private apiUrl = API.url + '/discover/movie?' + API.key + '&language=en-US&sort_by=popularity.desc' + '&include_adult=false&include_video=false&page=1';
 
   constructor(private http: Http) { super(); }
