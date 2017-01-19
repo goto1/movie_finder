@@ -4,6 +4,7 @@ import { Observable }     from 'rxjs/Observable';
 
 import { MovieDBService } from './moviedb.service';
 import { DetailedMovie }  from '../models/detailed-movie';
+import { Movie }          from '../models/movie';
 import { API }            from './moviedb-api-info';
 
 @Injectable()
@@ -17,41 +18,49 @@ export class MovieDetailsService extends MovieDBService {
       API.key + '&language=en-US' + '&append_to_response=videos,similar';
     
     return this.http.get(apiUrl)
-      .map(this.extractData)
-      .map(this.extractSimilarMovies)
-      .map(this.extractTrailerUrl)
-      .map(this.extractPosterUrl)
+      .map(data => this.extractData(data))
       .catch(this.handleError);
   }
 
   protected extractData(res: Response): Object {
-    return res.json() || {};
+    let movie = res.json() || {};
+
+    movie.similar = this.extractSimilarMovies(movie);
+    movie.trailer = this.extractTrailerUrl(movie);
+    movie.poster_path = this.extractPosterUrl(movie);
+    
+    return movie;
   }
 
-  private extractSimilarMovies(movie): DetailedMovie {
+  private extractSimilarMovies(movie): Movie[] {
+    let similar: Movie[] = [];
     const numberOfMovies: number = 6;
-
+    
     if (movie.similar.results) {
       if (movie.similar.results.length > numberOfMovies) {
-        movie.similar = movie.similar.results.slice(0, numberOfMovies);
+        similar = movie.similar.results.slice(0, numberOfMovies);
       } else {
-        movie.similar = movie.similar.results;
+        similar = movie.similar.results;
       }
     }
-    return movie;
+    return similar;
   }
 
-  private extractTrailerUrl(movie): DetailedMovie {
+  private extractTrailerUrl(movie): string {
+    let trailerUrl: string = '';
+
     if (movie.videos.results[0]) {
-      movie.trailer = `https://youtube.com/embed/${movie.videos.results[0].key}`;
+      trailerUrl = `https://youtube.com/embed/${movie.videos.results[0].key}`;
     }
-    return movie;
+    return trailerUrl;
   }
 
-  private extractPosterUrl(movie): DetailedMovie {
+  private extractPosterUrl(movie): string {
+    let posterUrl: string = '';
+
     if (movie.poster_path) {
-      movie.poster_path = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+      posterUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
     }
-    return movie;
+    return posterUrl;
   }
 }
