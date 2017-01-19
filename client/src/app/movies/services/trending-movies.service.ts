@@ -1,5 +1,5 @@
 import { Injectable }     from '@angular/core';
-import { Http }           from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 
 import { MovieDBService } from './moviedb.service';
@@ -14,29 +14,32 @@ export class TrendingMoviesService extends MovieDBService {
 
   public getMovies(): Observable<[Movie]> {
     return this.http.get(this.apiUrl)
-      .map(this.extractData)
-      .map(this.splitBySets)
+      .map(data => this.extractData(data))
       .catch(this.handleError);
   }
 
-  private splitBySets(data) {
-    if (data) {
-      let tempArr: Movie[] = [];
-      let resultingArr = [];
-      let counter: number = 1;
-      let setNumber = 5;
+  protected extractData(res: Response) {
+    let movies = res.json() || {};
 
-      data.forEach(item => {
+    return this.splitBySets(movies);
+  }
+
+  private splitBySets(data) {
+    let extractedMovies = [];
+    let tempArr: Movie[] = [];
+    let counter: number = 1;
+    const moviesPerSet = 5;
+
+    if (data.results) {
+      data.results.forEach(item => {
         tempArr.push(item);
-        if (counter % setNumber === 0) {
-          resultingArr.push(tempArr);
+        if (counter % moviesPerSet === 0) {
+          extractedMovies.push(tempArr);
           tempArr = [];
         }
         counter++;
       });
-
-      return resultingArr;
     }
-    return data;
+    return extractedMovies;
   }
 }
