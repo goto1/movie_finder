@@ -1,0 +1,32 @@
+$primary-color: #FBFFFD
+$secondary-color: #7D7F7F
+$font-color-dark-green: #577F6D
+$font-color-off-white: #FFFBFB
+
+$row-border-bottom-color: #C8CBCB
+$border-bottom-color-col: #B4CBCB
+
+nav
+  display: flex
+  margin: 15px 0 0 0
+  padding: 7.5px 25px 7.5px 25px
+  border-bottom: 1px solid $border-bottom-color-col
+  border-top: 1px solid $border-bottom-color-col
+  .nav-item
+    flex-basis: 140px
+    padding: 12.5px 7.5px 12.5px 12.5px
+    margin-right: 7.5px
+    text-align: center
+    border-radius: 2px
+    letter-spacing: .15em
+    font-weight: 400
+    text-transform: uppercase
+    color: $font-color-dark-green
+    //border: 1px solid $font-color-dark-green
+    transition: 0.5s
+    box-shadow: 0px 0px 1px 1px $secondary-color
+    &:hover
+      color: $font-color-off-white
+      background-color: $font-color-dark-green
+    i
+      margin-left: 2.5px
