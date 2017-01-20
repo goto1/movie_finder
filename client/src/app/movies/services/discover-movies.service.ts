@@ -25,6 +25,11 @@ export class DiscoverMoviesService extends MovieDBService {
     return this.getMovies(apiUrl);
   }
 
+  public getUpcomingMovies(): Observable<[Movie]> {
+    const apiUrl = API.url + '/movie/upcoming?' + API.key + '&language=en-US&page=1';
+    return this.getMovies(apiUrl);
+  }
+
   private getMovies(apiUrl: string): Observable<[Movie]> {
     return this.http.get(apiUrl)
       .map(data => this.extractData(data))

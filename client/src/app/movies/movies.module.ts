@@ -10,6 +10,7 @@ import { MoviesDiscoverComponent }    from './movies-discover/movies-discover.co
 import { NowPlayingMoviesComponent }  from './movies-discover/now-playing-movies.component';
 import { PopularMoviesComponent }     from './movies-discover/popular-movies.component';
 import { TopRatedMoviesComponent }    from './movies-discover/top-rated-movies.component';
+import { UpcomingMoviesComponent }    from './movies-discover/upcoming-movies.component';
 import { MoviesSearchComponent }      from './movies-search/movies-search.component';
 import { MovieDetailsComponent }      from './movie-details/movie-details.component';
 
@@ -33,6 +34,7 @@ import { SafeUrlPipe }                from './pipes/safe-url.pipe';
     NowPlayingMoviesComponent,
     PopularMoviesComponent,
     TopRatedMoviesComponent,
+    UpcomingMoviesComponent,
     MoviesSearchComponent,
     MovieDetailsComponent,
 
