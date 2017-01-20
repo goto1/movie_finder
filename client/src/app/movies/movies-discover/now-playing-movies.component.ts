@@ -11,13 +11,13 @@ import { DiscoverMoviesService }    from '../services/discover-movies.service';
 })
 export class NowPlayingMoviesComponent implements OnInit {
   public showMovies: Movie[];
-  private moviesPaginated: MoviesPaginated;
+  public moviesPaginated: MoviesPaginated;
   public title: string = 'Now Playing';
 
   constructor(private discoverMoviesService: DiscoverMoviesService) { }
 
   ngOnInit(): void {
-    this.discoverMoviesService.getMovies().subscribe(
+    this.discoverMoviesService.getNowPlayingMovies().subscribe(
       movies => {
         this.moviesPaginated = new MoviesPaginated(movies);
         this.showMovies = this.moviesPaginated.getCurrentPageContent();
@@ -25,7 +25,7 @@ export class NowPlayingMoviesComponent implements OnInit {
       error => console.error(error)
     );
   }
-
+  
   public nextPage(): void {
     this.moviesPaginated.nextPage();
     this.showMovies = this.moviesPaginated.getCurrentPageContent();
