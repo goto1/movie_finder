@@ -20,7 +20,7 @@ export class MoviesPaginated {
   }
 
   public hasPrevious(): boolean {
-    return this.page > 1;
+    return this.page > 0;
   }
 
   public hasNext(): boolean {
