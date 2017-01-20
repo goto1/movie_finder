@@ -5,12 +5,14 @@
   </div>
 
   <div class="movies" *ngIf="showMovies">
-    <div class="scroll-left scroll" (click)="prevPage()">
+    <button class="scroll-left scroll" (click)="prevPage()" 
+      [disabled]="!moviesPaginated.hasPrevious()">
       <a><i class="fa fa-angle-left" aria-hidden="true"></i></a>
-    </div>
-    <div class="scroll-right scroll" (click)="nextPage()">
+    </button>
+    <button class="scroll-right scroll" (click)="nextPage()"
+      [disabled]="!moviesPaginated.hasNext()">
       <a><i class="fa fa-angle-right" aria-hidden="true"></i></a>
-    </div>
+    </button>
 
     <div class="trending-movies">
       <div class="movie-wrapper" *ngFor="let movie of showMovies">

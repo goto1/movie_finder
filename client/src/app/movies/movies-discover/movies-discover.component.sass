@@ -46,18 +46,27 @@ $font-color-off-white: #FFFBFB
     height: 100%
     position: relative
 
+    button
+      border: none
+      background-color: inherit
+      color: #FE5E4A
+      &:disabled
+        color: #3F1712
+      &:focus
+        outline: 0
+
     .scroll
       position: absolute
       top: 40%
       font-size: 3.25em
       transition: 0.5s
       &:hover
-        color: #FE5E4A
+        transform: scale(1.2)
         cursor: pointer
     .scroll-left
-      left: 7.5px
+      left: 2.5px
     .scroll-right
-      right: 7.5px
+      right: 2.5px
 
     .trending-movies
       display: flex 
