@@ -8,12 +8,15 @@ import { API }            from './moviedb-api-info';
 
 @Injectable()
 export class DiscoverMoviesService extends MovieDBService {
-  private apiUrl = API.url + '/discover/movie?' + API.key + '&language=en-US&sort_by=popularity.desc' + '&include_adult=false&include_video=false&page=1';
-
   constructor(private http: Http) { super(); }
 
-  public getMovies(): Observable<[Movie]> {
-    return this.http.get(this.apiUrl)
+  public getNowPlayingMovies(): Observable<[Movie]> {
+    const apiUrl = API.url + '/movie/now_playing?' + API.key + '&language=en-US&page=1';
+    return this.getMovies(apiUrl);
+  }
+
+  private getMovies(apiUrl: string): Observable<[Movie]> {
+    return this.http.get(apiUrl)
       .map(data => this.extractData(data))
       .catch(this.handleError);
   }
