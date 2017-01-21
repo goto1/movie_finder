@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-root',
   template: `
     <header>
-      <div class="logo header-item">MOVIEJO</div>
+      <div class="logo header-item" [routerLink]="'/'">MOVIEJO</div>
       <nav class="header-item">
         <button class="nav-item" *ngIf="!userLoggedIn">
           Login <i class="fa fa-user" aria-hidden="true"></i>
