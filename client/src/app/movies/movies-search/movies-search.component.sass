@@ -15,27 +15,39 @@ $orangy-color: #FE5E4A
     justify-content: center
     border: 1px solid $font-color-dark-green
     height: 30px
-    width: 215px
-    padding: 10px
+    width: auto
+    padding: 10px 10px 10px 15px
     border-radius: 2.5px
     box-shadow: 0px 0px 2px 1px $secondary-color
     transition: $transition-time
-    &:hover
-      border: 1px solid $orangy-color
-      width: 300px
     
     input[type="text"]
       border: none
-      width: 75%
+      width: 275px
+      transition: $transition-time
       &:focus
         outline: none
+    button
+      border: none
+      background-color: inherit
+      color: $orangy-color
+      &:hover
+        cursor: pointer
+
+      &:disabled
+        color: $secondary-color
+        cursor: not-allowed
     i
       align-self: center
       font-size: 1.25em
-      transition: $transition-time
-      &:hover
-        color: $orangy-color
-        cursor: pointer
+  .error
+    width: 100%
+    padding: 5px 0 0 0;
+    color: red
+    text-transform: uppercase
+    font-weight: 600
+    text-align: center
+    font-size: .85em
 
 .search-results
   padding-left: 25px 

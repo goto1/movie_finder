@@ -1,13 +1,21 @@
 <div class="movie-search">
-  <div class="search-input">
-    <input type="text" placeholder="The Hangover..." class="input-item" 
-      #title />
-    <i class="fa fa-search input-item" aria-hidden="true"
-      (click)="searchMovie(title.value)"></i>
-  </div>
+  <form>
+    <div class="search-input">
+      <input type="text"
+        [(ngModel)]="search.title" #query="ngModel"
+        name="title" placeholder="Search for a title..." required />
+      <button type="button" (click)="searchFor(search.title)" 
+        [disabled]="!query.valid || query.prestine">
+        <i class="fa fa-search input-item" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="error" [hidden]="query.valid || query.pristine">
+      Missing movie title!
+    </div>
+  </form>
 </div>
 <div class="search-results" *ngIf="movies">
-  <h2 class="header">Showing results for <span>{{searchQuery}}</span>...</h2>
+  <h2 class="header">Showing results for <span>{{search.title}}</span>...</h2>
 
   <div class="movies">
     <div class="movie-details" *ngFor="let movie of movies" [routerLink]="['/movie', movie.id]">
