@@ -127,10 +127,16 @@ $border-bottom-color-col: #B4CBCB
       border-radius: 2.5px
       background-color: $font-color-dark-green
       box-shadow: 0px 0px 2px 2px $orangy-color
+      transition: $transition-time
+      &:hover
+        cursor: pointer
+        box-shadow: 0px 0px 2px 3px #FE5E4A
+        transform: scale(1.05)
       .movie-poster
         position: relative
         img
-          width: 100%
+          width: 135px
+          height: 202px
           border-radius: 2.5px
         .rating
           position: absolute
@@ -150,5 +156,6 @@ $border-bottom-color-col: #B4CBCB
         color: $font-color-off-white
         text-transform: uppercase
         text-align: center
+        overflow: hidden
 
 

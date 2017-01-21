@@ -21,6 +21,7 @@ export class NowPlayingMoviesComponent implements OnInit {
       movies => {
         this.moviesPaginated = new MoviesPaginated(movies);
         this.showMovies = this.moviesPaginated.getCurrentPageContent();
+        console.log(this.showMovies);
       },
       error => console.error(error)
     );

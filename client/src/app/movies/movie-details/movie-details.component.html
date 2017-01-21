@@ -46,7 +46,7 @@
 <div class="row row2" *ngIf="movie?.similar">
   <h2>Similar Movies</h2>
   <div class="similar-movies">
-    <div class="movie-template" *ngFor="let similar of movie.similar">
+    <div class="movie-template" *ngFor="let similar of movie.similar" [routerLink]="['/movie', similar.id]">
       <div class="movie-poster">
         <img src="https://image.tmdb.org/t/p/w500{{similar.poster_path}}" 
           alt="movie poster" />

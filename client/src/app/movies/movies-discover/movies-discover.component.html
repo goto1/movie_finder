@@ -15,7 +15,7 @@
     </button>
 
     <div class="trending-movies">
-      <div class="movie-wrapper" *ngFor="let movie of showMovies">
+      <div class="movie-wrapper" *ngFor="let movie of showMovies" [routerLink]="['/movie', movie.id]">
         <div class="movie-details">
           <div class="movie-poster">
             <img src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}" alt="movie poster">
