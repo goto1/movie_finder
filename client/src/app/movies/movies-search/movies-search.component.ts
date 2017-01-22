@@ -20,7 +20,7 @@ export class MoviesSearchComponent implements OnInit {
   constructor(private searchService: SearchMoviesService) { }
 
   ngOnInit(): void {
-    this.search = { title: 'The Hangover' };
+    this.search = { title: '' };
     this.searchFor(this.search.title);
   }
 
