@@ -12,6 +12,7 @@ import { PopularMoviesComponent }     from './movies-discover/popular-movies.com
 import { TopRatedMoviesComponent }    from './movies-discover/top-rated-movies.component';
 import { UpcomingMoviesComponent }    from './movies-discover/upcoming-movies.component';
 import { MoviesSearchComponent }      from './movies-search/movies-search.component';
+import { SearchResultsComponent }     from './movies-search/search-results.component';
 import { MovieDetailsComponent }      from './movie-details/movie-details.component';
 
 import { DiscoverMoviesService }      from './services/discover-movies.service';
@@ -36,6 +37,7 @@ import { SafeUrlPipe }                from './pipes/safe-url.pipe';
     TopRatedMoviesComponent,
     UpcomingMoviesComponent,
     MoviesSearchComponent,
+    SearchResultsComponent,
     MovieDetailsComponent,
 
     MovieTitleShortPipe,
