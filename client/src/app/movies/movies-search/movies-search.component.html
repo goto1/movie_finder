@@ -1,6 +1,9 @@
+<!--query.touched || query.dirty-->
+
 <div class="movie-search">
   <form>
-    <div class="search-input">
+    <div class="search-input" [class.active]="query.touched || query.dirty"
+      [class.active-not-valid]="query.invalid && query.dirty">
       <input type="text"
         [(ngModel)]="search.title" #query="ngModel"
         name="title" placeholder="Search for a title..." required />
@@ -14,7 +17,7 @@
     </div>
   </form>
 </div>
-<div class="search-results" *ngIf="movies">
+<!--<div class="search-results" *ngIf="movies">
   <h2 class="header">Showing results for <span>{{search.title}}</span>...</h2>
 
   <div class="movies">
@@ -52,4 +55,4 @@
   <div class="error">
     <i class="fa fa-meh-o" aria-hidden="true"></i>
   </div>
-</div>
+</div>-->

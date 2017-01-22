@@ -20,7 +20,7 @@ export class MoviesSearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.search = { title: '' };
-    this.searchFor(this.search.title);
+    // this.searchFor(this.search.title);
   }
 
   public searchFor(title: string): void {
