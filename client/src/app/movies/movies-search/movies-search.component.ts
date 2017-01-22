@@ -15,12 +15,13 @@ interface SearchMovieInput {
 export class MoviesSearchComponent implements OnInit {
   public search: SearchMovieInput;
   public movies: Movie[];
+  public error: boolean;
 
   constructor(private searchService: SearchMoviesService) { }
 
   ngOnInit(): void {
-    this.search = { title: '' };
-    // this.searchFor(this.search.title);
+    this.search = { title: 'The Hangover' };
+    this.searchFor(this.search.title);
   }
 
   public searchFor(title: string): void {
@@ -29,7 +30,10 @@ export class MoviesSearchComponent implements OnInit {
       this.searchService.searchMovie(this.search.title)
         .subscribe(
           movies => this.movies = movies,
-          error => console.error(error)
+          error => {
+            console.error(error);
+            this.error = true;
+          }
         );
     }
   }
