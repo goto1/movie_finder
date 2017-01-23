@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { DiscoverService } from '../services/discover.service';
+import { Movie } from '../models/movie';
 
 @Component({
   selector: 'now-playing',
@@ -9,13 +10,34 @@ import { DiscoverService } from '../services/discover.service';
 })
 export class NowPlayingComponent implements OnInit {
 
-  constructor(private discoverService: DiscoverService) { }
+  public movies: Movie[];
+  public error: boolean; 
+
+  constructor(public discoverService: DiscoverService) { }
   
   ngOnInit(): void {
-    this.discoverService.getNowPlayingMovies()
+    this.getMovies();
+  }
+
+  private getMovies(): void {
+    this.discoverService.getNowPlaying()
       .subscribe(
-        movies => console.log(movies),
-        err => console.log(err)
+        movies => {
+          this.movies = movies;
+          console.log(this.movies);
+        },
+        error => this.error = true
       );
   }
+
+  public nextPage(): void {
+    this.discoverService.nextPage();
+    this.getMovies();
+  }
+
+  public previousPage(): void {
+    this.discoverService.previousPage();
+    this.getMovies();
+  }
+
 }

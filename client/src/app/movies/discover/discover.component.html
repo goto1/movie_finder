@@ -1,12 +1,17 @@
 <div class="select-category">
-  <select name="category" [(ngModel)]="selected.category">
-    <option *ngFor="let category of categories" [ngValue]="category">
-      {{category.name}}
-    </option>
-  </select>
+  <div class="select-wrapper">
+    <select name="category" [(ngModel)]="selected.category">
+      <option *ngFor="let category of categories" [ngValue]="category">
+        {{category.name}}
+      </option>
+    </select>
+  </div>
 </div>
 
 <now-playing *ngIf="selected.category.value === 1"></now-playing>
+<!--<popular *ngIf="selected.category.value === 2"></popular>
+<top-rated *ngIf="selected.category.value === 3"></top-rated>
+<upcoming *ngIf="selected.category.value === 4"></upcoming>-->
 
 <div *ngIf="selected.category.value === 2">
   <h1>Popular</h1>

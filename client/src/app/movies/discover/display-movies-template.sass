@@ -1,0 +1,78 @@
+$primary-color: #FBFFFD
+$secondary-color: #7D7F7F
+$font-color-dark-green: #577F6D
+$font-color-off-white: #FFFBFB
+
+$row-border-bottom-color: #C8CBCB
+$border-bottom-color-col: #B4CBCB
+$orangy-color: #FE5E4A
+
+.pagination
+  display: flex
+  justify-content: space-around
+  margin: 15px 0 0 0
+  button
+    width: 180px
+    padding: 10px
+    border: none
+    background-color: inherit
+    text-transform: uppercase
+    font-weight: 500
+    color: $font-color-dark-green
+    letter-spacing: 0.05em
+    transition: 0.5s
+    &:hover
+      cursor: pointer
+      transform: scale(1.2)
+    &:focus 
+      outline: none
+    &:disabled
+      cursor: not-allowed
+      color: $secondary-color
+      font-weight: 300
+    i
+      font-size: 1.15em
+      padding-left: 2.5px
+      padding-right: 2.5px
+
+.movies
+  margin-top: 20px
+  display: flex
+  flex-wrap: wrap 
+  justify-content: space-around
+  .movie-overview
+    flex-basis: 190px
+    height: auto
+    margin-bottom: 25px
+    flex-grow: 0
+    padding: 2.5px
+    background-color: $font-color-dark-green
+    border-radius: 2.5px
+    box-shadow: 0px 0px 2px 2px $orangy-color
+    transition: 0.5s
+    &:hover
+      transform: translateY(-.75em)
+      cursor: pointer
+    .movie-poster
+      img
+        width: 100%
+        border-radius: 2.5px
+        height: 285px
+      .no-poster
+        height: 285px
+        display: flex
+        justify-content: center
+        align-items: center
+        i
+          font-size: 7em
+          color: $orangy-color
+    .movie-title
+      color: $font-color-off-white
+      text-transform: uppercase
+      letter-spacing: 0.05em
+      height: 40px
+      overflow: hidden
+      display: flex
+      justify-content: center
+      align-items: center
+      text-align: center

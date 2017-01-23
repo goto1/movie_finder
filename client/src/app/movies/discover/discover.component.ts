@@ -15,7 +15,7 @@ interface Selected {
 })
 export class DiscoverComponent implements OnInit {
   public selected: Selected;
-  public categories: Category[] = [
+  private categories: Category[] = [
     { value: 1, name: 'Now Playing' },
     { value: 2, name: 'Popular' },
     { value: 3, name: 'Top Rated' },
