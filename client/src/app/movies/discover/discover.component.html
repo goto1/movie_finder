@@ -6,9 +6,7 @@
   </select>
 </div>
 
-<div *ngIf="selected.category.value === 1">
-  <h1>Now Playing</h1>
-</div>
+<now-playing *ngIf="selected.category.value === 1"></now-playing>
 
 <div *ngIf="selected.category.value === 2">
   <h1>Popular</h1>
