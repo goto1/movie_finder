@@ -1,27 +1,27 @@
 import { Response }   from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
+import { Movie }      from '../models/movie';
+
 export abstract class TMDBService {
-  protected page: number;
-  protected pageCount: number;
 
-  public nextPage(): void {
-    this.page++;
-  }
-
-  public previousPage(): void {
-    this.page--;
-  }
-
-  public hasNext(): boolean {
-    return this.page < this.pageCount;
-  }
-
-  public hasPrevious(): boolean {
-    return this.page > 1;
+  protected extractPosterUrl(movies: Movie[]) {
+    movies.map(movie => {
+      if (movie.poster_path) {
+        movie.poster_path = `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+      } else {
+        movie.poster_path = '';
+      }
+    });
   }
 
   protected handleError(error: Response | any) {
+    let errorMessage: string = this.extractErrorMessage(error);
+
+    return Observable.throw(errorMessage);
+  }
+
+  private extractErrorMessage(error: Response | any): string {
     let errorMessage: string;
 
     if (error instanceof Response) {
@@ -31,9 +31,8 @@ export abstract class TMDBService {
     } else {
       errorMessage = error.message ? error.message : error.toString();
     }
-    console.error(errorMessage);
 
-    return Observable.throw(errorMessage);
+    return errorMessage; 
   }
 
 }
