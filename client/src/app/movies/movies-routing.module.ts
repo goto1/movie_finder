@@ -2,7 +2,6 @@ import { NgModule }                 from '@angular/core';
 import { RouterModule, Routes }     from '@angular/router';
 
 import { MoviesComponent }          from './movies.component';
-import { MoviesDiscoverComponent }  from './movies-discover/movies-discover.component';
 import { MovieDetailsComponent }    from './movie-details/movie-details.component';
 import { MoviesSearchComponent }    from './movies-search/movies-search.component';
 
