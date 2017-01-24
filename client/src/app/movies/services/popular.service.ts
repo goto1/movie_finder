@@ -15,7 +15,6 @@ export class PopularService extends DiscoverService {
 
   public getPopular(): Observable<[Movie]> {
     this.page = this.page || 1;
-    console.log(this.page);
     const url = `${API.url}/movie/popular?${API.key}&language=en-US&page=${this.page}`;
     return this.getMovies(url);
   }

@@ -15,7 +15,6 @@ export class NowPlayingService extends DiscoverService {
 
   public getNowPlaying(): Observable<[Movie]> {
     this.page = this.page || 1;
-    console.log(this.page);
     const url = `${API.url}/movie/now_playing?${API.key}&language=en-US&page=${this.page}`;
     return this.getMovies(url);
   }
