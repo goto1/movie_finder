@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import { Injectable }       from '@angular/core';
+import { Http }             from '@angular/http';
+import { Observable }       from 'rxjs/Observable';
 
-import { Movie } from '../models/movie';
-import { API } from './moviedb-api-info';
-import { DiscoverService } from './discover.service';
+import { Movie }            from '../models/movie';
+import { API }              from './moviedb-api-info';
+import { DiscoverService }  from './discover.service';
 
 @Injectable()
 export class UpcomingService extends DiscoverService {

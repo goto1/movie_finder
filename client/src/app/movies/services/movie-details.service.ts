@@ -10,6 +10,7 @@ import { API }            from './moviedb-api-info';
 @Injectable()
 export class MovieDetailsService extends MovieDBService {
   private data;
+  private lastMovie: number;
 
   constructor(private http: Http) { super(); }
 
@@ -17,9 +18,15 @@ export class MovieDetailsService extends MovieDBService {
     const apiUrl = API.url + '/movie/' + id + '?' + 
       API.key + '&language=en-US' + '&append_to_response=videos,similar';
     
+    this.lastMovie = +id;
+
     return this.http.get(apiUrl)
       .map(data => this.extractData(data))
       .catch(this.handleError);
+  }
+
+  public getLastMovieRetrieved(): number {
+    return this.lastMovie;
   }
 
   protected extractData(res: Response): Object {
