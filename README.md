@@ -11,4 +11,4 @@ A movie finder website built using the `MEAN` stack.
 * `SASS`
 
 ### Link
-* [Coming Soon](https://google.com)
+* [goto1.github.io/movie_finder/client/dist/](https://goto1.github.io/movie_finder/client/dist/)
