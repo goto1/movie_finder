@@ -2,11 +2,11 @@
 
   <div class="pagination">
     <button type="button" class="btn" (click)="previousPage()"
-      [disabled]="!discoverService.hasPrevious()">
+      [disabled]="!hasPrevious()">
     <i class="fa fa-angle-left" aria-hidden="true"></i> Previous Page
     </button>
     <button type="button" class="btn" (click)="nextPage()"
-      [disabled]="!discoverService.hasNext()">
+      [disabled]="!hasNext()">
       Next Page <i class="fa fa-angle-right" aria-hidden="true"></i>
     </button>
   </div>
@@ -20,7 +20,7 @@
         </div>
       </div>
       <div class="movie-title">
-        <div class="title">{{movie.title}}</div>
+        <div class="title">{{movie.title | movieTitleShort: 30}}</div>
       </div>
     </div>
   </div>
