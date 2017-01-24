@@ -30,7 +30,15 @@
 
 </div>
 
-<!--TODO: Add Message When Something Went Wrong!-->
+<div class="error" *ngIf="!movies">
+  <div class="message">
+    Something went wrong! <br> Please try again shortly.
+  </div>
+  <div class="broken">
+    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+  </div>
+</div>
+
 
 
 
