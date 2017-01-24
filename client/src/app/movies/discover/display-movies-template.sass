@@ -13,7 +13,8 @@ $orangy-color: #FE5E4A
   margin: 15px 0 0 0
   button
     width: 180px
-    padding: 10px
+    padding: 10px 10px 5px 10px
+    margin-bottom: 5px
     border: none
     background-color: inherit
     text-transform: uppercase
@@ -21,6 +22,7 @@ $orangy-color: #FE5E4A
     color: $font-color-dark-green
     letter-spacing: 0.05em
     transition: 0.5s
+    border-bottom: 1px solid $orangy-color
     &:hover
       cursor: pointer
       transform: scale(1.2)
@@ -30,13 +32,14 @@ $orangy-color: #FE5E4A
       cursor: not-allowed
       color: $secondary-color
       font-weight: 300
+      border-bottom: none
     i
       font-size: 1.15em
       padding-left: 2.5px
       padding-right: 2.5px
 
 .movies
-  margin-top: 20px
+  margin-top: 25px
   display: flex
   flex-wrap: wrap 
   justify-content: space-around
@@ -50,8 +53,9 @@ $orangy-color: #FE5E4A
     border-radius: 2.5px
     box-shadow: 0px 0px 2px 2px $orangy-color
     transition: 0.5s
+    position: relative
     &:hover
-      transform: translateY(-.75em)
+      transform: scale(1.05)
       cursor: pointer
     .movie-poster
       img
@@ -63,6 +67,8 @@ $orangy-color: #FE5E4A
         display: flex
         justify-content: center
         align-items: center
+        border: 2px solid $orangy-color
+        border-radius: 2.5px
         i
           font-size: 7em
           color: $orangy-color
@@ -76,3 +82,18 @@ $orangy-color: #FE5E4A
       justify-content: center
       align-items: center
       text-align: center
+    .movie-rating
+      position: absolute
+      top: -10px
+      right: -10px
+      background-color: $orangy-color
+      padding: 2.5px 5px 2.5px 5px
+      color: $font-color-off-white
+      width: 55px
+      letter-spacing: 0.05em
+      font-weigth: 600
+      border-radius: 2.5px
+      text-align: center
+      i
+        color: yellow
+        font-weight: 900
