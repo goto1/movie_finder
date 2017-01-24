@@ -1,6 +1,6 @@
 import { Component, OnInit }  from '@angular/core';
 
-import { NowPlayingService }    from '../services/now-playing.service';
+import { NowPlayingService }  from '../services/now-playing.service';
 import { Movie }              from '../models/movie';
 
 @Component({
@@ -21,10 +21,7 @@ export class NowPlayingComponent implements OnInit {
   private getMovies(): void {
     this.nowPlayingService.getNowPlaying()
       .subscribe(
-        movies => {
-          this.movies = movies;
-          console.log(this.movies);
-        },
+        movies => this.movies = movies,
         error => this.error = true
       );
   }
