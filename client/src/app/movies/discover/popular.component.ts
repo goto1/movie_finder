@@ -43,5 +43,4 @@ export class PopularComponent implements OnInit {
   public hasNext(): boolean {
     return this.popularService.hasNext();
   }
-
 }
