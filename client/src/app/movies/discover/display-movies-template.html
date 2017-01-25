@@ -12,7 +12,7 @@
   </div>
 
   <div class="movies">
-    <div class="movie-overview" *ngFor="let movie of movies">
+    <div class="movie-overview" *ngFor="let movie of movies" [routerLink]="['/movie', movie.id]">
       <div class="movie-poster">
         <img *ngIf="movie.poster_path" [src]="movie.poster_path | safeUrl" alt="movie poster">
         <div class="no-poster" *ngIf="!movie.poster_path">
@@ -30,7 +30,7 @@
 
 </div>
 
-<div class="error" *ngIf="!movies">
+<div class="error" *ngIf="error">
   <div class="message">
     Something went wrong! <br> Please try again shortly.
   </div>
