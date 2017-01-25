@@ -13,16 +13,16 @@ import { NowPlayingComponent }        from './discover/now-playing.component';
 import { PopularComponent }           from './discover/popular.component';
 import { TopRatedComponent }          from './discover/top-rated.component';
 import { UpcomingComponent }          from './discover/upcoming.component';
-import { MoviesSearchComponent }      from './movies-search/movies-search.component';
-import { SearchResultsComponent }     from './movies-search/search-results.component';
+import { SearchComponent }            from './search/search.component';
+import { SearchResultsComponent }     from './search/search-results.component';
 import { MovieDetailsComponent }      from './movie-details/movie-details.component';
 
 // Services
-import { PopularService }             from './services/popular.service';
-import { NowPlayingService }          from './services/now-playing.service';
-import { TopRatedService }            from './services/top-rated.service';
-import { UpcomingService }            from './services/upcoming.service';
-import { SearchMoviesService }        from './services/search-movies.service';
+import { PopularService }             from './services/discover/popular.service';
+import { NowPlayingService }          from './services/discover/now-playing.service';
+import { TopRatedService }            from './services/discover/top-rated.service';
+import { UpcomingService }            from './services/discover/upcoming.service';
+import { SearchService }              from './services/search/search.service';
 import { MovieDetailsService }        from './services/movie-details.service';
 
 // Pipes
@@ -43,20 +43,20 @@ import { SafeUrlPipe }                from './pipes/safe-url.pipe';
     PopularComponent,
     TopRatedComponent,
     UpcomingComponent,
-    MoviesSearchComponent,
+    SearchComponent,
     SearchResultsComponent,
     MovieDetailsComponent,
 
     // Pipes
     MovieTitleShortPipe,
-    SafeUrlPipe
+    SafeUrlPipe,
   ],
   providers: [
     PopularService,
     NowPlayingService,
     TopRatedService,
     UpcomingService,
-    SearchMoviesService,
+    SearchService,
     MovieDetailsService,
     
     Location,

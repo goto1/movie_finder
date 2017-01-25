@@ -6,6 +6,7 @@ import { MovieDetailsComponent }    from './movie-details/movie-details.componen
 import { MoviesSearchComponent }    from './movies-search/movies-search.component';
 
 import { DiscoverComponent } from './discover/discover.component';
+import { SearchComponent } from './search/search.component';
 
 const moviesRoutes: Routes = [
   { path: 'movie/:id', component: MovieDetailsComponent },
@@ -14,7 +15,7 @@ const moviesRoutes: Routes = [
     component: MoviesComponent,
     children: [
       { path: 'movies', component: DiscoverComponent },
-      { path: 'search', component: MoviesSearchComponent },
+      { path: 'search', component: SearchComponent },
       { path: '', redirectTo: 'movies', pathMatch: 'full' }
     ]
   }
