@@ -1,6 +1,6 @@
 import { Component, OnInit }  from '@angular/core';
 
-import { NowPlayingService }  from '../services/now-playing.service';
+import { NowPlayingService }  from '../services/discover/now-playing.service';
 import { Movie }              from '../models/movie';
 
 @Component({

@@ -1,6 +1,6 @@
 import { Component, OnInit }  from '@angular/core';
 
-import { PopularService }     from '../services/popular.service';
+import { PopularService }     from '../services/discover/popular.service';
 import { Movie }              from '../models/movie';
 
 @Component({

@@ -1,6 +1,6 @@
 import { Component, OnInit }  from '@angular/core';
 
-import { UpcomingService }    from '../services/upcoming.service';
+import { UpcomingService }    from '../services/discover/upcoming.service';
 import { Movie }              from '../models/movie';
 
 @Component({

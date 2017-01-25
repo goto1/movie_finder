@@ -1,6 +1,6 @@
 import { Component, OnInit }  from '@angular/core';
 
-import { TopRatedService }    from '../services/top-rated.service';
+import { TopRatedService }    from '../services/discover/top-rated.service';
 import { Movie }              from '../models/movie';
 
 @Component({
