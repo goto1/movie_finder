@@ -1,0 +1,19 @@
+<div class="search-query">
+  Showing results for <span>{{query}}</span>...
+</div>
+<div class="movies">
+  <div class="movie-overview" *ngFor="let movie of movies" [routerLink]="['/movie', movie.id]">
+    <div class="movie-poster">
+      <img *ngIf="movie.poster_path" [src]="movie.poster_path | safeUrl" alt="movie poster">
+      <div class="no-poster" *ngIf="!movie.poster_path">
+        <i class="fa fa-file-video-o" aria-hidden="true"></i>
+      </div>
+    </div>
+    <div class="movie-title">
+      <div class="title">{{movie.title | movieTitleShort: 30}}</div>
+    </div>
+    <div *ngIf="movie.vote_average" class="movie-rating">
+      {{movie.vote_average}} <i class="fa fa-star-o" aria-hidden="true"></i>
+    </div>
+  </div>
+</div>
