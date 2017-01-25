@@ -3,6 +3,10 @@ import { Observable } from 'rxjs/Observable';
 
 import { Movie }      from '../models/movie';
 
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
+
 export abstract class TMDBService {
 
   protected extractPosterUrl(movies: Movie[]) {

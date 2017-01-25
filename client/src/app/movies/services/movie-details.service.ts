@@ -1,14 +1,16 @@
-import { Injectable }     from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { Observable }     from 'rxjs/Observable';
+import { Injectable }         from '@angular/core';
+import { Http, Response }     from '@angular/http';
+import { Observable }         from 'rxjs/Observable';
 
-import { MovieDBService } from './moviedb.service';
-import { DetailedMovie }  from '../models/detailed-movie';
-import { Movie }          from '../models/movie';
-import { API }            from './moviedb-api-info';
+import { TMDBService }        from './tmdb.service';
+import { DetailedMovie }      from '../models/detailed-movie';
+import { Movie }              from '../models/movie';
+import { API }                from './moviedb-api-info';
+
+import { TMDBDataExtractor }  from './tmdb-data-extractor';
 
 @Injectable()
-export class MovieDetailsService extends MovieDBService {
+export class MovieDetailsService extends TMDBService {
   private data;
   private lastMovie: number;
 
@@ -22,7 +24,7 @@ export class MovieDetailsService extends MovieDBService {
 
     return this.http.get(apiUrl)
       .map(data => this.extractData(data))
-      .catch(this.handleError);
+      .catch(err => this.handleError(err));
   }
 
   public getLastMovieRetrieved(): number {
@@ -32,42 +34,11 @@ export class MovieDetailsService extends MovieDBService {
   protected extractData(res: Response): Object {
     let movie = res.json() || {};
 
-    movie.similar = this.extractSimilarMovies(movie);
-    movie.trailer = this.extractTrailerUrl(movie);
-    movie.poster_path = this.extractPosterUrl(movie);
+    TMDBDataExtractor.getPosterUrlSingleMovie(movie);
+    TMDBDataExtractor.getSimilarMovies(movie);
+    TMDBDataExtractor.getTrailerUrl(movie);
+    TMDBDataExtractor.getPosterUrlsMultipleMovies(movie.similar);
     
     return movie;
-  }
-
-  private extractSimilarMovies(movie): Movie[] {
-    let similar: Movie[] = [];
-    const numberOfMovies: number = 6;
-    
-    if (movie.similar.results) {
-      if (movie.similar.results.length > numberOfMovies) {
-        similar = movie.similar.results.slice(0, numberOfMovies);
-      } else {
-        similar = movie.similar.results;
-      }
-    }
-    return similar;
-  }
-
-  private extractTrailerUrl(movie): string {
-    let trailerUrl: string = '';
-
-    if (movie.videos.results[0]) {
-      trailerUrl = `https://youtube.com/embed/${movie.videos.results[0].key}`;
-    }
-    return trailerUrl;
-  }
-
-  private extractPosterUrl(movie): string {
-    let posterUrl: string = '';
-
-    if (movie.poster_path) {
-      posterUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
-    }
-    return posterUrl;
   }
 }
