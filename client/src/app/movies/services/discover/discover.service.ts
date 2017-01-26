@@ -12,7 +12,7 @@ export class DiscoverService {
   protected page: number;
   protected pageCount: number;
 
-  constructor(private http: Http) { }
+  constructor(protected http: Http) { }
 
   public nextPage(): void {
     this.page++;
