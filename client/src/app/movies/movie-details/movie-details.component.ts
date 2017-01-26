@@ -2,9 +2,10 @@ import { Component, OnInit }      from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location }               from '@angular/common';
 
-import { MovieDetailsService }    from '../services/movie-details.service';
+import { DetailsService }         from '../services/details/details.service';
 
 import { DetailedMovie }          from '../models/detailed-movie';
+
 import 'rxjs/add/operator/switchMap';
 
 @Component({
@@ -16,7 +17,7 @@ export class MovieDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private movieDetailsService: MovieDetailsService,
+    private detailsService: DetailsService,
     private location: Location ) { }
 
   ngOnInit(): void {
@@ -27,7 +28,7 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   private getMovieDetails(id: number): void {
-    this.movieDetailsService.getDetails(id)
+    this.detailsService.getDetails(id)
       .subscribe(
         movie => this.movie = movie,
         error => console.error(error)

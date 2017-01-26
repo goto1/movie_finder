@@ -1,5 +1,7 @@
 import { Component }  from '@angular/core';
 
+import '../shared/rxjs-operators';
+
 @Component({
   template: `
     <nav>

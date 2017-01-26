@@ -31,7 +31,7 @@ export class PopularComponent implements OnInit {
     this.getMovies();
   }
 
-  public previousPAge(): void {
+  public previousPage(): void {
     this.popularService.previousPage();
     this.getMovies();
   }

@@ -23,7 +23,7 @@ import { NowPlayingService }          from './services/discover/now-playing.serv
 import { TopRatedService }            from './services/discover/top-rated.service';
 import { UpcomingService }            from './services/discover/upcoming.service';
 import { SearchService }              from './services/search/search.service';
-import { MovieDetailsService }        from './services/movie-details.service';
+import { DetailsService }             from './services/details/details.service';
 
 // Pipes
 import { MovieTitleShortPipe }        from './pipes/movie-title-short.pipe';
@@ -57,7 +57,7 @@ import { SafeUrlPipe }                from './pipes/safe-url.pipe';
     TopRatedService,
     UpcomingService,
     SearchService,
-    MovieDetailsService,
+    DetailsService,
     
     Location,
   ]

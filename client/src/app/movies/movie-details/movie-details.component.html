@@ -50,8 +50,7 @@
   <div class="similar-movies">
     <div class="movie-template" *ngFor="let similar of movie.similar" [routerLink]="['/movie', similar.id]">
       <div class="movie-poster">
-        <img src="https://image.tmdb.org/t/p/w500{{similar.poster_path}}" 
-          alt="movie poster" />
+        <img [src]="similar.poster_path | safeUrl" alt="movie poster">
         <div class="rating">{{similar.vote_average}}</div>
       </div>
       <div class="movie-title">
