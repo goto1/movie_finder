@@ -1,17 +1,18 @@
-import { Injectable }     from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { Observable }     from 'rxjs/Observable';
+import { Injectable }           from '@angular/core';
+import { Http, Response }       from '@angular/http';
+import { Observable }           from 'rxjs/Observable';
 
-import { Movie }          from '../../models/movie';
-import { API }            from '../moviedb-api-info';
-import { TMDBService }    from '../tmdb.service';
+import { IMovie }               from '../../../shared/interfaces';
+import { API }                  from '../moviedb-api-info';
+import { TMDBResponseHandler }  from '../tmdb-response-handler';
+import { TMDBDataExtractor }    from '../tmdb-data-extractor';
 
 @Injectable()
-export class DiscoverService extends TMDBService {
+export class DiscoverService {
   protected page: number;
   protected pageCount: number;
 
-  constructor(protected http: Http) { super(); };
+  constructor(private http: Http) { }
 
   public nextPage(): void {
     this.page++;
@@ -29,17 +30,17 @@ export class DiscoverService extends TMDBService {
     return this.page > 1;
   }
 
-  protected getMovies(url): Observable<[Movie]> {
+  protected getMovies(url): Observable<[IMovie]> {
     return this.http.get(url)
       .map(response => this.extractData(response))
-      .catch(err => this.handleError(err));
+      .catch(err => TMDBResponseHandler.handleError(err));
   }
 
   private extractData(res: Response) {
     let data = res.json();
 
     this.extractPageCount(data);
-    this.extractPosterUrl(data.results);
+    TMDBDataExtractor.getPosterUrlsFromMovies(data.results, false);
     
     return data.results || {};
   }
