@@ -2,13 +2,13 @@ import { Injectable }           from '@angular/core';
 import { Http, Response }       from '@angular/http';
 import { Observable }           from 'rxjs/Observable';
 
-import { API }                  from './moviedb-api-info';
-import { IDetailedMovie }       from '../../shared/interfaces';
-import { TMDBDataExtractor }    from './tmdb-data-extractor';
-import { TMDBResponseHandler }  from './tmdb-response-handler';
+import { API }                  from '../moviedb-api-info';
+import { IDetailedMovie }       from '../../../shared/interfaces';
+import { TMDBDataExtractor }    from '../tmdb-data-extractor';
+import { TMDBResponseHandler }  from '../tmdb-response-handler';
 
 @Injectable()
-export class MovieDetailsService {
+export class DetailsService {
   private data;
   private lastMovie: number;
 
