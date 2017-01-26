@@ -1,31 +1,33 @@
-import { Injectable }     from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { Observable }     from 'rxjs/Observable';
+import { Injectable }           from '@angular/core';
+import { Http, Response }       from '@angular/http';
+import { Observable }           from 'rxjs/Observable';
 
-import { TMDBService }    from '../tmdb.service';
-import { Movie }          from '../../models/movie';
-import { API }            from '../moviedb-api-info';
+import { API }                  from '../moviedb-api-info';
+import { IMovie }               from '../../../shared/interfaces';
+import { TMDBDataExtractor }    from '../tmdb-data-extractor';
+import { TMDBResponseHandler }  from '../tmdb-response-handler';
 
 @Injectable()
-export class SearchService extends TMDBService {
-  private apiUrl = API.url + '/search/movie?' + API.key + '&language=en-US&page=1&include_adult=false';
+export class SearchService {
+  private apiUrl = API.url + '/search/movie?' + API.key + '&language=en-US&page=1';
   private cachedSearchQuery: string;
   
-  constructor(private http: Http) { super(); }
+  constructor(private http: Http) { }
 
-  public search(title: string): Observable<Movie[]> {
+  public search(title: string): Observable<IMovie[]> {
     this.cachedSearchQuery = title;
     title = title.replace(/\s/g, '%20');
     this.apiUrl += '&query=' + title;
 
     return this.http.get(this.apiUrl)
       .map(data => this.extractData(data))
-      .catch(err => this.handleError(err));
+      .catch(err => TMDBResponseHandler.handleError(err));
   }
 
   private extractData(res: Response) {
     let data = res.json();
-    this.extractPosterUrl(data.results);
+
+    TMDBDataExtractor.getPosterUrlsFromMovies(data.results, false);
 
     return data.results || {};
   }
