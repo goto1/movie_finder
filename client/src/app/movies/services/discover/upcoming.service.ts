@@ -8,7 +8,6 @@ import { DiscoverService }  from './discover.service';
 
 @Injectable()
 export class UpcomingService extends DiscoverService {
-  public apiUrl: string = `${API.url}/movie/upcoming?${API.key}&language=en-US&page=`;
 
   constructor(protected http: Http) {
     super(http);
@@ -16,8 +15,8 @@ export class UpcomingService extends DiscoverService {
 
   public getUpcoming(): Observable<[IMovie]> {
     this.page = this.page || 1;
-    this.apiUrl += this.page;
+    const url = `${API.url}/movie/upcoming?${API.key}&language=en-US&page=${this.page}`;
 
-    return this.getMovies(this.apiUrl);
+    return this.getMovies(url);
   }
 }
