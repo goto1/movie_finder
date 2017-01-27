@@ -1,7 +1,7 @@
 import { Component, OnInit }  from '@angular/core';
 
+import { IMovie }             from '../../shared/interfaces';
 import { NowPlayingService }  from '../services/discover/now-playing.service';
-import { Movie }              from '../models/movie';
 
 @Component({
   selector: 'now-playing',
@@ -9,13 +9,31 @@ import { Movie }              from '../models/movie';
   styleUrls: [ './display-movies-template.sass' ]
 })
 export class NowPlayingComponent implements OnInit {
-  public movies: Movie[];
+  public movies: IMovie[];
   public error: boolean; 
 
   constructor(private nowPlayingService: NowPlayingService) { }
   
   ngOnInit(): void {
     this.getMovies();
+  }
+
+  public nextPage(): void {
+    this.nowPlayingService.pagination.nextPage();
+    this.getMovies();
+  }
+
+  public previousPage(): void {
+    this.nowPlayingService.pagination.previousPage();
+    this.getMovies();
+  }
+
+  public hasPrevious(): boolean {
+    return this.nowPlayingService.pagination.hasPrevious();
+  }
+
+  public hasNext(): boolean {
+    return this.nowPlayingService.pagination.hasNext();
   }
 
   private getMovies(): void {
@@ -25,23 +43,4 @@ export class NowPlayingComponent implements OnInit {
         error => this.error = true
       );
   }
-
-  public nextPage(): void {
-    this.nowPlayingService.nextPage();
-    this.getMovies();
-  }
-
-  public previousPage(): void {
-    this.nowPlayingService.previousPage();
-    this.getMovies();
-  }
-
-  public hasPrevious(): boolean {
-    return this.nowPlayingService.hasPrevious();
-  }
-
-  public hasNext(): boolean {
-    return this.nowPlayingService.hasNext();
-  }
-
 }
