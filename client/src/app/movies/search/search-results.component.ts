@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Movie } from '../models/movie';
+import { IMovie }           from '../../shared/interfaces';
 
 @Component({
   selector: 'search-results',
@@ -8,6 +8,6 @@ import { Movie } from '../models/movie';
   styleUrls: [ './search-results.component.sass' ]
 })
 export class SearchResultsComponent {
-  @Input() movies: Movie[];
+  @Input() movies: IMovie[];
   @Input() query: string;
 }

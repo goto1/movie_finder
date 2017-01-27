@@ -1,6 +1,6 @@
 import { Component, OnInit }  from '@angular/core';
 
-import { Movie }              from '../models/movie';
+import { IMovie }             from '../../shared/interfaces';
 import { SearchService }      from '../services/search/search.service';
 
 interface SearchMovieInput {
@@ -14,7 +14,7 @@ interface SearchMovieInput {
 })
 export class SearchComponent implements OnInit {
   public search: SearchMovieInput;
-  public movies: Movie[];
+  public movies: IMovie[];
   public error: boolean;
 
   constructor(private searchService: SearchService) { }

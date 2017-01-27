@@ -1,3 +1,4 @@
+// ng build --prod --base-href ./
 import { Component } from '@angular/core';
 
 @Component({

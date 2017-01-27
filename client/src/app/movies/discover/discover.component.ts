@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit }            from '@angular/core';
 
-import { Category } from '../models/category'
-import { Selected } from '../models/selected';
+import { ICategory, ISelectedCategory } from '../../shared/interfaces';
 
 @Component({
   template: `
@@ -22,8 +21,8 @@ import { Selected } from '../models/selected';
   styleUrls: [ './discover.component.sass' ]
 })
 export class DiscoverComponent implements OnInit {
-  public selected: Selected;
-  private categories: Category[] = [
+  public selected: ISelectedCategory;
+  private categories: ICategory[] = [
     { value: 1, name: 'Now Playing' },
     { value: 2, name: 'Popular' },
     { value: 3, name: 'Top Rated' },
