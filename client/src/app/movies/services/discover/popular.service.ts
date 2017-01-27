@@ -5,19 +5,24 @@ import { Observable }       from 'rxjs/Observable';
 import { IMovie }           from '../../../shared/interfaces';
 import { API }              from '../moviedb-api-info';
 import { DiscoverService }  from './discover.service';
+import { Pagination } from '../pagination';
+import { TMDBResponseHandler }  from '../tmdb-response-handler';
 
 @Injectable()
 export class PopularService extends DiscoverService {
 
-  constructor(protected http: Http) {
-    super(http);
+  constructor(private http: Http) {
+    super();
+    this.pagination = new Pagination(1, 1);    
   }
-
+  
   public getPopular(): Observable<[IMovie]> {
-    this.page = this.page || 1;
-    const url = `${API.url}/movie/popular?${API.key}&language=en-US&page=${this.page}`;
+    let currentPage = this.pagination.getCurrentPage();
+    const url = `${API.url}/movie/popular?${API.key}&language=en-US&page=${currentPage}`;
 
-    return this.getMovies(url);
+    return this.http.get(url)
+      .map(response => this.extractData(response))
+      .catch(err => TMDBResponseHandler.handleError(err));
   }
 }
 
