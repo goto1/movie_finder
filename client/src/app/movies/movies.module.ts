@@ -15,7 +15,7 @@ import { TopRatedComponent }          from './discover/top-rated.component';
 import { UpcomingComponent }          from './discover/upcoming.component';
 import { SearchComponent }            from './search/search.component';
 import { SearchResultsComponent }     from './search/search-results.component';
-import { MovieDetailsComponent }      from './movie-details/movie-details.component';
+import { DetailsComponent }           from './details/details.component';
 
 // Services
 import { PopularService }             from './services/discover/popular.service';
@@ -45,7 +45,7 @@ import { SafeUrlPipe }                from './pipes/safe-url.pipe';
     UpcomingComponent,
     SearchComponent,
     SearchResultsComponent,
-    MovieDetailsComponent,
+    DetailsComponent,
 
     // Pipes
     MovieTitleShortPipe,

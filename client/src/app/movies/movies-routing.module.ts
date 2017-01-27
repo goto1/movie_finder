@@ -1,14 +1,13 @@
 import { NgModule }                 from '@angular/core';
 import { RouterModule, Routes }     from '@angular/router';
 
-import { MoviesComponent }          from './movies.component';
-import { MovieDetailsComponent }    from './movie-details/movie-details.component';
-
+import { DetailsComponent }         from './details/details.component';
 import { DiscoverComponent }        from './discover/discover.component';
 import { SearchComponent }          from './search/search.component';
+import { MoviesComponent }          from './movies.component';
 
 const moviesRoutes: Routes = [
-  { path: 'movie/:id', component: MovieDetailsComponent },
+  { path: 'movie/:id', component: DetailsComponent },
   {
     path: '',
     component: MoviesComponent,
