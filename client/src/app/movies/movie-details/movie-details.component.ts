@@ -6,8 +6,6 @@ import { DetailsService }         from '../services/details/details.service';
 
 import { DetailedMovie }          from '../models/detailed-movie';
 
-import 'rxjs/add/operator/switchMap';
-
 @Component({
   templateUrl: './movie-details.component.html',
   styleUrls: [ './movie-details.component.sass' ]
