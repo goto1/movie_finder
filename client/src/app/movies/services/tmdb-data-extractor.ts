@@ -1,4 +1,4 @@
-import { Movie } from '../models/movie';
+import { IMovie } from '../../shared/interfaces';
 
 export class TMDBDataExtractor {
 
@@ -8,7 +8,7 @@ export class TMDBDataExtractor {
    *  -> SearchService
    *  -> MovieDetailsService
    */
-  static getPosterUrlsFromMovies(movies: Movie[], largeImages: boolean) {
+  static getPosterUrlsFromMovies(movies: IMovie[], largeImages: boolean) {
     let apiUrl: string;
 
     if (largeImages) {
@@ -30,7 +30,7 @@ export class TMDBDataExtractor {
    * Used by:
    *  -> MovieDetailsService
    */
-  static getPosterUrl(movie: Movie, largeImage: boolean) {
+  static getPosterUrl(movie: IMovie, largeImage: boolean) {
     let url: string;
 
     if (largeImage) {
@@ -51,7 +51,7 @@ export class TMDBDataExtractor {
    *  -> MovieDetailsService
    */
   static getSimilarMovies(movie) {
-    let similar: Movie[] = [];
+    let similar: IMovie[] = [];
     const moviesToBeExtracted: number = 10;
 
     if (movie.similar.results) {
