@@ -1,7 +1,8 @@
 import { NgModule }                   from '@angular/core';
 import { CommonModule, Location }     from '@angular/common';
 import { HttpModule }                 from '@angular/http';
-import { FormsModule }                from '@angular/forms';
+import { 
+  FormsModule, ReactiveFormsModule }  from '@angular/forms';
 
 // Routing
 import { MoviesRoutingModule }        from './movies-routing.module';
@@ -34,6 +35,7 @@ import { SafeUrlPipe }                from './pipes/safe-url.pipe';
     CommonModule,
     HttpModule,
     FormsModule,
+    ReactiveFormsModule,
     MoviesRoutingModule
   ],
   declarations: [
