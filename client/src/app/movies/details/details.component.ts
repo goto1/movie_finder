@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit }      from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Location } from '@angular/common';
+import { Location }               from '@angular/common';
 
-import { DetailsService } from '../services/details/details.service';
-import { IDetailedMovie } from '../../shared/interfaces';
+import { DetailsService }         from '../services/details/details.service';
+import { IDetailedMovie }         from '../../shared/interfaces';
 
 @Component({
   templateUrl: './details.component.html',
@@ -14,7 +14,7 @@ export class DetailsComponent implements OnInit {
 
   constructor( 
     private route: ActivatedRoute,
-    private detailsService: DetailsService,
+    private ds: DetailsService,
     private location: Location ) { }
 
   ngOnInit(): void {
@@ -29,7 +29,7 @@ export class DetailsComponent implements OnInit {
   }
 
   private getMovie(id: number): void {
-    this.detailsService.getDetails(id)
+    this.ds.getDetails(id)
       .subscribe(
         movie => this.movie = movie,
         error => console.error(error)
