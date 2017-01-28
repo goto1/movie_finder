@@ -1,23 +1,22 @@
 <div class="movie-search">
-  <form>
-    <div class="search-input" [class.active]="query.touched || query.dirty"
-      [class.active-not-valid]="query.invalid && query.dirty">
-      <input type="text"
-        [(ngModel)]="search.title" #query="ngModel"
-        name="title" placeholder="Search for a title..." required />
-      <button type="button" (click)="searchFor(search.title)" 
-        [disabled]="!query.valid || query.prestine">
+  <form novalidate (ngSubmit)="onSubmit()" [formGroup]="searchQuery">
+    <div class="search-input" 
+      [class.active]="searchQuery.get('query').touched || searchQuery.get('query').dirty"
+      [class.active-not-valid]="searchQuery.get('query').invalid && searchQuery.get('query').dirty">
+      <input type="text" placeholder="Search for a movie..." formControlName="query">
+      <button type="submit" [disabled]="searchQuery.invalid">
         <i class="fa fa-search input-item" aria-hidden="true"></i>
       </button>
     </div>
-    <div class="error-missing-query" [hidden]="query.valid || query.pristine">
-      Missing search query!
+    <div class="error-missing-query" 
+      [hidden]="searchQuery.get('query').valid || searchQuery.get('query').pristine">
+      Search query required!
     </div>
   </form>
 </div>
 
 <div *ngIf="movies && !error">
-  <search-results [movies]="movies" [query]="search.title"></search-results>
+  <search-results [movies]="movies" [query]="searchQuery.value.query || cachedQuery"></search-results>
 </div>
 
 <div class="error" *ngIf="error && !movies">
