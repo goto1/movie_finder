@@ -36,6 +36,7 @@ export class DetailsService {
     TMDBDataExtractor.getSimilarMovies(movie);
     TMDBDataExtractor.getTrailerUrl(movie);
     TMDBDataExtractor.getPosterUrlsFromMovies(movie.similar, false);
+    TMDBDataExtractor.getBackdropUrl(movie);
     
     return movie;
   }

@@ -76,4 +76,12 @@ export class TMDBDataExtractor {
       movie.trailer = '';
     }
   }
+
+  static getBackdropUrl(movie) {
+    if (movie.backdrop_path) {
+      movie.backdrop_path = `https://image.tmdb.org/t/p/w1000${movie.backdrop_path}`;
+    } else {
+      movie.backdrop_path = '';
+    }
+  }
 }
