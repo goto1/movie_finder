@@ -8,9 +8,11 @@ const api = {
   key: 'api_key=03eb2b84d82f7dbdb50c3106fb6c2de3',
 };
 
-router.get('/now_playing/:page', (req, res, next) => {
+router.get('/now_playing/:page?', (req, res, next) => {
+  const page = req.params.page || 1;
+
   rp({
-    uri: `${api.url}/movie/now_splaying?${api.key}&language=en-US&page=${req.params.page}`,
+    uri: `${api.url}/movie/now_playing?${api.key}&language=en-US&page=${page}`,
     json: true,
   })
   .then(data => {
@@ -21,6 +23,25 @@ router.get('/now_playing/:page', (req, res, next) => {
     let errDetails = tmdbHelper.handleError(err);
     res.json(errDetails);
   });
+
+});
+
+router.get('/popular/:page?', (req, res, next) => {
+  const page = req.params.page || 1;
+
+  rp({
+    uri: `${api.url}/movie/popular?${api.key}&language=en-US&page=${page}`,
+    json: true,
+  })
+  .then(data => {
+    const extracted = tmdbHelper.extractData(data);
+    res.json(extracted);
+  })
+  .catch(err => {
+    let errDetails = tmdbHelper.handleError(err);
+    res.json(errDetails);
+  });
+
 });
 
 module.exports = router;

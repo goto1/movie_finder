@@ -45,10 +45,8 @@ module.exports = {
   handleError(err) {
     let details = {};
 
-    details.status_code =
-      err.response.body.status_code ? err.response.body.status_code : 400;
-    details.status_message =
-      err.response.body.status_message ? err.response.body.status_message : 'Something went wrong!';
+    details.status_code = err.response.body.status_code || 400;
+    details.status_message = err.response.body.status_message || 'Could not get any response';
 
     return details;
   }
