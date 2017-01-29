@@ -6,13 +6,24 @@ const movieAttributes = ['id', 'poster_path', 'title', 'vote_average'];
 
 module.exports = {
 
-  extractData(data) {
-    let movies;
+  // extractData(data) {
+  //   let movies;
+  //
+  //   movies = this.extractMovies(data);
+  //   movies = this.extractPosterUrls(movies);
+  //
+  //   return movies;
+  // },
 
-    movies = this.extractMovies(data);
-    movies = this.extractPosterUrls(movies);
+  extractData(response) {
+    let data = {};
 
-    return movies;
+    data.page = response.page;
+    data.total_pages = response.total_pages;
+    data.movies = this.extractMovies(response);
+    data.movies = this.extractPosterUrls(data.movies);
+
+    return data;
   },
 
   extractMovies(data) {
@@ -36,6 +47,7 @@ module.exports = {
       }
       return movie;
     });
+
     return movies;
   },
 };
