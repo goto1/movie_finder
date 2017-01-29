@@ -2,52 +2,63 @@
  * Helper methods for extracting data from TheMovieDB API
  */
 
-const movieAttributes = ['id', 'poster_path', 'title', 'vote_average'];
-
 module.exports = {
 
   extractData(response) {
-    let data = {};
+    const data = {};
 
-    data.page = response.page;
-    data.total_pages = response.total_pages;
+    data.page = response.page || 1;
+    data.total_pages = response.total_pages || 1;
     data.movies = this.extractMovies(response);
-    data.movies = this.extractPosterUrls(data.movies);
+    data.movies = this.extractPosterUrl(data.movies);
 
     return data;
   },
 
   extractMovies(data) {
-    const movies = data.results.map(obj => {
-      const copy = {};
-      movieAttributes.map(att => {
-        if (obj[att]) {
-          copy[att] = obj[att];
-        }
+    let movies = [];
+    const attributesToExtract = [
+      'id', 'poster_path',
+      'title', 'vote_average',
+    ];
+
+    if (data) {
+      movies = data.results.map(movie => {
+        const copy = {};
+        attributesToExtract.map(attribute => {
+          if (movie[attribute]) {
+            copy[attribute] = movie[attribute];
+          }
+        });
+        return copy;
       });
-      return copy;
-    });
+    }
 
     return movies;
   },
 
-  extractPosterUrls(data) {
-    const movies = data.map(movie => {
-      if (movie.poster_path) {
-        movie.poster_path = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
-      }
-      return movie;
-    });
+  extractPosterUrl(movies) {
+    let data = [];
 
-    return movies;
+    if (movies) {
+      data = movies.map(movie => {
+        movie.poster_path =
+          movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : '';
+        return movie;
+      });
+    }
+
+    return data;
   },
 
   handleError(err) {
-    let details = {};
+    const details = {};
 
-    details.status_code = err.response.body.status_code || 400;
-    details.status_message = err.response.body.status_message || 'Could not get any response';
+    if (err) {
+      details.status_code = err.response.body.status_code || 400;
+      details.status_message = err.response.body.status_message || 'Could not get any response';
+    }
 
     return details;
-  }
+  },
 };
