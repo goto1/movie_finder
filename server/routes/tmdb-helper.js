@@ -6,15 +6,6 @@ const movieAttributes = ['id', 'poster_path', 'title', 'vote_average'];
 
 module.exports = {
 
-  // extractData(data) {
-  //   let movies;
-  //
-  //   movies = this.extractMovies(data);
-  //   movies = this.extractPosterUrls(movies);
-  //
-  //   return movies;
-  // },
-
   extractData(response) {
     let data = {};
 
@@ -50,4 +41,15 @@ module.exports = {
 
     return movies;
   },
+
+  handleError(err) {
+    let details = {};
+
+    details.status_code =
+      err.response.body.status_code ? err.response.body.status_code : 400;
+    details.status_message =
+      err.response.body.status_message ? err.response.body.status_message : 'Something went wrong!';
+
+    return details;
+  }
 };
