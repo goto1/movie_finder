@@ -5,7 +5,7 @@ const rp = require('request-promise');
 const api = require('./api-info');
 const tmdb = require('./tmdb-helper');
 
-router.get('/:id', (req, res, next) => {
+router.get('/details/:id', (req, res, next) => {
 
   const url = api.url + '/movie/' +
     req.params.id + '?' + api.key +
