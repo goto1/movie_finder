@@ -3,11 +3,7 @@ const express = require('express');
 const router = express.Router();
 const rp = require('request-promise');
 const tmdb = require('./tmdb-helper');
-
-const api = {
-  url: 'https://api.themoviedb.org/3',
-  key: 'api_key=03eb2b84d82f7dbdb50c3106fb6c2de3',
-};
+const api = require('./api-info');
 
 // Upcoming Movies
 router.get('/upcoming/:page?', (req, res, next) => {
