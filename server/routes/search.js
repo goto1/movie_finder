@@ -5,10 +5,15 @@ const rp = require('request-promise');
 const api = require('./api-info');
 const tmdb = require('./tmdb-helper');
 
+const err = {
+  status_code: 400,
+  status_message: 'Bad Request',
+};
+
 router.get('/movie', (req, res, next) => {
 
   if (!req.query.q) {
-    res.send(400).send('Bad Request');
+    res.status(400).send(err);
   }
 
   const url = api.url + '/search/movie?' + api.key +
@@ -24,7 +29,7 @@ router.get('/movie', (req, res, next) => {
   })
   .catch(err => {
     err = tmdb.handleError(err);
-    res.json(err);
+    res.status(400).send(err);
   });
 });
 
