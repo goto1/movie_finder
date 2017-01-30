@@ -1,15 +1,19 @@
-const express = require('express');
+const router = require('express').Router();
 
-const router = express.Router();
 const rp = require('request-promise');
 const api = require('./api-info');
 const tmdb = require('./tmdb-helper');
 
-router.get('/details/:id', (req, res, next) => {
+const err = {
+  status_code: 400,
+  status_message: 'Bad Request',
+};
 
-  const url = api.url + '/movie/' +
-    req.params.id + '?' + api.key +
-    '&language=en-US&append_to_response=videos,similar';
+// movie/:id/details
+router.get('/:id/details', (req, res, next) => {
+
+  const url =
+    `${api.url}/movie/${req.params.id}?${api.key}&language=en-US&append_to_response=videos,similar`;
 
   rp({
     uri: url,
@@ -21,7 +25,7 @@ router.get('/details/:id', (req, res, next) => {
   })
   .catch(err => {
     err = tmdb.handleError(err);
-    res.json(err);
+    res.status(400).send(err);
   });
 });
 
