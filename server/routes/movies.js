@@ -2,8 +2,13 @@ const express = require('express');
 
 const router = express.Router();
 const rp = require('request-promise');
-const tmdb = require('./tmdb-helper');
 const api = require('./api-info');
+const tmdb = require('./tmdb-helper');
+
+const err = {
+  status_code: 400,
+  status_message: 'Bad Request',
+};
 
 // Upcoming Movies
 router.get('/upcoming/:page?', (req, res, next) => {
@@ -19,7 +24,7 @@ router.get('/upcoming/:page?', (req, res, next) => {
   })
   .catch(err => {
     err = tmdb.handleError(err);
-    res.json(err);
+    res.status(400).send(err);
   });
 })
 
@@ -37,7 +42,7 @@ router.get('/top_rated/:page?', (req, res, next) => {
   })
   .catch(err => {
     err = tmdb.handleError(err);
-    res.json(err);
+    res.status(400).send(err);
   });
 });
 
@@ -55,7 +60,7 @@ router.get('/now_playing/:page?', (req, res, next) => {
   })
   .catch(err => {
     err = tmdb.handleError(err);
-    res.json(err);
+    res.status(400).send(err);
   });
 });
 
@@ -73,7 +78,7 @@ router.get('/popular/:page?', (req, res, next) => {
   })
   .catch(err => {
     err = tmdb.handleError(err);
-    res.json(err);
+    res.status(400).send(err);
   });
 });
 

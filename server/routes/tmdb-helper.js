@@ -115,7 +115,7 @@ module.exports = {
 
     if (err) {
       details.status_code = err.response.body.status_code || 400;
-      details.status_message = err.response.body.status_message || 'Not found';
+      details.status_message = err.response.body.status_message || 'Bad Request';
     }
 
     return details;
