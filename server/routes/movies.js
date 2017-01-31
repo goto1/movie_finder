@@ -1,40 +1,45 @@
 const router = require('express').Router();
 
-const rp = require('request-promise');
+const request = require('request-promise');
 const api = require('./api-info');
 const tmdb = require('./tmdb-helper');
 
+const options = {
+  method: 'GET',
+  json: true,
+  qs: {
+    api_key: api.key,
+    language: 'en-US',
+  },
+};
+
 // Upcoming Movies
 router.get('/upcoming/:page?', (req, res, next) => {
-  const page = req.params.page || 1;
+  options.uri = `${api.url}/movie/upcoming`;
+  options.qs.page = req.params.page || 1;
 
-  rp({
-    uri: `${api.url}/movie/upcoming?${api.key}&language=en-US&page=${page}`,
-    json: true,
-  })
-  .then(data => {
+  request(options)
+  .then((data) => {
     data = tmdb.extractData(data);
     res.json(data);
   })
-  .catch(err => {
+  .catch((err) => {
     err = tmdb.handleError(err);
     res.status(400).send(err);
   });
-})
+});
 
 // Top Rated Movies
 router.get('/top_rated/:page?', (req, res, next) => {
-  const page = req.params.page || 1;
+  options.uri = `${api.url}/movie/top_rated`;
+  options.qs.page = req.params.page || 1;
 
-  rp({
-    uri: `${api.url}/movie/now_playing?${api.key}&language=en-US&page=${page}`,
-    json: true,
-  })
-  .then(data => {
+  request(options)
+  .then((data) => {
     data = tmdb.extractData(data);
     res.json(data);
   })
-  .catch(err => {
+  .catch((err) => {
     err = tmdb.handleError(err);
     res.status(400).send(err);
   });
@@ -42,17 +47,15 @@ router.get('/top_rated/:page?', (req, res, next) => {
 
 // Now Playing
 router.get('/now_playing/:page?', (req, res, next) => {
-  const page = req.params.page || 1;
+  options.uri = `${api.url}/movie/now_playing`;
+  options.qs.page = req.params.page || 1;
 
-  rp({
-    uri: `${api.url}/movie/now_playing?${api.key}&language=en-US&page=${page}`,
-    json: true,
-  })
-  .then(data => {
+  request(options)
+  .then((data) => {
     data = tmdb.extractData(data);
     res.json(data);
   })
-  .catch(err => {
+  .catch((err) => {
     err = tmdb.handleError(err);
     res.status(400).send(err);
   });
@@ -60,17 +63,15 @@ router.get('/now_playing/:page?', (req, res, next) => {
 
 // Popular Movies
 router.get('/popular/:page?', (req, res, next) => {
-  const page = req.params.page || 1;
+  options.uri = `${api.url}/movie/popular`;
+  options.qs.page = req.params.page || 1;
 
-  rp({
-    uri: `${api.url}/movie/popular?${api.key}&language=en-US&page=${page}`,
-    json: true,
-  })
-  .then(data => {
+  request(options)
+  .then((data) => {
     data = tmdb.extractData(data);
     res.json(data);
   })
-  .catch(err => {
+  .catch((err) => {
     err = tmdb.handleError(err);
     res.status(400).send(err);
   });
