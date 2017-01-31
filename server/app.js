@@ -27,7 +27,7 @@ app.use((req, res, next) => {
 
 // error handler
 app.use((err, req, res, next) => {
-  const errDetailed = {
+  const error = {
     status: err.status || 500,
     message: err.message,
   };
@@ -36,7 +36,7 @@ app.use((err, req, res, next) => {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  res.status(errDetailed.status).send(errDetailed);
+  res.status(error.status).send(error);
 });
 
 module.exports = app;
