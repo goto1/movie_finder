@@ -12,11 +12,8 @@ const err = {
 // movie/:id/details
 router.get('/:id/details', (req, res, next) => {
 
-  const url =
-    `${api.url}/movie/${req.params.id}?${api.key}&language=en-US&append_to_response=videos,similar`;
-
   rp({
-    uri: url,
+    uri: `${api.url}/movie/${req.params.id}?${api.key}&language=en-US&append_to_response=videos,similar`,
     json: true
   })
   .then(data => {
