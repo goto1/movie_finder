@@ -1,7 +1,6 @@
 /**
  * Helper methods for extracting data from TheMovieDB API
  */
-const request = require('request-promise');
 
 module.exports = {
 
@@ -31,7 +30,7 @@ module.exports = {
       'title', 'vote_average',
     ];
 
-    if (data) {
+    if (data.results) {
       movies = data.results.map(movie => {
         const temp = {};
         attributes.map(attribute => {
@@ -104,23 +103,8 @@ module.exports = {
       movie.backdrop_path =
         movie.backdrop_path ? `https://image.tmdb.org/t/p/w1000${movie.backdrop_path}` : '';
     }
-    
-    return movie;
-  },
 
-  /**
-   * Used for making a request to get movies
-   */
-  getMovies(res, options) {
-    request(options)
-    .then((data) => {
-      data = this.extractData(data);
-      res.json(data);
-    })
-    .catch((err) => {
-      err = this.handleError(err);
-      res.status(400).send(err);
-    });
+    return movie;
   },
 
   /**
@@ -129,7 +113,7 @@ module.exports = {
   handleError(err) {
     const details = {};
 
-    if (err) {
+    if (err.response.body) {
       details.status_code = err.response.body.status_code || 400;
       details.status_message = err.response.body.status_message || 'Bad Request';
     }
