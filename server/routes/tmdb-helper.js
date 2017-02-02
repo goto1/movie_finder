@@ -30,7 +30,7 @@ module.exports = {
       'title', 'vote_average',
     ];
 
-    if (data.results) {
+    if (data && data.results) {
       movies = data.results.map(movie => {
         const temp = {};
         attributes.map(attribute => {
@@ -97,11 +97,9 @@ module.exports = {
   extractImages(data) {
     const movie = data || {};
 
-    if (movie) {
-      movie.poster_path =
-        movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : '';
-      movie.backdrop_path =
-        movie.backdrop_path ? `https://image.tmdb.org/t/p/w1000${movie.backdrop_path}` : '';
+    if (movie.poster_path && movie.backdrop_path) {
+      movie.poster_path = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+      movie.backdrop_path = `https://image.tmdb.org/t/p/w1000${movie.backdrop_path}`;
     }
 
     return movie;
@@ -111,11 +109,16 @@ module.exports = {
    * Used for extracting the error message
    */
   handleError(err) {
-    const details = {};
+    const details = {
+      status_code: 400,
+      status_message: 'Bad Request',
+    };
 
-    if (err.response.body) {
-      details.status_code = err.response.body.status_code || 400;
-      details.status_message = err.response.body.status_message || 'Bad Request';
+    if (err.response && err.response.body) {
+      details.status_code =
+        err.response.body.status_code || details.status_code;
+      details.status_message =
+        err.response.body.status_message || details.status_message;
     }
 
     return details;
