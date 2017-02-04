@@ -4,6 +4,8 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 
+require('./configs/database');
+
 const movie = require('./routes/movie');
 const search = require('./routes/search');
 const user = require('./routes/user');
