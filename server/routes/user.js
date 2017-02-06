@@ -18,8 +18,8 @@ function createResponseMessage(status, message) {
 // -> /user/register
 router.post('/register', (req, res, next) => {
   if (!req.body.email || !req.body.password) {
-    return res.status(400)
-      .send(createResponseMessage(400, 'Missing required information'));
+    const message = createResponseMessage(400, 'Missing required information');
+    return res.status(400).send(message);
   }
 
   const user = new User({
@@ -28,10 +28,13 @@ router.post('/register', (req, res, next) => {
   });
 
   user.save()
-    .then(response => res.send(createResponseMessage(200, 'User created successfully')))
+    .then((response) => {
+      const message = createResponseMessage(200, 'User created successfully');
+      return res.send(message);
+    })
     .catch((err) => {
-      const message = err.message || 'Could not create a new user';
-      return res.status(500).send(createResponseMessage(500, message));
+      const message = createResponseMessage(500, err.message || 'Could not create a new user');
+      return res.status(500).send(message);
     });
 });
 
