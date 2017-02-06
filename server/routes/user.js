@@ -1,15 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const { MovieSchema, UserSchema } = require('../models/schemas');
+const request = require('request-promise');
+const tmdb = require('./tmdb-helper');
+const api = require('./api-info');
 
 const router = express.Router();
 const Movie = mongoose.model('Movie', MovieSchema);
 const User = mongoose.model('User', UserSchema);
-
-// /user/:id/movie/:id/favorites
-// /user/:id/movie/:id/bookmarked
-// /user/:id/favorites/:id
-// /user/:id/bookmark/:id
 
 function createResponseMessage(status, message) {
   return { status, message };
@@ -38,66 +36,51 @@ router.post('/register', (req, res, next) => {
     });
 });
 
-//
-// // /user/login
-// router.route('/login')
-//   .post((req, res, next) => {
-//     if (!req.body.email || !req.body.password) {
-//       return res.status(400).send({
-//         status: 400,
-//         message: 'Missing required user information',
-//       });
-//     }
-//
-//     User.where({ email: req.body.email }).findOne()
-//       .then((user) => {
-//         bcrypt.compare(req.body.password, user.password)
-//           .then((matched) => {
-//             if (!matched) {
-//               return res.status(400).send({
-//                 status: 200,
-//                 message: 'User email or password is incorrect',
-//               });
-//             }
-//
-//             return res.status(200).send({
-//               status: 200,
-//               message: 'User successfully authenticated',
-//             });
-//           })
-//           .catch((err) => res.status(500).send({
-//             status: 500,
-//             message: 'Something went wrong',
-//           }));
-//       })
-//       .catch((err) => res.status(200).send({
-//         status: 400,
-//         message: 'Could not find the user with specified information',
-//       }));
-//   });
-//
-// // --> /user/:id
-// router.route('/:id')
-//   .get((req, res, next) => {
-//     User.findById(req.params.id).exec()
-//       .then((response) => res.json(response))
-//       .catch((err) => res.send(err));
-//   })
-//   .put((req, res, next) => {
-//     const options = {
-//       password: req.body.password,
-//       email: req.body.email,
-//       updatedAt: Date.now(),
-//     };
-//
-//     User.findByIdAndUpdate(req.params.id, options).exec()
-//       .then((response => res.json({ message: 'User info successfully updated!' })))
-//       .catch((err) => res.send({ error: err }));
-//   })
-//   .delete((req, res, next) => {
-//     User.findByIdAndRemove(req.params.id).exec()
-//       .then((response) => res.json({ message: 'User successfully deleted!' }))
-//       .catch((err) => res.send(err));
-//   });
+// -> /user/:id/favorites/:id
+router.route('/:user_id/favorites/:movie_id')
+  .post((req, res, next) => {
+    const options = {
+      method: 'GET',
+      json: true,
+      uri: `${api.url}/movie/${req.params.movie_id}`,
+      qs: { api_key: api.key, language: 'en-US' },
+    };
+
+    User.findById(req.params.user_id).exec()
+      .then((user) => {
+
+        request(options)
+          .then((data) => {
+            const movieExtracted = tmdb.extractMovieData(data);
+
+            user.movies.favorites.push(
+              new Movie({
+                _id: movieExtracted.id,
+                poster_path: movieExtracted.poster_path,
+                title: movieExtracted.title,
+                vote_average: movieExtracted.vote_average,
+              })
+            );
+
+            user.save()
+              .then((response) => {
+                const message = createResponseMessage(200, 'Movie was added to favorites');
+                res.send(message);
+              })
+              .catch((err) => {
+                const message = createResponseMessage(500, 'Could not add movie to favorites');
+                res.status(500).send(message);
+              });
+          })
+          .catch((err) => {
+            const message = createResponseMessage(400, 'Couldn\'t retrieve movie information');
+            return res.status(400, message);
+          });
+      })
+      .catch((err) => {
+        const message = createResponseMessage(400, 'Couldn\'t find user');
+        return res.status(400).send(message);
+      });
+  });
 
 module.exports = router;

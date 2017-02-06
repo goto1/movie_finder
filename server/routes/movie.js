@@ -85,7 +85,7 @@ router.get('/upcoming', (req, res, next) => {
   })
   .catch((err) => {
     const error = tmdb.handleError(err);
-    res.stauts(400).send(error);
+    res.status(400).send(error);
   });
 });
 
