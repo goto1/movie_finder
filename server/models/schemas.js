@@ -5,6 +5,9 @@ const MovieSchema = new Schema({
   poster_path: { type: String, default: '' },
   title: { type: String, required: true },
   vote_average: { type: String, default: 0 },
+  genres: {
+    type: { id: Number, name: String }
+  },
 });
 
 const UserSchema = new Schema({
