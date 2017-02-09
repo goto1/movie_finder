@@ -1,3 +1,6 @@
+# API and DB info
+server/secret
+
 # Logs
 logs
 *.log
