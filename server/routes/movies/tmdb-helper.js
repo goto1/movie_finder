@@ -66,6 +66,8 @@ module.exports = {
   extractMovieData(response) {
     let data = response || {};
 
+    console.log(response);
+
     data = this.extractAttributes(data);
     data = this.extractImages(data);
     data.similar = this.extractMovies(data.similar);

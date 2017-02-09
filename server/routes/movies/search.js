@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const api = require('./api-info');
+// const api = require('./api-info');
 const tmdb = require('./tmdb-helper');
 const request = require('request-promise');
 
