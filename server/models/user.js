@@ -28,6 +28,10 @@ userSchema.pre('save', function (next) {
     });
 });
 
+userSchema.methods.validatePassword = function (password) {
+  return bcrypt.compareSync(password, this.password);
+};
+
 userSchema.methods.generateJwt = () => {
   return jwt.sign({
     _id: this._id,
