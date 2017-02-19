@@ -1,19 +1,15 @@
 const mongoose = require('mongoose');
-
-const User = mongoose.model('User');
+const passport = require('passport');
 
 module.exports.getProfile = (req, res, next) => {
-  if (!req.payload.id) {
-    return res.status(401).json({
-      message: 'UnauthorizedErrror: Private Profile',
-    });
-  }
+  passport.authenticate('jwt', { session: false },
+    (err, user) => {
+      if (err) {
+        return res.status(404).json({
+          message: 'Something went wrong'
+        });
+      }
 
-  User.findById(req.payload.id).exec()
-    .then(user => res.status(200).json(user))
-    .catch(err =>
-      res.status(400).json({
-        message: err.message || 'Couldn\'t not retrieve profile information'
-      })
-    );
+      return res.status(200).json(user);
+    })(req, res);
 };
