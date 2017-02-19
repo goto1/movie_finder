@@ -9,16 +9,20 @@ const sendJSONResponse = (res, status, content) => {
 };
 
 module.exports.register = (req, res, next) => {
-  if (!req.body.name || !req.body.email || !req.body.password) {
+  const data = req.body || {};
+
+  if (!data.first_name || !data.last_name || !data.email || !data.password) {
     return sendJSONResponse(res, 400, {
-      message: 'Missing required fields'
+      message: 'Missing required information'
     });
   }
 
   const user = new User();
-  user.name = req.body.name;
-  user.email = req.body.email;
-  user.setPassword(req.body.password);
+
+  user.email = data.email;
+  user.first_name = data.first_name;
+  user.last_name = data.last_name;
+  user.password = data.password;
 
   user.save()
     .then(response => res.status(200).json({
@@ -40,7 +44,6 @@ module.exports.login = (req, res, next) => {
   passport.authenticate('local',
     (err, user, info) => {
       if (err) {
-        console.log(err);
         return res.status(404).json({
           message: 'Something went wrong',
         });
