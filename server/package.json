@@ -18,9 +18,12 @@
     "mongoose": "^4.8.1",
     "morgan": "~1.7.0",
     "passport": "^0.3.2",
+    "passport-jwt": "^2.2.1",
     "passport-local": "^1.0.0",
     "request": "^2.79.0",
-    "request-promise": "^4.1.1"
+    "request-promise": "^4.1.1",
+    "validator": "^6.2.1",
+    "xss-filters": "^1.2.7"
   },
   "devDependencies": {
     "eslint": "^3.14.1",
