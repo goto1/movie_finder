@@ -1,20 +1,14 @@
 const passport = require('passport');
 const mongoose = require('mongoose');
+const resJSON = require('../helpers/response');
 
 const User = mongoose.model('User');
 
-const sendJSONResponse = (res, status, content) => {
-  res.status(status);
-  res.json(content);
-};
-
-module.exports.register = (req, res, next) => {
+module.exports.register = (req, res) => {
   const data = req.body || {};
 
   if (!data.first_name || !data.last_name || !data.email || !data.password) {
-    return sendJSONResponse(res, 400, {
-      message: 'Missing required information'
-    });
+    return resJSON.badRequest(res, 'Missing required information');
   }
 
   const user = new User();
@@ -25,36 +19,27 @@ module.exports.register = (req, res, next) => {
   user.password = data.password;
 
   user.save()
-    .then(response => res.status(200).json({
-      message: `User ${response.name ? response.name : ''} successfully registered`,
-      token: user.generateJwt(),
-    }))
-    .catch(err => res.status(400).json({
-      message: `Couldn't not register a new user${err.message ? '; ' + err.message : ''}`
-    }));
+    .then(() => resJSON.created(res, 'Account successfully created', user.generateJwt()))
+    .catch((err) => {
+      console.error(err);
+      return resJSON.internalServerError(res, 'Couldn\'t register a new account');
+    });
 };
 
-module.exports.login = (req, res, next) => {
+module.exports.login = (req, res) => {
   if (!req.body.email || !req.body.password) {
-    return sendJSONResponse(res, 400, {
-      message: 'Missing required fields'
-    });
+    return resJSON.badRequest(res, 'Missing required information');
   }
 
   passport.authenticate('local',
     (err, user, info) => {
       if (err) {
-        return res.status(404).json({
-          message: 'Something went wrong',
-        });
+        console.error(err);
+        return resJSON.internalServerError(res, 'Something went wrong');
       }
 
       if (user) {
-        return res.status(200).json({
-          token: user.generateJwt(),
-        });
+        return resJSON.ok(res, 'User successfully logged in', user.generateJwt());
       }
-
-      return res.status(401).json(info);
     })(req, res);
 };
