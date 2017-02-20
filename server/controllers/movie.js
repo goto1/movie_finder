@@ -58,7 +58,7 @@ module.exports.addMovie = (req, res, next) => {
       request(options)
         .then((data) => {
           const movie = extractMovie(data);
-          const duplicate = _.findIndex(user.movies, o => o.id === movie.id);
+          const duplicate = user.movies.find(e => e.id === movie.id);
 
           if (!duplicate) {
             User.findById(user.id)
@@ -69,6 +69,8 @@ module.exports.addMovie = (req, res, next) => {
                   .catch(() => sendJSONResponse(res, 400, 'Couldn\'t save the movie'));
               })
               .catch(() => sendJSONResponse(res, 400, 'Something went wrong retrieving the user'));
+          } else {
+            return sendJSONResponse(res, 200, 'Movie already added');
           }
         })
         .catch(() => sendJSONResponse(res, 400, 'Something went wrong retrieving the movie'));
@@ -76,5 +78,25 @@ module.exports.addMovie = (req, res, next) => {
 };
 
 module.exports.deleteMovie = (req, res, next) => {
+  if (!req.body.id) {
+    return sendJSONResponse(res, 400, 'Missing movie id');
+  }
 
+  passport.authenticate('jwt', { session: false },
+    (err, user) => {
+      if (err) {
+        return sendJSONResponse(res, 400, 'Access restricted');
+      }
+
+      User.findById(user.id)
+        .then((u) => {
+          const movies = _.remove(u.movies, n => n.id === req.body.id);
+          u.movies = movies;
+
+          u.save()
+            .then(() => sendJSONResponse(res, 200, 'Movie successfully deleted'))
+            .catch(() => sendJSONResponse(res, 400, 'Couldn\'t delete the movie'));
+        })
+        .catch(() => sendJSONResponse(res, 400, 'Something went wrong retrieving user'));
+    })(req, res);
 };
