@@ -11,6 +11,7 @@ const userSchema = new Schema({
   password: { type: String, required: true },
   first_name: { type: String, required: true, set: sanitizer.name },
   last_name: { type: String, required: true, set: sanitizer.name },
+  movies: { type: Array, default: [] },
 });
 
 userSchema.pre('save', function (next) {
