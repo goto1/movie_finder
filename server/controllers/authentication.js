@@ -40,6 +40,8 @@ module.exports.login = (req, res) => {
 
       if (user) {
         return resJSON.ok(res, 'User successfully logged in', user.generateJwt());
+      } else {
+        return resJSON.internalServerError(res, 'Something went wrong');
       }
     })(req, res);
 };
