@@ -1,5 +1,6 @@
 # API and DB info
 server/secret
+server/config/main.js
 
 # Logs
 logs
