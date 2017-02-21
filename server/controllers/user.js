@@ -78,9 +78,7 @@ module.exports.deleteMovie = (req, res, next) => {
         return resJSON.restricted(res, 'Access restricted');
       }
 
-      const movies = _.remove(user.movies, n => n.id == req.body.id);
-
-      user.movies = movies;
+      user.movies = _.filter(user.movies, o => o.id != req.body.id);
 
       user.save()
         .then(() => resJSON.ok(res, 'Movie removed successfully'))
