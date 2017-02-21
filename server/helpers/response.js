@@ -27,6 +27,13 @@ module.exports = {
     return res.status(400).json(info);
   },
 
+  // 401 Unauthorized
+  unauthorized(res, message, token) {
+    const info = token ? { status: 401, message, token } : { status: 401, message };
+
+    return res.status(401).json(info);
+  },
+
   // 404 Not Found
   notFound(res, message, token) {
     const info = token ? { status: 404, message, token } : { status: 404, message };
