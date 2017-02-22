@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     <header>
       <div class="logo header-item" [routerLink]="'/'">MOVIEJO</div>
       <nav class="header-item">
-        <button class="nav-item" *ngIf="!userLoggedIn">
+        <button class="nav-item" *ngIf="!userLoggedIn" [routerLink]="'/login'">
           Login <i class="fa fa-user" aria-hidden="true"></i>
         </button>
         <button class="nav-item" *ngIf="userLoggedIn">

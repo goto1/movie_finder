@@ -6,6 +6,7 @@ import { AppComponent }           from './app.component';
 import { AppRoutingModule }       from './app-routing.module';
 
 import { MoviesModule }           from './movies/movies.module';
+import { UserModule }             from './user/user.module';
 import { PageNotFoundComponent }  from './page-not-found.component';
 
 @NgModule({
@@ -18,7 +19,8 @@ import { PageNotFoundComponent }  from './page-not-found.component';
     CommonModule,
     AppRoutingModule,
 
-    MoviesModule
+    MoviesModule,
+    UserModule
   ],
   providers: [],
   bootstrap: [ AppComponent ]
