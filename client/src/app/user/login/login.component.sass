@@ -127,7 +127,7 @@ input:focus ~ .highlight
     background: #466557
   &:disabled
     cursor: not-allowed
-    opacity: .75
+    opacity: .65
   &:focus
     outline: 0
 
@@ -138,3 +138,13 @@ input:focus ~ .highlight
   font-weight: 600
   font-size: .85em
   color: $font-color-dark-green
+  span
+    display: inline-block
+    border-bottom: 1px solid $orangy-color
+    padding: 0 2.5px 0 4px
+    transition: all .5s ease 
+    &:hover
+      cursor: pointer
+      border-bottom: 1px solid $font-color-dark-green
+      color: $orangy-color
+

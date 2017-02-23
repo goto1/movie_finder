@@ -3,18 +3,20 @@
     <input type="text" formControlName="email">
     <span class="highlight"></span>
     <span class="bar" 
-      [ngClass]="{'has-error': user.get('email').hasError('minlength')}"></span>
+      [ngClass]="{'has-error': user.get('email').invalid && user.get('email').dirty}"></span>
     <label>Email</label>
   </div>
   <div class="group">
     <input type="password" formControlName="password">
     <span class="highlight"></span>
     <span class="bar" 
-      [ngClass]="{'has-error': user.get('password').hasError('minlength')}"></span>
+      [ngClass]="{'has-error': user.get('password').invalid && user.get('password').dirty}"></span>
     <label>Password</label>
   </div>
   <button type="submit" [disabled]="user.invalid" class="button">
     Sing In
   </button>
-  <div class="register">Register</div>
+  <div class="register">
+    <span>Register</span>
+  </div>
 </form>
