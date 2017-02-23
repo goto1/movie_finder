@@ -74,9 +74,17 @@ input.ng-invalid.ng-dirty ~ label
   left: 50%
 .bar:after
   right: 50%
-
 .has-error:before, .has-error:after
   background: #E45543
+
+.error-message
+  position: absolute
+  right: 0
+  font-size: .7em
+  color: #E45543
+  text-transform: uppercase
+  letter-spacing: 1.3px
+  font-weight: 500
 
 input:focus ~ .bar:before, input:focus ~ .bar:after 
   width: 50%

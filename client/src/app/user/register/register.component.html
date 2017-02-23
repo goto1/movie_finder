@@ -4,6 +4,10 @@
     <span class="highlight"></span>
     <span class="bar"
       [ngClass]="{'has-error': user.get('firstName').invalid && user.get('firstName').dirty}">
+      <span class="error-message"
+        *ngIf="user.get('firstName').invalid && user.get('firstName').dirty">
+        First name is required
+      </span>
     </span>
     <label>First Name</label>
   </div>
@@ -12,6 +16,10 @@
     <span class="highlight"></span>
     <span class="bar"
       [ngClass]="{'has-error': user.get('lastName').invalid && user.get('lastName').dirty}">
+      <span class="error-message"
+        *ngIf="user.get('lastName').invalid && user.get('lastName').dirty">
+        Last name is required
+      </span>
     </span>
     <label>Last Name</label>
   </div>
@@ -20,6 +28,10 @@
     <span class="highlight"></span>
     <span class="bar"
       [ngClass]="{'has-error': user.get('email').invalid && user.get('email').dirty}">
+      <span class="error-message"
+        *ngIf="user.get('email').invalid && user.get('email').dirty">
+        Email is required
+      </span>
     </span>
     <label>Email</label>
   </div>
@@ -28,6 +40,10 @@
     <span class="highlight"></span>
     <span class="bar"
       [ngClass]="{'has-error': user.get('password').invalid && user.get('password').dirty}">
+      <span class="error-message"
+        *ngIf="user.get('password').invalid && user.get('password').dirty">
+        Mininum 10 characters long
+      </span>
     </span>
     <label>Password</label>
   </div>
@@ -36,6 +52,10 @@
     <span class="highlight"></span>
     <span class="bar"
       [ngClass]="{'has-error': user.get('passwordRepeated').invalid && user.get('passwordRepeated').dirty}">
+      <span class="error-message"
+        *ngIf="!passwordMatching()">
+        Passwords not matching
+      </span>
     </span>
     <label>Repeat Password</label>
   </div>
