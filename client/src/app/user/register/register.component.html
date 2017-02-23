@@ -1,0 +1,45 @@
+<form novalidate (ngSubmit)="onSubmit()" [formGroup]="user">
+  <div class="group">
+    <input type="text" formControlName="firstName">
+    <span class="highlight"></span>
+    <span class="bar"
+      [ngClass]="{'has-error': user.get('firstName').invalid && user.get('firstName').dirty}">
+    </span>
+    <label>First Name</label>
+  </div>
+  <div class="group">
+    <input type="text" formControlName="lastName">
+    <span class="highlight"></span>
+    <span class="bar"
+      [ngClass]="{'has-error': user.get('lastName').invalid && user.get('lastName').dirty}">
+    </span>
+    <label>Last Name</label>
+  </div>
+  <div class="group">
+    <input type="text" formControlName="email">
+    <span class="highlight"></span>
+    <span class="bar"
+      [ngClass]="{'has-error': user.get('email').invalid && user.get('email').dirty}">
+    </span>
+    <label>Email</label>
+  </div>
+  <div class="group">
+    <input type="password" formControlName="password">
+    <span class="highlight"></span>
+    <span class="bar"
+      [ngClass]="{'has-error': user.get('password').invalid && user.get('password').dirty}">
+    </span>
+    <label>Password</label>
+  </div>
+  <div class="group">
+    <input type="password" formControlName="passwordRepeated">
+    <span class="highlight"></span>
+    <span class="bar"
+      [ngClass]="{'has-error': user.get('passwordRepeated').invalid && user.get('passwordRepeated').dirty}">
+    </span>
+    <label>Repeat Password</label>
+  </div>
+  <button type="submit" [disabled]="user.invalid" class="button">
+    Create Account
+  </button>
+</form>

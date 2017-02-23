@@ -7,6 +7,7 @@ import { HttpModule }                   from '@angular/http';
 import { UserRoutingModule }            from './user-routing.module';
 
 import { LoginComponent }               from './login/login.component';
+import { RegisterComponent }            from './register/register.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { LoginComponent }               from './login/login.component';
     HttpModule
   ],
   declarations: [
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   providers: [],
 })
