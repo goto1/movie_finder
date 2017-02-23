@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit }  from '@angular/core';
+import { 
+  FormBuilder, FormControl, 
+  FormGroup, Validators }     from '@angular/forms';
 
 @Component({
   templateUrl: './login.component.html',
-  styleUrls: [ './login.component.sass' ]
+  styleUrls: [ '../form-styles.sass' ]
 })
 export class LoginComponent implements OnInit { 
   public user: FormGroup;
