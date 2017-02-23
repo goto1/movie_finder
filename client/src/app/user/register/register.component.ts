@@ -27,10 +27,6 @@ export class RegisterComponent implements OnInit {
   }
 
   public passwordMatching(): boolean {
-    if (this.user.value.password.length > 0 && this.user.value.passwordRepeated.length > 0) {
-      return this.user.value.password === this.user.value.passwordRepeated;
-    }
-    
-    return true;
+    return this.user.value.password === this.user.value.passwordRepeated;
   }
 }
