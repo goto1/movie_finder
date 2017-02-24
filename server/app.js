@@ -1,6 +1,5 @@
 const express = require('express');
 const logger = require('morgan');
-const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const passport = require('passport');
@@ -13,10 +12,10 @@ const routes = require('./routes/index');
 const app = express();
 
 app.use(helmet());
+app.use(helmet.hidePoweredBy());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
 
 app.use(passport.initialize());
 app.use('/api', routes);

@@ -38,8 +38,16 @@ module.exports.getMovies = (req, res, next) => {
 };
 
 module.exports.addMovie = (req, res, next) => {
-  if (!req.body.id) {
+  let id = req.body.id || undefined;
+
+  if (!id) {
     return resJSON.badRequest(res, 'Missing required information');
+  }
+
+  try {
+    id = parseInt(id);
+  } catch (e) {
+    return resJSON.badRequest(res, 'Something went wrong');
   }
 
   passport.authenticate('jwt', { session: false },
@@ -48,13 +56,13 @@ module.exports.addMovie = (req, res, next) => {
         return resJSON.restricted(res, 'Access restricted');
       }
 
-      const duplicate = _.find(user.movies, o => o.id == req.body.id);
+      const duplicate = _.find(user.movies, o => o.id == id);
 
       if (duplicate) {
         return resJSON.notModified(res, 'Movie already added');
       }
 
-      tmdb.getMovie(req.body.id)
+      tmdb.getMovie(id)
         .then((data) => {
           const movie = tmdb.extractMovie(data);
           user.movies.push(movie);
@@ -68,8 +76,16 @@ module.exports.addMovie = (req, res, next) => {
 };
 
 module.exports.deleteMovie = (req, res, next) => {
-  if (!req.body.id) {
+  let id = req.body.id || undefined;
+
+  if (!id) {
     return resJSON.badRequest(res, 'Missing required information');
+  }
+
+  try {
+    id = parseInt(id);
+  } catch (e) {
+    return resJSON.badRequest(res, 'Something went wrong');
   }
 
   passport.authenticate('jwt', { session: false },
@@ -78,7 +94,7 @@ module.exports.deleteMovie = (req, res, next) => {
         return resJSON.restricted(res, 'Access restricted');
       }
 
-      user.movies = _.filter(user.movies, o => o.id != req.body.id);
+      user.movies = _.filter(user.movies, o => o.id != id);
 
       user.save()
         .then(() => resJSON.ok(res, 'Movie removed successfully'))
