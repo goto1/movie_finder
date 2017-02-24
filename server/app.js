@@ -11,13 +11,15 @@ const routes = require('./routes/index');
 
 const app = express();
 
+app.set('port', (process.env.PORT || 5000));
+
 app.use(helmet());
 app.use(helmet.hidePoweredBy());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
 app.use(passport.initialize());
+
 app.use('/api', routes);
 
 // catch 404 and forward to error handler
@@ -33,10 +35,6 @@ app.use((err, req, res, next) => {
     status: err.status || 500,
     message: err.message,
   };
-
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   res.status(error.status).send(error);
 });
