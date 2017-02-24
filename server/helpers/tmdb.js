@@ -1,12 +1,12 @@
 const request = require('request-promise');
-const api = require('../secret/tmdb_api');
+const api = require('../secret/config');
 
 const options = {
   method: 'GET',
   json: true,
   qs: {
-    uri: `${api.url}/movie`,
-    api_key: api.key,
+    uri: `${api.tmdb_url}/movie`,
+    api_key: api.tmdb_key,
     language: 'en-US',
   },
 };

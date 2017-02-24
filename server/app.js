@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const passport = require('passport');
 
-require('./secret/db');
+require('./config/db');
 require('./config/passport');
 
 const routes = require('./routes/index');
