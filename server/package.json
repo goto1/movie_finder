@@ -6,11 +6,9 @@
     "node": "7.4.0"
   },
   "scripts": {
-    "start": "node app.js"
+    "start": "nodemon app.js"
   },
-  "main": {
-    "app.js"
-  },
+  "main": "app.js",
   "dependencies": {
     "bcrypt": "^1.0.2",
     "bluebird": "^3.4.7",
