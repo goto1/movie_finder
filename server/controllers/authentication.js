@@ -41,7 +41,7 @@ module.exports.login = (req, res) => {
       if (user) {
         return resJSON.ok(res, 'User successfully logged in', user.generateJwt());
       } else {
-        return resJSON.internalServerError(res, 'Something went wrong');
+        return resJSON.badRequest(res, 'User email and/or password incorrect');
       }
     })(req, res);
 };
