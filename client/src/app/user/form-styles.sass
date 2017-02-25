@@ -20,6 +20,38 @@ form
   background: #fafafa
   border: 1px solid #ebebeb
   box-shadow: rgba(0,0,0,0.14902) 0px 1px 1px 0px, rgba(0,0,0,0.09804) 0px 1px 2px 0px
+  position: relative
+
+.shake-on-error 
+  animation: shake 0.4s 1 linear
+
+@keyframes shake
+  0% 
+    transform: translate(30px)
+  20%
+    transform: translate(-30px)
+  40%
+    transform: translate(15px)
+  60%
+    transform: translate(-15px)
+  80%
+    transform: translate(8px)
+  100%
+    transform: translate(0px)
+
+.login-error
+  position: absolute
+  top: 1%
+  right: 1%
+  color: #E45543
+  text-transform: uppercase
+  letter-spacing: 1.25px
+  font-weight: 600
+  font-size: .85em
+  display: none
+
+.show
+  display: block
 
 .group
   position: relative
