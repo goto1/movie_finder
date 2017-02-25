@@ -1,4 +1,6 @@
-<form novalidate (ngSubmit)="onSubmit()" [formGroup]="user">
+<form novalidate (ngSubmit)="onSubmit()" [formGroup]="user"
+  [ngClass]="{'shake-on-error': error}">
+  <span class="login-error" [ngClass]="{'show': error}">{{ error }}</span>
   <div class="group">
     <input type="text" formControlName="email">
     <span class="highlight"></span>
