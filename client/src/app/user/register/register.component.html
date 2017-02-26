@@ -53,7 +53,7 @@
     <span class="bar"
       [ngClass]="{'has-error': user.get('passwordRepeated').invalid && user.get('passwordRepeated').dirty}">
       <span class="error-message"
-        *ngIf="!passwordMatching() && user.get('passwordRepeated').dirty">
+        *ngIf="!passwordsMatching() && user.get('passwordRepeated').dirty">
         Passwords not matching
       </span>
     </span>
