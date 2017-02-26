@@ -31,18 +31,25 @@ export class LoginComponent implements OnInit {
     let email = this.user.value.email;
     let password = this.user.value.password;
 
+    this.error = '';
+
+    this.login(email, password);
+  }
+
+  private login(email: string, password: string): void {
     this.ls.login(email, password)
       .subscribe(
         result => {
-          if (result === true) {
-            this.router.navigate(['/']);
-          } else {
-            this.error = 'Email or password is incorrect';
+          if (!result) {
+            this.error = 'Login failed, try again';
+            return;
           }
+
+          this.router.navigate(['/']);
         },
         err => {
-          let details = err.json() || {};
-          this.error = details.message;
-        });
+          this.error = err;
+        }
+      );
   }
 }

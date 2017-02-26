@@ -33,6 +33,16 @@ export class LoginService {
         localStorage.setItem('currentUser', JSON.stringify({ token }));
 
         return true;
+      })
+      .catch((err) => {
+        let errorMessage: string = '';
+
+        if (err instanceof Response) {
+          const body = err.json() || '';
+          errorMessage = body.message;
+        }
+
+        return Observable.throw(errorMessage);
       });
   }
 
