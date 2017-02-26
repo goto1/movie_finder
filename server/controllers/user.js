@@ -12,9 +12,20 @@ module.exports.getProfile = (req, res) => {
         return resJSON.internalServerError(res, 'Something went wrong');
       }
 
+      if (!user) {
+        return resJSON.restricted(res, 'Access restricted');
+      }
+
+      const user_details = {
+        last_name: user.last_name,
+        first_name: user.first_name,
+        email: user.email,
+        movies: user.movies,
+      };
+
       return res.status(200).json({
         status: 200,
-        result: user,
+        result: user_details,
       });
     })(req, res);
 };
@@ -27,7 +38,7 @@ module.exports.getMovies = (req, res, next) => {
       }
 
       if (!user) {
-        return resJSON.internalServerError(res, 'Something went wrong');
+        return resJSON.unauthorized(res, 'You are not authorized');
       }
 
       return res.status(200).json({
@@ -38,21 +49,19 @@ module.exports.getMovies = (req, res, next) => {
 };
 
 module.exports.addMovie = (req, res, next) => {
-  let id = req.body.id || undefined;
+  const id = parseInt(req.body.id, 10) || undefined;
 
-  if (!id) {
-    return resJSON.badRequest(res, 'Missing required information');
-  }
-
-  try {
-    id = parseInt(id);
-  } catch (e) {
-    return resJSON.badRequest(res, 'Something went wrong');
+  if (!id || isNaN(id)) {
+    return resJSON.badRequest(res, 'Missing or incorrect required information');
   }
 
   passport.authenticate('jwt', { session: false },
     (err, user) => {
       if (err) {
+        return resJSON.internalServerError(res, 'Something went wrong');
+      }
+
+      if (!user) {
         return resJSON.restricted(res, 'Access restricted');
       }
 
@@ -76,21 +85,19 @@ module.exports.addMovie = (req, res, next) => {
 };
 
 module.exports.deleteMovie = (req, res, next) => {
-  let id = req.body.id || undefined;
+  const id = parseInt(req.body.id, 10) || undefined;
 
-  if (!id) {
-    return resJSON.badRequest(res, 'Missing required information');
-  }
-
-  try {
-    id = parseInt(id);
-  } catch (e) {
-    return resJSON.badRequest(res, 'Something went wrong');
+  if (!id || isNaN(id)) {
+    return resJSON.badRequest(res, 'Missing or incorrect required information');
   }
 
   passport.authenticate('jwt', { session: false },
     (err, user) => {
       if (err) {
+        return resJSON.internalServerError(res, 'Something went wrong');
+      }
+
+      if (!user) {
         return resJSON.restricted(res, 'Access restricted');
       }
 
