@@ -21,30 +21,27 @@ module.exports = {
   },
 
   // 400 Bad Request
-  badRequest(res, message, token) {
-    const info = token ? { status: 400, message, token } : { status: 400, message };
-
-    return res.status(400).json(info);
+  badRequest(res, message) {
+    return res.status(400).json({ status: 400, message });
   },
 
   // 401 Unauthorized
-  unauthorized(res, message, token) {
-    const info = token ? { status: 401, message, token } : { status: 401, message };
+  unauthorized(res, message) {
+    return res.status(401).json({ status: 401, message });
+  },
 
-    return res.status(401).json(info);
+  // 403 Forbidden
+  forbidden(res, message) {
+    res.status(403).json({ status: 403, message });
   },
 
   // 404 Not Found
-  notFound(res, message, token) {
-    const info = token ? { status: 404, message, token } : { status: 404, message };
-
-    return res.status(404).json(info);
+  notFound(res, message) {
+    return res.status(404).json({ status: 404, message });
   },
 
   // 500 Internal Server Error
-  internalServerError(res, message, token) {
-    const info = token ? { status: 500, message, token } : { status: 500, message };
-
-    return res.status(500).json(info);
+  internalServerError(res, message) {
+    return res.status(500).json({ status: 500, message });
   },
 };
