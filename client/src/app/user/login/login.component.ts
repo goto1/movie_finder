@@ -1,9 +1,10 @@
-import { Component, OnInit }  from '@angular/core';
+import { Component, OnInit }      from '@angular/core';
 import { 
   FormBuilder, FormControl, 
-  FormGroup, Validators }     from '@angular/forms';
-import { Router }             from '@angular/router';
-import { LoginService }       from '../services/login.service';
+  FormGroup, Validators }         from '@angular/forms';
+import { Router }                 from '@angular/router';
+import { AuthenticationService }  from '../services/authentication.service';
+import { ILoginForm }             from '../../shared/interfaces';
 
 @Component({
   templateUrl: './login.component.html',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private ls: LoginService ) { }
+    private auth: AuthenticationService ) { }
 
   ngOnInit(): void {
     this.user = this.fb.group({
@@ -24,20 +25,22 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required]]
     });
 
-    this.ls.logout();
+    this.auth.logout(); // just to be safe
   }
 
-  public onSubmit(): void {
-    let email = this.user.value.email;
-    let password = this.user.value.password;
+  onSubmit(): void {
+    const formData: ILoginForm = {
+      email: this.user.value.email,
+      password: this.user.value.password
+    };
 
     this.error = '';
 
-    this.login(email, password);
+    this.login(formData);
   }
 
-  private login(email: string, password: string): void {
-    this.ls.login(email, password)
+  private login(formData: ILoginForm): void {
+    this.auth.login(formData)
       .subscribe(
         result => {
           if (!result) {
@@ -49,7 +52,6 @@ export class LoginComponent implements OnInit {
         },
         err => {
           this.error = err;
-        }
-      );
+        });
   }
 }

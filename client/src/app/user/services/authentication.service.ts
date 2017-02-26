@@ -20,25 +20,15 @@ export class AuthenticationService {
   }
 
   register(formData: IRegisterForm): Observable<boolean | Error> {
-    // const dataToBeSubmitted: IRegisterForm = {
-    //   first_name: formData.first_name,
-    //   last_name: formData.last_name,
-    //   email: formData.email,
-    //   password: formData.password,
-    // };
     const url: string = 'https://gentle-tor-88697.herokuapp.com/api/register';
 
     return this.request(formData, url);
   }
 
   login(formData: ILoginForm): Observable<boolean | Error> {
-    const dataToBeSubmitted: ILoginForm = {
-      email: formData.email,
-      password: formData.password,
-    };
     const url: string = 'https://gentle-tor-88697.herokuapp.com/api/login';
 
-    return this.request(dataToBeSubmitted, url);
+    return this.request(formData, url);
   }
 
   logout(): void {
@@ -51,7 +41,6 @@ export class AuthenticationService {
   }
 
   private request(data, url): Observable<boolean | Error> {
-    console.log(data);
     return this.http.post(url, data, this.options)
       .map((res: Response) => {
         const data = res.json() || {};

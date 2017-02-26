@@ -9,6 +9,8 @@ import { UserRoutingModule }            from './user-routing.module';
 import { LoginComponent }               from './login/login.component';
 import { RegisterComponent }            from './register/register.component';
 
+import { AuthenticationService }        from './services/authentication.service';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -21,6 +23,8 @@ import { RegisterComponent }            from './register/register.component';
     LoginComponent,
     RegisterComponent
   ],
-  providers: [],
+  providers: [
+    AuthenticationService
+  ],
 })
 export class UserModule { }
