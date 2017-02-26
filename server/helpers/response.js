@@ -32,7 +32,7 @@ module.exports = {
 
   // 403 Forbidden
   forbidden(res, message) {
-    res.status(403).json({ status: 403, message });
+    return res.status(403).json({ status: 403, message });
   },
 
   // 404 Not Found
