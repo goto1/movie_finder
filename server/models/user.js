@@ -39,7 +39,7 @@ userSchema.methods.generateJwt = function () {
     email: this.email,
     first_name: this.first_name,
     last_name: this.last_name,
-  }, config.secret, { expiresIn: '1h' });
+  }, config.secret, { expiresIn: '3h' });
 };
 
 mongoose.model('User', userSchema);
