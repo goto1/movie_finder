@@ -1,5 +1,7 @@
 // ng build --prod --base-href ./
-import { Component } from '@angular/core';
+import { Component }              from '@angular/core';
+import { Router }                 from '@angular/router';
+import { AuthenticationService }  from './user/services/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -7,10 +9,10 @@ import { Component } from '@angular/core';
     <header>
       <div class="logo header-item" [routerLink]="'/'">MOVIEJO</div>
       <nav class="header-item">
-        <button class="nav-item" *ngIf="!userLoggedIn" [routerLink]="'/login'">
+        <button class="nav-item" *ngIf="!auth.loggedIn()" [routerLink]="'/login'">
           Login <i class="fa fa-user" aria-hidden="true"></i>
         </button>
-        <button class="nav-item" *ngIf="userLoggedIn">
+        <button class="nav-item" *ngIf="auth.loggedIn()" (click)="logout()">
           Logout <i class="fa fa-sign-out" aria-hidden="true"></i>
         </button>
       </nav>
@@ -20,5 +22,12 @@ import { Component } from '@angular/core';
   styleUrls: [ './app.component.sass' ]
 })
 export class AppComponent {
-  public userLoggedIn: boolean = false;
+  constructor(
+    private auth: AuthenticationService,
+    private router: Router ) { }
+
+  logout(): void {
+    this.auth.logout();
+    // this.router.navigate(['/']);
+  }
 }
