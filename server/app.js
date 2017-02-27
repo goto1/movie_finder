@@ -3,6 +3,7 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const passport = require('passport');
+const cors = require('cors');
 
 require('./config/db');
 require('./config/passport');
@@ -13,18 +14,13 @@ const app = express();
 
 app.set('port', (process.env.PORT || 5000));
 
+app.use(cors());
 app.use(helmet());
 app.use(helmet.hidePoweredBy());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(passport.initialize());
-
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
 
 app.use('/api', routes);
 
