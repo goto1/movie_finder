@@ -2,22 +2,35 @@ import { Injectable }         from '@angular/core';
 import {
   Http, Headers,
   Response, RequestOptions }  from '@angular/http';
+import { 
+  AuthHttp, tokenNotExpired } from 'angular2-jwt';
 import { Observable }         from 'rxjs/Observable';
 import { 
-  ILoginForm, IRegisterForm } from '../../shared/interfaces';
+  ILoginForm, IRegisterForm, 
+  IMovie }                    from '../../shared/interfaces';
 
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AuthenticationService {
-  private token: string;
   private headers: Headers;
   private options: RequestOptions;
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private authHttp: AuthHttp) {
     this.headers = new Headers({ 'Content-Type': 'application/json' });
     this.options = new RequestOptions({ headers: this.headers });
   }
+
+  // getProfile() {
+  //   const url = 'https://gentle-tor-88697.herokuapp.com/api/profile';
+
+  //   this.authHttp.get(url)
+  //     .map(res => res.json())
+  //     .subscribe(
+  //       data => console.log(data),
+  //       error => console.log(error)
+  //     );
+  // }
 
   register(formData: IRegisterForm): Observable<boolean | Error> {
     const url: string = 'https://gentle-tor-88697.herokuapp.com/api/register';
@@ -32,12 +45,11 @@ export class AuthenticationService {
   }
 
   logout(): void {
-    this.token = null;
-    localStorage.removeItem('currentUser');
+    localStorage.removeItem('id_token');
   }
 
-  isLoggedIn(): boolean {
-    return this.token !== null;
+  loggedIn(): boolean {
+    return tokenNotExpired();
   }
 
   private request(data, url): Observable<boolean | Error> {
@@ -49,8 +61,7 @@ export class AuthenticationService {
           return false;
         }
 
-        this.token = data.token;
-        localStorage.setItem('currentUser', JSON.stringify({ token: this.token }));
+        localStorage.setItem('id_token', data.token);
         return true;
       })
       .catch(err => this.handleError(err));
