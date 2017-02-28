@@ -12,6 +12,8 @@ import { UserRoutingModule }            from './user-routing.module';
 
 import { LoginComponent }               from './login/login.component';
 import { RegisterComponent }            from './register/register.component';
+import { LoginSuccessComponent }        from './login-success/login-success.component';
+import { LogoutSuccessComponent }       from './logout-success/logout-success.component';
 
 import { AuthenticationService }        from './services/authentication.service';
 
@@ -35,7 +37,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   ],
   declarations: [
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginSuccessComponent,
+    LogoutSuccessComponent
   ],
   providers: [
     AuthenticationService,
