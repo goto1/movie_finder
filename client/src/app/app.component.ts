@@ -9,11 +9,13 @@ import { AuthenticationService }  from './user/services/authentication.service';
     <header>
       <div class="logo header-item" [routerLink]="'/'">MOVIEJO</div>
       <nav class="header-item">
-        <button class="nav-item" *ngIf="!auth.loggedIn()" [routerLink]="'/login'">
-          Login <i class="fa fa-user" aria-hidden="true"></i>
+        <button class="btn btn-default" *ngIf="!auth.loggedIn()" [routerLink]="'/login'">
+          Login
+          <i class="fa fa-user" aria-hidden="true"></i>
         </button>
-        <button class="nav-item" *ngIf="auth.loggedIn()" (click)="logout()">
-          Logout <i class="fa fa-sign-out" aria-hidden="true"></i>
+        <button class="btn btn-default" *ngIf="auth.loggedIn()" (click)="logout()">
+          Logout
+          <i class="fa fa-sign-out" aria-hidden="true"></i>
         </button>
       </nav>
     </header>

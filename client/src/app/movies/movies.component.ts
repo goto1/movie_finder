@@ -5,12 +5,12 @@ import '../shared/rxjs-operators';
 @Component({
   template: `
     <nav>
-      <a routerLink="/movies" routerLinkActive="active">
+      <button class="btn btn-nav" routerLink="/movies" routerLinkActive="active">
         Discover <i class="fa fa-film" aria-hidden="true"></i>
-      </a>
-      <a routerLink="/search" routerLinkActive="active">
+      </button>
+      <button class="btn btn-nav" routerLink="/search" routerLinkActive="active">
         Search <i class="fa fa-search" aria-hidden="true"></i>
-      </a>
+      </button>
     </nav>
     <router-outlet></router-outlet>
   `,

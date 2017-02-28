@@ -1,0 +1,40 @@
+$primary-color: #FBFFFD
+$secondary-color: #7D7F7F
+$dark-green-color: #577F6D
+$off-white-color: #FFFBFB
+$orange-color: #FE5E4A
+
+button.btn
+  min-width: 130px
+  width: auto
+  height: 45px
+  font-weight: 400
+  letter-spacing: .15em
+  text-transform: uppercase
+  border-radius: 2px
+  border: none
+  text-align: center
+  margin-left: 10px
+  padding: 0 15px 0 15px
+  transition: 0.5s
+  &:focus
+    outline: none
+  &:hover
+    cursor: pointer
+  i
+    margin-left: 2.5px
+
+button.btn-default
+  background-color: $dark-green-color
+  color: $off-white-color
+  box-shadow: 0px 1.5px 2px 1px $secondary-color
+  &:hover
+    box-shadow: 0px 1.5px 2px 1px #6376D6
+
+button.btn-nav
+  color: $dark-green-color
+  background-color: inherit
+  box-shadow: 0px 0px 1px 1px $secondary-color
+  &:hover, button.btn-active
+    color: #6376D6
+    box-shadow: 0px 0px 1px 2px #6376D6
