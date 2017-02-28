@@ -21,17 +21,6 @@ export class AuthenticationService {
     this.options = new RequestOptions({ headers: this.headers });
   }
 
-  // getProfile() {
-  //   const url = 'https://gentle-tor-88697.herokuapp.com/api/profile';
-
-  //   this.authHttp.get(url)
-  //     .map(res => res.json())
-  //     .subscribe(
-  //       data => console.log(data),
-  //       error => console.log(error)
-  //     );
-  // }
-
   register(formData: IRegisterForm): Observable<boolean | Error> {
     const url: string = 'https://gentle-tor-88697.herokuapp.com/api/register';
 
