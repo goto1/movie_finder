@@ -18,8 +18,14 @@
     </div>
     <div class="overview">
       <div class="heading">Overview</div>
-      {{movie?.overview}} Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae eius, libero unde commodi, eveniet atque nesciunt consequatur quas vel repudiandae, veniam magnam quia facere voluptate! Dolores deserunt vel, voluptate nemo.
+      {{movie?.overview}}
     </div>
+    <div class="favorite" *ngIf="auth.loggedIn()">
+      <span (click)="toggleFavorite(movie.id)">
+        <i class="fa fa-heart" *ngIf="isFavorite"></i>
+        <i class="fa fa-heart-o" *ngIf="!isFavorite"></i>
+      </span>
+    </div>  
   </div>
   <div class="col col2">
     <div class="poster" *ngIf="movie?.poster_path">

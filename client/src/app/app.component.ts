@@ -30,6 +30,6 @@ export class AppComponent {
 
   logout(): void {
     this.auth.logout();
-    // this.router.navigate(['/']);
+    this.router.navigate(['/logout/success']);
   }
 }

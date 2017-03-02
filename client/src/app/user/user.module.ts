@@ -17,6 +17,7 @@ import { LogoutSuccessComponent }       from './logout-success/logout-success.co
 
 import { AuthenticationService }        from './services/authentication.service';
 import { AuthGuard }                    from './services/auth-guard.service';
+import { UserService }                  from './services/user.service';
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -45,6 +46,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   providers: [
     AuthenticationService,
     AuthGuard,
+    UserService,
     {
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,
