@@ -18,6 +18,9 @@ import { SearchComponent }            from './search/search.component';
 import { SearchResultsComponent }     from './search/search-results.component';
 import { DetailsComponent }           from './details/details.component';
 
+import { MoviesListComponent } from './movies-list/movies-list.component';
+import { MovieOverviewComponent } from './movie-overview/movie-overview.component';
+
 // Services
 import { PopularService }             from './services/discover/popular.service';
 import { NowPlayingService }          from './services/discover/now-playing.service';
@@ -48,6 +51,9 @@ import { SafeUrlPipe }                from './pipes/safe-url.pipe';
     SearchComponent,
     SearchResultsComponent,
     DetailsComponent,
+
+    MoviesListComponent,
+    MovieOverviewComponent,
 
     // Pipes
     MovieTitleShortPipe,
