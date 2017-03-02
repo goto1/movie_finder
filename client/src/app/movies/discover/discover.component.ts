@@ -4,19 +4,27 @@ import { ICategory, ISelectedCategory } from '../../shared/interfaces';
 
 @Component({
   template: `
-    <div class="select-category">
-      <div class="select-wrapper">
-        <select name="category" [(ngModel)]="selected.category">
-          <option *ngFor="let category of categories" [ngValue]="category">
-            {{category.name}}
-          </option>
-        </select>
-      </div>
-    </div>
-    <now-playing *ngIf="selected.category.value === 1"></now-playing>
-    <popular *ngIf="selected.category.value === 2"></popular>
-    <top-rated *ngIf="selected.category.value === 3"></top-rated>
-    <upcoming *ngIf="selected.category.value === 4"></upcoming>
+    <nav>
+      <button 
+        type="button" 
+        class="btn btn-default" 
+        routerLink="/movies/now_playing" 
+        routerLinkActive="btn-active">Now Playing</button>
+      <button 
+        type="button" 
+        class="btn btn-default" 
+        routerLink="/movies/popular" routerLinkActive="btn-active">Popular</button>
+      <button 
+        type="button" 
+        class="btn btn-default" 
+        routerLink="/movies/top_rated" routerLinkActive="btn-active">Top Rated</button>
+      <button 
+        type="button" 
+        class="btn btn-default" 
+        routerLink="/movies/upcoming" 
+        routerLinkActive="btn-active">Upcoming</button>
+    </nav>
+    <router-outlet></router-outlet>
   `,
   styleUrls: [ './discover.component.sass' ]
 })
