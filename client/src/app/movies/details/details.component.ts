@@ -42,7 +42,10 @@ export class DetailsComponent implements OnInit {
   toggleFavorite(id: number): void {
     this.us.toggleFavoriteMovie(id, this.movie.favorite)
       .subscribe(
-        res => console.log(res),
+        res => { 
+          console.log(res);
+          this.us.getMovies().subscribe(res => res);
+        },
         err => console.log(err)
       );
 
