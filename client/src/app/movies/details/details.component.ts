@@ -27,6 +27,12 @@ export class DetailsComponent implements OnInit {
       params => this.getMovie(+params['id']),
       error => console.error(error)
     );
+
+    this.us.getMovies()
+      .subscribe(
+        res => res,
+        err => err
+      );
   }
 
   goBack(): void {
@@ -34,21 +40,29 @@ export class DetailsComponent implements OnInit {
   }
 
   toggleFavorite(id: number): void {
-
-    this.us.toggleFavoriteMovie(id, this.isFavorite)
+    this.us.toggleFavoriteMovie(id, this.movie.favorite)
       .subscribe(
         res => console.log(res),
         err => console.log(err)
       );
 
-    this.isFavorite = this.isFavorite ? false : true;
+    this.movie.favorite = this.movie.favorite ? false : true;
   }
 
   private getMovie(id: number): void {
     this.ds.getDetails(id)
       .subscribe(
-        movie => this.movie = movie,
-        error => console.error(error)
+        movie => {
+          this.movie = movie;
+
+          const favorites = JSON.parse(localStorage.getItem('favorite'));
+          const isCurrentMovieFavorite = favorites.find(id => id === this.movie.id);
+
+          if (isCurrentMovieFavorite) {
+            this.movie.favorite = true;
+          }
+        },
+        err => console.error(err)
       );
   }
 }

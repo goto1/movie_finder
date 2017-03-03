@@ -22,8 +22,8 @@
     </div>
     <div class="favorite" *ngIf="auth.loggedIn()">
       <span (click)="toggleFavorite(movie.id)">
-        <i class="fa fa-heart" *ngIf="isFavorite"></i>
-        <i class="fa fa-heart-o" *ngIf="!isFavorite"></i>
+        <i class="fa fa-heart" *ngIf="movie?.favorite"></i>
+        <i class="fa fa-heart-o" *ngIf="!movie?.favorite"></i>
       </span>
     </div>  
   </div>

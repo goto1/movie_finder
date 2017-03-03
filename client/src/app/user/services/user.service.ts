@@ -23,7 +23,21 @@ export class UserService {
 
     return this.authHttp.get(url)
       .map((res: Response) => res.json())
+      .map(data => this.updateFavoriteMovies(data))
       .catch(err => this.handleError(err));
+  }
+
+  private updateFavoriteMovies(data) {
+    if (!data.result) {
+      localStorage.setItem('favorite', JSON.stringify([]));
+      return;
+    }
+
+    const favoriteMovies = data.result.map(movie => movie.id);
+    localStorage.setItem('favorite', JSON.stringify(favoriteMovies));
+    // localStorage.setItem('favorite', JSON.stringify([1, 2, 3, 4, 5]));
+
+    return favoriteMovies;
   }
 
   toggleFavoriteMovie(id: number, isFavorite: boolean) {

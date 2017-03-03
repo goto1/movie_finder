@@ -19,6 +19,7 @@ export interface IDetailedMovie extends IMovie {
   trailer: string;
   vote_count: number;
   genres: IGenre[];
+  favorite: boolean;
 }
 
 export interface ICategory {
