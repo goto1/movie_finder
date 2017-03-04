@@ -35,6 +35,8 @@ export class AuthenticationService {
 
   logout(): void {
     localStorage.removeItem('id_token');
+    localStorage.removeItem('favorite');
+    localStorage.removeItem('genres');
   }
 
   loggedIn(): boolean {
