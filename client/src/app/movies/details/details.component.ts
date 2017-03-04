@@ -27,12 +27,6 @@ export class DetailsComponent implements OnInit {
       params => this.getMovie(+params['id']),
       error => console.error(error)
     );
-
-    this.us.getMovies()
-      .subscribe(
-        res => res,
-        err => err
-      );
   }
 
   goBack(): void {
@@ -43,7 +37,6 @@ export class DetailsComponent implements OnInit {
     this.us.toggleFavoriteMovie(id, this.movie.favorite)
       .subscribe(
         res => { 
-          console.log(res);
           this.us.getMovies().subscribe(res => res);
         },
         err => console.log(err)
