@@ -23,8 +23,28 @@ export class UserService {
 
     return this.authHttp.get(url)
       .map((res: Response) => res.json())
-      .map(data => this.updateFavoriteMovies(data))
+      .map(data => this.extractData(data))
       .catch(err => this.handleError(err));
+  }
+
+  private extractData(data) {
+    this.extractGenreIds(data);
+    this.updateFavoriteMovies(data);
+
+    return data;
+  }
+
+  private extractGenreIds(data) {
+    const genreIds = [];
+    const movies = data.result;
+
+    movies.map(movie => {
+      if (movie.genres.length > 0) {
+        movie.genres.map(genre => genreIds.push(genre.id))
+      }
+    });
+
+    localStorage.setItem('genres', JSON.stringify(genreIds));
   }
 
   private updateFavoriteMovies(data) {
@@ -35,9 +55,6 @@ export class UserService {
 
     const favoriteMovies = data.result.map(movie => movie.id);
     localStorage.setItem('favorite', JSON.stringify(favoriteMovies));
-    // localStorage.setItem('favorite', JSON.stringify([1, 2, 3, 4, 5]));
-
-    return favoriteMovies;
   }
 
   toggleFavoriteMovie(id: number, isFavorite: boolean) {
