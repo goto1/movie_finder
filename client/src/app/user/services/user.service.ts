@@ -41,7 +41,7 @@ export class UserService {
     }
 
     const ids = [];
-    
+
     data.result.map(movie => {
       movie.genres.map(genre => { ids.push(genre.id); });
     });
@@ -78,8 +78,7 @@ export class UserService {
 
   private handleError(err: any): Observable<Error> {
     let errorMessage: string = 'Something went wrong';
-    console.log(err);
-    const body = err.json() || {};
+    const body = err.json() || {}; // NEEDS FIXING; ERROR .json() 
 
     if (body.message) {
       errorMessage = body.message;
