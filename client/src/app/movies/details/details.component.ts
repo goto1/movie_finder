@@ -51,8 +51,10 @@ export class DetailsComponent implements OnInit {
         movie => {
           this.movie = movie;
 
-          const favorites = JSON.parse(localStorage.getItem('favorite'));
-          const isCurrentMovieFavorite = favorites.find(id => id === this.movie.id);
+          const usersFavoriteMovies = JSON.parse(localStorage.getItem('favorite'));
+          const isCurrentMovieFavorite = usersFavoriteMovies.ids.find(
+            id => id === this.movie.id
+          );
 
           if (isCurrentMovieFavorite) {
             this.movie.favorite = true;
