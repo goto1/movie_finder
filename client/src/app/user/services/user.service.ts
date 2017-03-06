@@ -19,42 +19,46 @@ export class UserService {
   }
 
   getMovies() {
-    const url = 'https://gentle-tor-88697.herokuapp.com/api/movie';
-
-    return this.authHttp.get(url)
-      .map((res: Response) => res.json())
-      .map(data => this.extractData(data))
+    return this.authHttp.get('https://gentle-tor-88697.herokuapp.com/api/movie')
+      .map((res: Response) => this.extractData(res))
       .catch(err => this.handleError(err));
   }
 
-  private extractData(data) {
-    this.extractGenreIds(data);
-    this.updateFavoriteMovies(data);
+  private extractData(response) {
+    const data = response.json() || {};
 
-    return data;
-  }
-
-  private extractGenreIds(data) {
-    const genreIds = [];
-    const movies = data.result;
-
-    movies.map(movie => {
-      if (movie.genres.length > 0) {
-        movie.genres.map(genre => genreIds.push(genre.id))
-      }
-    });
-
-    localStorage.setItem('genres', JSON.stringify(genreIds));
-  }
-
-  private updateFavoriteMovies(data) {
-    if (!data.result) {
-      localStorage.setItem('favorite', JSON.stringify([]));
+    if (!data) {
       return;
     }
 
-    const favoriteMovies = data.result.map(movie => movie.id);
-    localStorage.setItem('favorite', JSON.stringify(favoriteMovies));
+    this.extractFavoriteMovies(data);
+    this.extractGenreIds(data);
+  }
+
+  private extractGenreIds(data) {
+    if (!data.result) {
+      return;
+    }
+
+    const ids = data.result.map(movie => {
+      if (movie.genres.length > 0) {
+        movie.genres.map(genre => genre.id);
+      } else {
+        return [];
+      }
+    });
+
+    localStorage.setItem('genres', JSON.stringify({ ids }));
+  }
+
+  private extractFavoriteMovies(data) {
+    if (!data.result) {
+      return; 
+    }
+
+    const ids = data.result.map(movie => movie.id);
+
+    localStorage.setItem('favorite', JSON.stringify({ ids }));
   }
 
   toggleFavoriteMovie(id: number, isFavorite: boolean) {
@@ -76,6 +80,7 @@ export class UserService {
 
   private handleError(err: any): Observable<Error> {
     let errorMessage: string = 'Something went wrong';
+    console.log(err);
     const body = err.json() || {};
 
     if (body.message) {
