@@ -40,12 +40,10 @@ export class UserService {
       return;
     }
 
-    const ids = data.result.map(movie => {
-      if (movie.genres.length > 0) {
-        movie.genres.map(genre => genre.id);
-      } else {
-        return [];
-      }
+    const ids = [];
+    
+    data.result.map(movie => {
+      movie.genres.map(genre => { ids.push(genre.id); });
     });
 
     localStorage.setItem('genres', JSON.stringify({ ids }));
