@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import { IMovie } from '../shared/interfaces';
+import { IMovieDetailed, IMoviesListData } from '../shared/interfaces';
 import { TMDBUtils } from './tmdbUtils';
 
 const api = {
@@ -15,20 +15,20 @@ export class MovieService {
 
   constructor(private http: Http) { }
 
-  getMoviesWithGenres(genres: Array<Number>): Observable<Object> {
+  getMoviesWithGenres(genres: Array<Number>): Observable<IMoviesListData> {
     let genreIds = genres.length > 3 ? genres.slice(0, 3) : genres;
     const url = `${api.url}/discover/movie?${api.options}&sort_by=popularity.desc&with_genres=${genreIds.toString()}`;
 
     return this.getMovies(url);
   }
 
-  searchMovie(title: string): Observable<Object> {
+  searchMovie(title: string): Observable<IMoviesListData> {
     const url = `${api.url}/search/movie?${api.options}&query=${title}`;
 
     return this.getMovies(url);
   }
 
-  getMovieDetails(id: number): Observable<Object> {
+  getMovieDetails(id: number): Observable<IMovieDetailed> {
     const url = `${api.url}/movie/${id}?${api.options}&append_to_response=videos,similar`;
 
     return this.http.get(url)
@@ -38,30 +38,30 @@ export class MovieService {
       .catch(err => TMDBUtils.handleError(err));
   }
 
-  getNowPlaying(page: number): Observable<Object> {
+  getNowPlaying(page: number): Observable<IMoviesListData> {
     const url = `${api.url}/movie/now_playing?${api.options}&page=${page}`;
     return this.getMovies(url);
   }
 
-  getPopular(page: number): Observable<Object> {
+  getPopular(page: number): Observable<IMoviesListData> {
     const url = `${api.url}/movie/popular?${api.options}&page=${page}`;
     return this.getMovies(url);
   }
 
-  getTopRated(page: number): Observable<Object> {
+  getTopRated(page: number): Observable<IMoviesListData> {
     const url = `${api.url}/movie/top_rated?${api.options}&page=${page}`;
     return this.getMovies(url);
   }
 
-  getUpcoming(page: number): Observable<Object> {
+  getUpcoming(page: number): Observable<IMoviesListData> {
     const url = `${api.url}/movie/upcoming?${api.options}&page=${page}`;
     return this.getMovies(url);
   }
 
-  private getMovies(url: string) {
+  private getMovies(url: string): Observable<IMoviesListData> {
     return this.http.get(url)
       .map(response => TMDBUtils.extractDataMultipleMovies(response))
-      .map(data => TMDBUtils.fixImagePaths(data))
+      .map(data => TMDBUtils.extractMovieInformation(data))
       .catch(error => TMDBUtils.handleError(error));
   }
 

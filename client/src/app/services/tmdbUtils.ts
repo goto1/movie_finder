@@ -4,12 +4,12 @@
 
 import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { IMovie } from '../shared/interfaces';
+import { IMovieDetailed, IMoviesListData } from '../shared/interfaces';
 import * as _ from 'lodash';
 
 export class TMDBUtils {
 
-  static extractDataSingleMovie(res: Response) {
+  static extractDataSingleMovie(res: Response): IMovieDetailed {
     const data = res.json() || {};
 
     return {
@@ -28,7 +28,7 @@ export class TMDBUtils {
     };
   }
 
-  static extractTrailerUrl(data) {
+  static extractTrailerUrl(data): IMovieDetailed {
     const clone = _.clone(data);
 
     clone.trailer = clone.trailer[0] ? `https://www.youtube.com/watch?v=${clone.trailer[0].key}` : '';
@@ -36,7 +36,7 @@ export class TMDBUtils {
     return clone;
   }
 
-  static extractSimilarMovies(data) {
+  static extractSimilarMovies(data): IMovieDetailed {
     const clone = _.clone(data);
 
     clone.similar = clone.similar.map(movie => {
@@ -51,7 +51,7 @@ export class TMDBUtils {
     return clone;
   }
   
-  static extractDataMultipleMovies(res: Response) {
+  static extractDataMultipleMovies(res: Response): IMoviesListData {
     const data = res.json() || {};
 
     return {
@@ -61,12 +61,16 @@ export class TMDBUtils {
     };
   }
 
-  static fixImagePaths(data) {
+  static extractMovieInformation(data): IMoviesListData {
     const clone = _.clone(data);
 
-    clone.movies.map(movie => {
-      movie.poster_path = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
-      movie.backdrop_path = `https://image.tmdb.org/t/p/w1000${movie.backdrop_path}`;
+    clone.movies = clone.movies.map(movie => {
+      return {
+        id: movie.id,
+        title: movie.title,
+        poster_path: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+        vote_average: movie.vote_average
+      };
     });
 
     return clone;
