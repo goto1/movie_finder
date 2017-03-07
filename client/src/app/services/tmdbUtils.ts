@@ -3,6 +3,7 @@
  */
 
 import { Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 import { IMovie } from '../shared/interfaces';
 import * as _ from 'lodash';
 
@@ -27,5 +28,20 @@ export class TMDBUtils {
     });
 
     return clone;
+  }
+
+  static handleError(error) {
+    const err = new Error();
+    
+    err.name = error.status || 400;
+
+    if (error instanceof Response) {
+      const body = error.json();
+      err.message = body.status_message;
+    } else {
+      err.message = 'Something went wrong.';
+    }
+
+    return Observable.throw(err.toString());
   }
 }
