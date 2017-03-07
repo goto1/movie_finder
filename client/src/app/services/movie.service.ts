@@ -7,8 +7,7 @@ import { TMDBUtils } from './tmdbUtils';
 
 const api = {
   url: 'https://api.themoviedb.org/3',
-  key: 'api_key=03eb2b84d82f7dbdb50c3106fb6c2de3',
-  options: '&language=en-US',
+  options: 'api_key=03eb2b84d82f7dbdb50c3106fb6c2de3&language=en-US',
 };
 
 @Injectable()
@@ -16,13 +15,31 @@ export class MovieService {
 
   constructor(private http: Http) { }
 
-  getNowPlaying(): Observable<[IMovie]> {
-    const url = `${api.url}/movie/now_playing?${api.key}${api.options}&page=1`;
+  getNowPlaying(page: number): Observable<Object> {
+    const url = `${api.url}/movie/now_playing?${api.options}&page=${page}`;
+    return this.getMovies(url);
+  }
 
+  getPopular(page: number): Observable<Object> {
+    const url = `${api.url}/movie/popular?${api.options}&page=${page}`;
+    return this.getMovies(url);
+  }
+
+  getTopRated(page: number): Observable<Object> {
+    const url = `${api.url}/movie/top_rated?${api.options}&page=${page}`;
+    return this.getMovies(url);
+  }
+
+  getUpcoming(page: number): Observable<Object> {
+    const url = `${api.url}/movie/upcoming?${api.options}&page=${page}`;
+    return this.getMovies(url);
+  }
+
+  private getMovies(url: string) {
     return this.http.get(url)
       .map(response => TMDBUtils.extractData(response))
       .map(data => TMDBUtils.fixImagePaths(data))
-      .catch(err => err);
+      .catch(error => TMDBUtils.handleError(error));
   }
 
 }
