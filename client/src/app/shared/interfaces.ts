@@ -42,3 +42,31 @@ export interface IRegisterForm {
   email: string;
   password: string;
 }
+
+/**
+ * KEEP BELOW
+ */
+
+export interface IMovieOverview {
+  id: number;
+  poster_path: string;
+  title: string;
+  vote_average: number;
+};
+
+export interface IMovieDetailed extends IMovieOverview {
+  backdrop_path: string;
+  genres: [ { id: number, name: string } ];
+  isFavorite: boolean;
+  overview: string;
+  release_date: string;
+  runtime: number;
+  similar: [IMovieOverview],
+  trailer: string;
+}
+
+export interface IMoviesListData {
+  page: number;
+  movies: [IMovieOverview],
+  total_pages: number;
+}
