@@ -15,6 +15,15 @@ export class MovieService {
 
   constructor(private http: Http) { }
 
+  getMovieDetails(id: number): Observable<Object> {
+    const url = `${api.url}/movie/${id}?${api.options}&append_to_response=videos,similar`;
+
+    return this.http.get(url)
+      .map(response => TMDBUtils.extractDataSingleMovie(response))
+      .map(movie => TMDBUtils.extractTrailerUrl(movie))
+      .catch(err => TMDBUtils.handleError(err));
+  }
+
   getNowPlaying(page: number): Observable<Object> {
     const url = `${api.url}/movie/now_playing?${api.options}&page=${page}`;
     return this.getMovies(url);
@@ -37,7 +46,7 @@ export class MovieService {
 
   private getMovies(url: string) {
     return this.http.get(url)
-      .map(response => TMDBUtils.extractData(response))
+      .map(response => TMDBUtils.extractDataMultipleMovies(response))
       .map(data => TMDBUtils.fixImagePaths(data))
       .catch(error => TMDBUtils.handleError(error));
   }

@@ -9,7 +9,34 @@ import * as _ from 'lodash';
 
 export class TMDBUtils {
 
-  static extractData(res: Response) {
+  static extractDataSingleMovie(res: Response) {
+    const data = res.json() || {};
+
+    return {
+      id: data.id,
+      poster_path: `https://image.tmdb.org/t/p/w500${data.poster_path}`,
+      backdrop_path: `https://image.tmdb.org/t/p/w1000${data.backdrop_path}`,
+      title: data.title,
+      vote_average: data.vote_average,
+      overview: data.overview,
+      release_date: data.release_date,
+      runtime: data.runtime,
+      similar: data.similar ? data.similar.results : [],
+      trailer: data.videos ? data.videos.results : [],
+      genres: data.genres,
+      favorite: false
+    };
+  }
+
+  static extractTrailerUrl(data) {
+    const clone = _.clone(data);
+
+    clone.trailer = clone.trailer[0] ? `https://www.youtube.com/watch?v=${clone.trailer[0].key}` : '';
+    
+    return clone;
+  }
+  
+  static extractDataMultipleMovies(res: Response) {
     const data = res.json() || {};
 
     return {
@@ -33,7 +60,7 @@ export class TMDBUtils {
   static handleError(error) {
     const err = new Error();
     
-    err.name = error.status || 400;
+    err.name = error.status || 'Error';
 
     if (error instanceof Response) {
       const body = error.json();
