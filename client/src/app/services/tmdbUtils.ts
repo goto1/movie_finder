@@ -24,7 +24,7 @@ export class TMDBUtils {
       similar: data.similar ? data.similar.results : [],
       trailer: data.videos ? data.videos.results : [],
       genres: data.genres,
-      favorite: false
+      isFavorite: false
     };
   }
 
@@ -33,6 +33,21 @@ export class TMDBUtils {
 
     clone.trailer = clone.trailer[0] ? `https://www.youtube.com/watch?v=${clone.trailer[0].key}` : '';
     
+    return clone;
+  }
+
+  static extractSimilarMovies(data) {
+    const clone = _.clone(data);
+
+    clone.similar = clone.similar.map(movie => {
+      return {
+        id: movie.id,
+        title: movie.title,
+        poster_path: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+        vote_average: movie.vote_average
+      };
+    })
+
     return clone;
   }
   

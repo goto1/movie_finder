@@ -34,6 +34,7 @@ export class MovieService {
     return this.http.get(url)
       .map(response => TMDBUtils.extractDataSingleMovie(response))
       .map(movie => TMDBUtils.extractTrailerUrl(movie))
+      .map(movie => TMDBUtils.extractSimilarMovies(movie))
       .catch(err => TMDBUtils.handleError(err));
   }
 
