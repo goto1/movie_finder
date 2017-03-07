@@ -15,6 +15,19 @@ export class MovieService {
 
   constructor(private http: Http) { }
 
+  getMoviesWithGenres(genres: Array<Number>): Observable<Object> {
+    let genreIds = genres.length > 3 ? genres.slice(0, 3) : genres;
+    const url = `${api.url}/discover/movie?${api.options}&sort_by=popularity.desc&with_genres=${genreIds.toString()}`;
+
+    return this.getMovies(url);
+  }
+
+  searchMovie(title: string): Observable<Object> {
+    const url = `${api.url}/search/movie?${api.options}&query=${title}`;
+
+    return this.getMovies(url);
+  }
+
   getMovieDetails(id: number): Observable<Object> {
     const url = `${api.url}/movie/${id}?${api.options}&append_to_response=videos,similar`;
 
