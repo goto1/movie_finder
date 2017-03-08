@@ -1,0 +1,14 @@
+<div>
+  <button 
+    (click)="prevPage()"
+    [disabled]="!pagination.hasPrev()">
+    <i class="fa fa-angle-left" aria-hidden="true"></i> Previous
+  </button>
+  <button 
+    (click)="nextPage()"
+    [disabled]="!pagination.hasNext()">
+    Next <i class="fa fa-angle-right" aria-hidden="true"></i>
+  </button>
+</div>
+
+<movie-list [movies]="movies"></movie-list>
