@@ -14,8 +14,8 @@ export class TMDBUtils {
 
     return {
       id: data.id,
-      poster_path: `https://image.tmdb.org/t/p/w500${data.poster_path}`,
-      backdrop_path: `https://image.tmdb.org/t/p/w1000${data.backdrop_path}`,
+      poster_path: data.poster_path ? `https://image.tmdb.org/t/p/w500${data.poster_path}` : '',
+      backdrop_path: data.backdrop_path ? `https://image.tmdb.org/t/p/w1000${data.backdrop_path}` : '',
       title: data.title,
       vote_average: data.vote_average,
       overview: data.overview,
@@ -43,7 +43,7 @@ export class TMDBUtils {
       return {
         id: movie.id,
         title: movie.title,
-        poster_path: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+        poster_path: movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : '',
         vote_average: movie.vote_average
       };
     })
