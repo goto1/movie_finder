@@ -9,7 +9,7 @@ import { Pagination } from '../../shared/pagination';
   templateUrl: './layout.html',
   styleUrls: [ './styles.sass' ]
 })
-export class NowPlayingMoviesComponent implements OnInit {
+export class UpcomingMoviesComponent implements OnInit {
   movies: IMovieOverview[];
   pagination: Pagination;
 
@@ -43,15 +43,14 @@ export class NowPlayingMoviesComponent implements OnInit {
   }
 
   private fetchMovies(): void {
-    this.movieService.getNowPlaying(this.pagination.currentPage)
+    this.movieService.getUpcoming(this.pagination.currentPage)
       .subscribe(
         res => {
           this.pagination.currentPage = res.page;
           this.pagination.pageCount = res.total_pages;
-          this.movies = res.movies;
+          this.movies = res.movies
         },
         err => console.error(err)
       );
   }
 }
-

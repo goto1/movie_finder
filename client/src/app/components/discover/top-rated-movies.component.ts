@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { MovieService } from '../../services/movie.service';
 import { IMovieOverview } from '../../shared/interfaces';
@@ -12,25 +13,32 @@ export class TopRatedMoviesComponent implements OnInit {
   movies: IMovieOverview[];
   pagination: Pagination;
 
-  constructor(private movieService: MovieService) { }
+  constructor(
+    private movieService: MovieService,
+    private route: ActivatedRoute,
+    private router: Router ) { }
 
   ngOnInit(): void {
-    this.pagination = new Pagination();
-    this.pagination.currentPage = 1;
-    this.fetchMovies();
+    this.route.params.subscribe(
+      params => {
+        this.pagination = new Pagination();
+        this.pagination.currentPage = +params['page'] || 1;
+        this.fetchMovies();
+      }
+    )
   }
 
   nextPage(): void {
     if (this.pagination.hasNext()) {
       this.pagination.nextPage();
-      this.fetchMovies();
+      this.router.navigate([`/discover/top_rated/${this.pagination.currentPage}`]);
     }
   }
 
   prevPage(): void {
     if (this.pagination.hasPrev()) {
       this.pagination.prevPage();
-      this.fetchMovies();
+      this.router.navigate([`/discover/top_rated/${this.pagination.currentPage}`]);
     }
   }
 
