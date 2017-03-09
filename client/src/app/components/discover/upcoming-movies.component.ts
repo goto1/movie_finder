@@ -31,14 +31,14 @@ export class UpcomingMoviesComponent implements OnInit {
   nextPage(): void {
     if (this.pagination.hasNext()) {
       this.pagination.nextPage();
-      this.router.navigate([`/discover/now_playing/${this.pagination.currentPage}`]);
+      this.router.navigate([`/discover/upcoming/${this.pagination.currentPage}`]);
     }
   }
 
   prevPage(): void {
     if (this.pagination.hasPrev()) {
       this.pagination.prevPage();
-      this.router.navigate([`/discover/now_playing/${this.pagination.currentPage}`]);
+      this.router.navigate([`/discover/upcoming/${this.pagination.currentPage}`]);
     }
   }
 
