@@ -17,37 +17,25 @@ export class NowPlayingMoviesComponent implements OnInit {
 
   ngOnInit(): void {
     this.pagination = new Pagination();
-
-    this.movieService.getNowPlaying(1)
-      .subscribe(
-        res => {
-          this.pagination.currentPage = res.page;
-          this.pagination.pageCount = res.total_pages;
-          this.movies = res.movies;
-        },
-        err => console.log(err)
-      );
+    this.pagination.currentPage = 1;
+    this.fetchMovies();
   }
 
-  nextPage() {
-    if (!this.pagination.hasNext()) {
-      return;
+  nextPage(): void {
+    if (this.pagination.hasNext()) {
+      this.pagination.nextPage();
+      this.fetchMovies();
     }
-
-    this.pagination.nextPage();
-    this.updateMovieList();
   }
 
-  prevPage() {
-    if (!this.pagination.hasPrev()) {
-      return;
+  prevPage(): void {
+    if (this.pagination.hasPrev()) {
+      this.pagination.prevPage();
+      this.fetchMovies();
     }
-
-    this.pagination.prevPage();
-    this.updateMovieList();
   }
 
-  private updateMovieList(): void {
+  private fetchMovies(): void {
     this.movieService.getNowPlaying(this.pagination.currentPage)
       .subscribe(
         res => {
@@ -55,7 +43,7 @@ export class NowPlayingMoviesComponent implements OnInit {
           this.pagination.pageCount = res.total_pages;
           this.movies = res.movies;
         },
-        err => console.log(err)
+        err => console.error(err)
       );
   }
 }
