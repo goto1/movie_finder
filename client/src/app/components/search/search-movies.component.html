@@ -1,0 +1,16 @@
+<div class="movie-search">
+  <form novalidate (ngSubmit)="onSubmit()" [formGroup]="searchQuery">
+    <div class="search-input" 
+      [class.active]="searchQuery.get('query').touched || searchQuery.get('query').dirty"
+      [class.active-not-valid]="searchQuery.get('query').invalid && searchQuery.get('query').dirty">
+      <input type="text" placeholder="Search for a movie..." formControlName="query">
+      <button type="submit" [disabled]="searchQuery.invalid">
+        <i class="fa fa-search input-item" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="error-missing-query" 
+      [hidden]="searchQuery.get('query').valid || searchQuery.get('query').pristine">
+      Movie Title Required!
+    </div>
+  </form>
+</div>
