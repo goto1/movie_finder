@@ -19,27 +19,35 @@ export class NowPlayingMoviesComponent implements OnInit {
     private router: Router ) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(
-      params => {
-        this.pagination = new Pagination();
-        this.pagination.currentPage = +params['page'] || 1;
-        this.fetchMovies();
-      }
-    )
+    this.pagination = new Pagination();
+
+    this.route.queryParams
+      .subscribe(
+        params => {
+          this.pagination.currentPage = +params['page'] || 1;
+          this.fetchMovies();
+        }
+      );
   }
 
   nextPage(): void {
     if (this.pagination.hasNext()) {
       this.pagination.nextPage();
-      this.router.navigate([`/discover/now_playing/${this.pagination.currentPage}`]);
+      this.switchPage();
     }
   }
 
   prevPage(): void {
     if (this.pagination.hasPrev()) {
       this.pagination.prevPage();
-      this.router.navigate([`/discover/now_playing/${this.pagination.currentPage}`]);
+      this.switchPage();
     }
+  }
+
+  private switchPage(): void {
+    this.router.navigate(['discover/now_playing'], {
+      queryParams: { page: this.pagination.currentPage }
+    });
   }
 
   private fetchMovies(): void {
