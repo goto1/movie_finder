@@ -4,6 +4,14 @@ $dark-green-color: #577F6D
 $off-white-color: #FFFBFB
 $orange-color: #FE5E4A
 
+$row-border-bottom-color: #C8CBCB
+$border-bottom-color-col: #B4CBCB
+
+.btn-default-active
+  box-shadow: 0px 0px 2px 1px $orange-color
+  color: $orange-color
+  background-color: inherit
+
 button.btn
   min-width: 130px
   width: auto
@@ -29,7 +37,12 @@ button.btn-default
   color: $off-white-color
   box-shadow: 0px 1.5px 2px 1px $secondary-color
   &:hover
-    box-shadow: 0px 1.5px 2px 1px #6376D6
+    @extend .btn-default-active
+
+button.btn-default-active
+  box-shadow: 0px 0px 1px 2px $orange-color
+  color: $orange-color
+  background-color: inherit
 
 button.btn-nav
   color: $dark-green-color
@@ -39,6 +52,7 @@ button.btn-nav
     color: #6376D6
     box-shadow: 0px 0px 1px 2px #6376D6
 
-button.btn-active
-  transform: translateY(.75em)
+button.btn-nav-active
+  color: #6376D6
+  box-shadow: 0px 0px 1px 2px #6376D6
 
