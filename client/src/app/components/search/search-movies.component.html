@@ -1,7 +1,7 @@
 <div class="movie-search">
   <form novalidate (ngSubmit)="onSubmit()" [formGroup]="searchQuery">
     <div class="search-input" 
-      [class.active]="searchQuery.get('query').touched || searchQuery.get('query').dirty"
+      [class.active]="searchQuery.get('query').touched || searchQuery.get('query').dirty || searchQuery.get('query').value.length > 0"
       [class.active-not-valid]="searchQuery.get('query').invalid && searchQuery.get('query').dirty">
       <input type="text" placeholder="Search for a movie..." formControlName="query">
       <button type="submit" [disabled]="searchQuery.invalid">
@@ -14,3 +14,10 @@
     </div>
   </form>
 </div>
+
+<div class="search-result" *ngIf="searchResults && query">
+  <h2>Showing results for <span>{{query}}</span>...</h2>
+  <movie-list [movies]="searchResults.movies"></movie-list>
+</div>
+
+

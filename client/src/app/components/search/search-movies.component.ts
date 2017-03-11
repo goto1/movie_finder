@@ -3,15 +3,17 @@ import {
   FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { IMoviesListData } from '../../shared/interfaces';
+
 import { MovieService } from '../../services/movie.service';
 
   @Component({
-    selector: 'search-movies',
     templateUrl: './search-movies.component.html',
     styleUrls: [ './search-movies.component.sass' ]
   })
   export class SearchMoviesComponent implements OnInit {
     searchQuery: FormGroup;
+    searchResults: IMoviesListData;
     query: string;
 
     constructor(
@@ -24,7 +26,7 @@ import { MovieService } from '../../services/movie.service';
       this.route.queryParams
         .subscribe(
           params => {
-            this.query = params['search'] || '';
+            this.query = params['query'] || '';
             this.searchQuery = this.fb.group({
               query: [this.query, [Validators.required]]
             });
@@ -38,15 +40,15 @@ import { MovieService } from '../../services/movie.service';
 
     onSubmit(): void {
       this.query = this.searchQuery.value.query;
-      this.router.navigate(['test'], {
-        queryParams: { search: this.query }
+      this.router.navigate(['search'], {
+        queryParams: { query: this.query }
       });
     }
 
     private search(): void {
       this.movieService.searchMovie(this.query)
         .subscribe(
-          movies => console.log(movies),
+          result => this.searchResults = result,
           err => console.error(err)
         );
     }
