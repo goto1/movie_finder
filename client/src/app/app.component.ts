@@ -1,7 +1,8 @@
 // ng build --prod --base-href ./
-import { Component }              from '@angular/core';
-import { Router }                 from '@angular/router';
-import { AuthenticationService }  from './user/services/authentication.service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthenticationService } from './user/services/authentication.service';
+import { HerokuService } from './services/heroku.service';
 
 @Component({
   selector: 'app-root',
@@ -44,10 +45,18 @@ import { AuthenticationService }  from './user/services/authentication.service';
   `,
   styleUrls: [ './app.component.sass' ]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   constructor(
     private auth: AuthenticationService,
-    private router: Router ) { }
+    private router: Router,
+    private herokuService: HerokuService ) { }
+
+  ngOnInit(): void {
+    this.herokuService.wakeUp().subscribe(
+      res => console.log('Heroku woken up...'),
+      err => console.error(err)
+    );
+  }
 
   logout(): void {
     this.auth.logout();
