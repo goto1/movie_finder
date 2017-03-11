@@ -53,7 +53,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.herokuService.wakeUp().subscribe(
-      res => console.log('Heroku woken up...'),
+      result => console.log('Heroku is awake!'),
       err => console.error(err)
     );
   }
