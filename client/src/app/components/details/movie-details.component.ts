@@ -30,7 +30,7 @@ export class MovieDetailsComponent implements OnInit {
   private fetchMovieDetails(id: number) {
     this.movieService.getMovieDetails(id)
       .subscribe(
-        response => this.movie = response,
+        response => { this.movie = response; console.log(this.movie); },
         err => console.log(err)
       );
   }

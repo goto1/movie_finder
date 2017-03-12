@@ -1,0 +1,27 @@
+<div class="detailed-movie-info">
+  <div class="row" [style.background-image]="'url(' + movie?.backdrop_path + ')'">
+    <span class="bgk"></span>
+    <div class="col col-left">
+      <div class="title-rating">
+        <div class="title">{{movie?.title}} <span>({{movie?.release_date | year}})</span></div>
+        <div class="rating">
+          <span>
+            {{movie?.vote_average}}
+            <i class="fa fa-star" aria-hidden="true"></i>
+          </span>
+        </div>
+      </div>
+      <div class="genres">
+        <span class="genre" *ngFor="let genre of movie?.genres">
+          {{genre.name}}
+        </span>
+      </div>
+      <div class="overview">{{movie?.overview}}</div>
+    </div>
+    <div class="col col-right">
+      <div class="poster">
+        <img [src]="movie?.poster_path | safeUrl" alt="poster path" />
+      </div>
+    </div>
+  </div>
+</div>
