@@ -1,5 +1,5 @@
 <div class="detailed-movie-info">
-  <div class="row" [style.background-image]="'url(' + movie?.backdrop_path + ')'">
+  <div class="row row1" [style.background-image]="'url(' + movie?.backdrop_path + ')'">
     <span class="bgk"></span>
     <div class="col col-left">
       <div class="title-rating">
@@ -24,4 +24,9 @@
       </div>
     </div>
   </div>
+  <div class="row row2">
+    <h2>Similar Movies</h2>
+    <movie-list [movies]="movie?.similar"></movie-list>
+  </div>
 </div>
+
