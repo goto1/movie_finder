@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { MovieDetailsComponent } from '../components/details/movie-details.component';
-
+import { SharedModule } from '../modules/shared.module';
 import { MovieService } from '../services/movie.service';
+import { MovieDetailsComponent } from '../components/details/movie-details.component';
 
 const detailsRoutes: Routes = [
   { path: 'movie/:id', component: MovieDetailsComponent }
@@ -11,6 +11,7 @@ const detailsRoutes: Routes = [
 
 @NgModule({
   imports: [
+    SharedModule,
     RouterModule.forRoot(detailsRoutes)
   ],
   declarations: [ MovieDetailsComponent ],

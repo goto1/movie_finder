@@ -12,10 +12,10 @@ const discoverMoviesRoutes: Routes = [
     path: 'discover',
     component: DiscoverMoviesComponent,
     children: [
-      { path: 'now_playing/:page', component: NowPlayingMoviesComponent },
-      { path: 'popular/:page', component: PopularMoviesComponent },
-      { path: 'top_rated/:page', component: TopRatedMoviesComponent },
-      { path: 'upcoming/:page', component: UpcomingMoviesComponent }
+      { path: 'now_playing', component: NowPlayingMoviesComponent },
+      { path: 'popular', component: PopularMoviesComponent },
+      { path: 'top_rated', component: TopRatedMoviesComponent },
+      { path: 'upcoming', component: UpcomingMoviesComponent }
     ]
   }
 ];

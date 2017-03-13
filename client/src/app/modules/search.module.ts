@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MovieService } from '../services/movie.service';
 import { SharedModule } from '../modules/shared.module';
-
 import { SearchMoviesComponent } from '../components/search/search-movies.component';
 
 const searchRoutes: Routes = [

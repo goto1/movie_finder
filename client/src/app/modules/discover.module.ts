@@ -25,8 +25,6 @@ import { MovieService } from '../services/movie.service';
     TopRatedMoviesComponent,
     UpcomingMoviesComponent
   ],
-  providers: [
-    MovieService
-  ]
+  providers: [ MovieService ]
 })
 export class DiscoverModule { }
