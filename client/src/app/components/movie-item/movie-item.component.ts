@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { IMovieOverview } from '../../shared/interfaces';
 
 @Component({
   selector: 'movie-item',
   template: `
-    <div class="movie" [routerLink]="['/movie', movie.id]">
+    <div class="movie" (click)="showDetails()">
       <div class="poster">
         <img *ngIf="movie.poster_path" [src]="movie.poster_path | sanitizeUrl"
           alt="movie poster" />
@@ -23,5 +24,11 @@ import { IMovieOverview } from '../../shared/interfaces';
 })
 export class MovieItemComponent {
   @Input() movie: IMovieOverview;
+
+  constructor(private router: Router) { }
+
+  showDetails(): void {
+    this.router.navigate(['/movie', this.movie.id]);
+  }
 }
 
