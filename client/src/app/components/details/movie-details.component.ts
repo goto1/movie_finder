@@ -14,11 +14,10 @@ export class MovieDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private movieService: MovieService ) { }
+    private movieService: MovieService,
+    private location: Location ) { }
 
   ngOnInit(): void {
-    console.log('Movie Details Component Initialized...');
-    
     this.route.params.subscribe(
       params => { 
         this.fetchMovieDetails(+params['id']);
@@ -27,10 +26,14 @@ export class MovieDetailsComponent implements OnInit {
     );
   }
 
+  goBack(): void {
+    this.location.back();
+  }
+
   private fetchMovieDetails(id: number) {
     this.movieService.getMovieDetails(id)
       .subscribe(
-        response => { this.movie = response; console.log(this.movie); },
+        response => this.movie = response,
         err => console.log(err)
       );
   }
