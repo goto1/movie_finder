@@ -3,8 +3,11 @@ import { RouterModule, Routes }   from '@angular/router';
 
 import { PageNotFoundComponent }  from './page-not-found.component';
 
+// import { TestComponent } from './components/test.component';
+
 export const appRoutes: Routes = [
-  { path: '', redirectTo: '/movies/now_playing', pathMatch: 'full' },
+  { path: '', redirectTo: '/discover/now_playing', pathMatch: 'full' },
+  // { path: 'test', component: TestComponent } // DELETE AFTER DONE TESTING!!!
   //{ path: '**', component: PageNotFoundComponent }
 ];
 

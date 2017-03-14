@@ -42,6 +42,6 @@ export class UserService {
   private saveToLocalStorage(data): void {
     const userInfo = _.assign({}, data);
 
-    localStorage.setItem('userInfo', JSON.stringify(userInfo));
+    localStorage.setItem('user_info', JSON.stringify(userInfo));
   }
 }

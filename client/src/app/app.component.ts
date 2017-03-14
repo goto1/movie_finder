@@ -1,7 +1,7 @@
 // ng build --prod --base-href ./
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService } from './user/services/authentication.service';
+import { AuthService } from './services/auth.service';
 import { HerokuService } from './services/heroku.service';
 
 @Component({
@@ -14,7 +14,7 @@ import { HerokuService } from './services/heroku.service';
           Login
           <i class="fa fa-user" aria-hidden="true"></i>
         </button>
-        <button class="btn btn-default" *ngIf="auth.loggedIn()" (click)="logout()">
+        <button class="btn btn-default" *ngIf="auth.loggedIn()" [routerLink]="'/logout'">
           Logout
           <i class="fa fa-sign-out" aria-hidden="true"></i>
         </button>
@@ -47,7 +47,7 @@ import { HerokuService } from './services/heroku.service';
 })
 export class AppComponent implements OnInit {
   constructor(
-    private auth: AuthenticationService,
+    private auth: AuthService,
     private router: Router,
     private herokuService: HerokuService ) { }
 
@@ -56,10 +56,5 @@ export class AppComponent implements OnInit {
       result => console.log('Heroku is awake!'),
       err => console.error(err)
     );
-  }
-
-  logout(): void {
-    this.auth.logout();
-    this.router.navigate(['/logout/success']);
   }
 }
