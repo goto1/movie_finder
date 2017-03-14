@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { UserService } from '../../services/user.service';
 
 @Component({
   template: `
@@ -11,4 +13,11 @@ import { Component } from '@angular/core';
   `,
   styleUrls: [ './login-success.component.sass' ]
 })
-export class LoginSuccessComponent { } 
+export class LoginSuccessComponent implements OnInit { 
+
+  constructor(private userService: UserService) { }
+
+  ngOnInit(): void {
+    this.userService.getMovies().subscribe();
+  }
+} 
