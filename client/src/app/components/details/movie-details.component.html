@@ -18,6 +18,14 @@
         </span>
       </div>
       <div class="overview">{{movie?.overview}}</div>
+      <div class="liked-buttons" *ngIf="authService.loggedIn()">
+        <i class="fa fa-heart-o" aria-hidden="true" 
+          *ngIf="!movie?.isFavorite"
+          (click)="toggleFavorite()"></i>
+        <i class="fa fa-heart" aria-hidden="true" 
+          *ngIf="movie?.isFavorite"
+          (click)="toggleFavorite()"></i>
+      </div>
     </div>
     <div class="col col-right">
       <div class="poster">

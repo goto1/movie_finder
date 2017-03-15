@@ -3,6 +3,9 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { MovieService } from '../../services/movie.service';
+import { AuthService } from '../../services/auth.service';
+import { UserService } from '../../services/user.service';
+import { Utils } from '../../shared/utils';
 import { IMovieDetailed } from '../../shared/interfaces';
 
 @Component({
@@ -15,12 +18,15 @@ export class MovieDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private movieService: MovieService,
-    private location: Location ) { }
+    private location: Location,
+    private authService: AuthService,
+    private userService: UserService ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(
       params => { 
         this.fetchMovieDetails(+params['id']);
+        this.userService.getMovies().subscribe();
       },
       err => console.error(err)
     );
@@ -30,10 +36,18 @@ export class MovieDetailsComponent implements OnInit {
     this.location.back();
   }
 
+  toggleFavorite(): void {
+    this.movie.isFavorite = !this.movie.isFavorite;
+    this.userService.toggleFavoriteMovie(this.movie).subscribe();
+  }
+
   private fetchMovieDetails(id: number) {
     this.movieService.getMovieDetails(id)
       .subscribe(
-        response => this.movie = response,
+        res => {
+          this.movie = res;
+          this.movie.isFavorite = Utils.isMovieFavorite(this.movie.id);
+        },
         err => console.log(err)
       );
   }
