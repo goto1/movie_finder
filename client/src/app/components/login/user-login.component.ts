@@ -46,8 +46,6 @@ export class UserLoginComponent implements OnInit {
             return;
           }
 
-          // TODO: userService.getMovies()
-
           this.router.navigate(['/success']);
         },
         err => this.error = err
