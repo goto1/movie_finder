@@ -38,8 +38,7 @@ export class UserService {
       .map((res: Response) => res.json() || {})
       .catch(err => UserUtils.handleError(err));
   }
-
-
+  
   private extractData(res: Response) {
     const data = res.json() || {};
 
