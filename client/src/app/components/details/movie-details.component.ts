@@ -26,7 +26,10 @@ export class MovieDetailsComponent implements OnInit {
     this.route.params.subscribe(
       params => { 
         this.fetchMovieDetails(+params['id']);
-        this.userService.getMovies().subscribe();
+        
+        if (this.authService.loggedIn()) {
+          this.userService.getMovies().subscribe();
+        }
       },
       err => console.error(err)
     );
@@ -46,7 +49,10 @@ export class MovieDetailsComponent implements OnInit {
       .subscribe(
         res => {
           this.movie = res;
-          this.movie.isFavorite = Utils.isMovieFavorite(this.movie.id);
+
+          if (this.authService.loggedIn()) {
+            this.movie.isFavorite = Utils.isMovieFavorite(this.movie.id);
+          }
         },
         err => console.log(err)
       );
