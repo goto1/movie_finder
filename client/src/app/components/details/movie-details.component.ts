@@ -14,6 +14,7 @@ import { IMovieDetailed } from '../../shared/interfaces';
 })
 export class MovieDetailsComponent implements OnInit {
   movie: IMovieDetailed;
+  error: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,8 +31,10 @@ export class MovieDetailsComponent implements OnInit {
         if (this.authService.loggedIn()) {
           this.userService.getMovies().subscribe();
         }
+
+        this.error = false;
       },
-      err => console.error(err)
+      err => this.error = true
     );
   }
 
@@ -54,7 +57,7 @@ export class MovieDetailsComponent implements OnInit {
             this.movie.isFavorite = Utils.isMovieFavorite(this.movie.id);
           }
         },
-        err => console.log(err)
+        err => this.error = true
       );
   }
 }

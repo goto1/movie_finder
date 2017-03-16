@@ -1,4 +1,4 @@
-<div class="detailed-movie-info">
+<div class="detailed-movie-info" *ngIf="!error">
   <i class="fa fa-chevron-circle-left" aria-hidden="true" (click)="goBack()"></i>
   <div class="row row1" [style.background-image]="'url(' + movie?.backdrop_path + ')'">
     <span class="bgk"></span>
@@ -38,4 +38,6 @@
     <movie-list [movies]="movie?.similar"></movie-list>
   </div>
 </div>
+
+<error *ngIf="error"></error>
 
