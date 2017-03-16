@@ -21,4 +21,4 @@ This app was written using `Angular CLI`, which was still in beta at that time, 
 * `SASS`
 
 ### Link
-* [goto1.github.io/movie_finder/client/dist/](https://goto1.github.io/movie_finder/client/dist/)
+* [MOVIEJO](https://goto1.github.io/movie_finder/client/dist/)
