@@ -12,6 +12,9 @@ To test it, please use the following credentials, or register a new account:
 * `johnsmith@gmail.com`
 * `password123`
 
+The API that I used:
+* [`The MovieDB`](https://www.themoviedb.org)
+
 ### Technologies Used
 * `Angular 2`
 * `Node.js`

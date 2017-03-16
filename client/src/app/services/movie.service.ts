@@ -15,8 +15,9 @@ export class MovieService {
 
   constructor(private http: Http) { }
 
-  getMoviesWithGenres(genres: Array<Number>): Observable<IMoviesListData> {
-    let genreIds = genres.length > 3 ? genres.slice(0, 3) : genres;
+  getMoviesWithGenres(genres: Array<number>): Observable<IMoviesListData> {
+    let genreIds = TMDBUtils.extractRandomGenreIds(genres);
+
     const url = `${api.url}/discover/movie?${api.options}&sort_by=popularity.desc&with_genres=${genreIds.toString()}`;
 
     return this.getMovies(url);

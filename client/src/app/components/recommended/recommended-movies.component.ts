@@ -33,8 +33,7 @@ export class RecommendedMoviesComponent implements OnInit {
     if (userInfo.genreIds.length > 0) {
       this.movieService.getMoviesWithGenres(userInfo.genreIds)
         .subscribe(
-          res => { this.movies = res.movies; console.log(res.movies); },
-          err => console.error(err)
+          res => this.movies = res.movies
         );
     }
   }

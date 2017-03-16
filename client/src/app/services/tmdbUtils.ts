@@ -76,6 +76,25 @@ export class TMDBUtils {
     return clone;
   }
 
+  static extractRandomGenreIds(genres: Array<number>): Array<number> {
+    let randomGenreIds = [];
+
+    while (randomGenreIds.length < 3) {
+      let randomGenre = TMDBUtils.getRandomNumberBetween(0, genres.length - 1);
+      let duplicate = _.find(randomGenreIds, idx => idx === genres[randomGenre]);
+
+      if (duplicate === undefined) {
+        randomGenreIds.push(genres[randomGenre]);
+      }
+    }
+
+    return randomGenreIds;
+  }
+
+  static getRandomNumberBetween(min: number, max: number): number {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
   static handleError(error) {
     const err = new Error();
     
