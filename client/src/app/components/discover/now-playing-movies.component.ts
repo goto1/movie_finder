@@ -12,6 +12,7 @@ import { Pagination } from '../../shared/pagination';
 export class NowPlayingMoviesComponent implements OnInit {
   movies: IMovieOverview[];
   pagination: Pagination;
+  error: boolean;
 
   constructor(
     private movieService: MovieService,
@@ -19,6 +20,7 @@ export class NowPlayingMoviesComponent implements OnInit {
     private router: Router ) { }
 
   ngOnInit(): void {
+    this.error = false;
     this.pagination = new Pagination();
 
     this.route.queryParams
@@ -26,7 +28,8 @@ export class NowPlayingMoviesComponent implements OnInit {
         params => {
           this.pagination.currentPage = +params['page'] || 1;
           this.fetchMovies();
-        }
+        },
+        err => this.error = true
       );
   }
 
@@ -57,8 +60,9 @@ export class NowPlayingMoviesComponent implements OnInit {
           this.pagination.currentPage = res.page;
           this.pagination.pageCount = res.total_pages;
           this.movies = res.movies;
+          this.error = false;
         },
-        err => console.error(err)
+        err => this.error = true
       );
   }
 }
